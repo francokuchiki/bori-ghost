@@ -1,5 +1,8 @@
 import discord
 import listas
+import os
+
+TOKEN = os.getenv("TOKEN")
 
 client = discord.Client()
 
@@ -29,4 +32,4 @@ async def on_message(message):
 if __name__ == "__main__":
 	for tarea in listas.tasks:
 		client.loop.create_task(tarea(client))
-	client.run("NDUyOTYxNTgzMzE2OTkyMDAw.DfX-pA.c8OkFlftDWIt3I8jR2Y9I7tRgyU")
+	client.run(TOKEN)
