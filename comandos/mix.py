@@ -8,9 +8,10 @@ async def reverso(client, message, nick_autor, avatar_autor, mensaje_separado, p
 
 async def decir(client, message, nick_autor, avatar_autor, mensaje_separado, prefijo):
 	mensaje_sin_comando = lista_a_cadena(mensaje_separado, 1)
-	await client.send_typing(message.channel)
-	await client.delete_message(message)
-	await client.send_message(message.channel, mensaje_sin_comando)
+	if mensaje_sin_comando != "":
+		await client.send_typing(message.channel)
+		await client.delete_message(message)
+		await client.send_message(message.channel, mensaje_sin_comando)
 
 async def elegir(client, message, nick_autor, avatar_autor, mensaje_separado, prefijo):
 	mensaje_sin_comando = lista_a_cadena(mensaje_separado, 1)

@@ -5,6 +5,7 @@ from datetime import datetime, timedelta
 from variables import (pie_texto, mute_titulo, unmute_titulo, en_descripcion, mute_color,
 						frown_usuario, un_usuario, tabla_mute, nuevo_mute, quita_mute)
 from funciones import get_mute_role, borrar_repetidos, crear_embed
+from discord.errors import Forbidden
 
 
 async def mute(client, message, nick_autor, avatar_autor, mensaje_separado, prefijo):
@@ -92,19 +93,22 @@ async def mute(client, message, nick_autor, avatar_autor, mensaje_separado, pref
 				tiempo_texto = "10 minutos."
 				termina_muteo = message.timestamp + timedelta(seconds=tiempo)
 			pie_embed = pie_texto.format("silenciado",nick_autor,message.author.name,message.author.discriminator)
-			mute_embed = crear_embed(mute_titulo, en_descripcion, mute_color, miembro, message.author, message.server,
+			mute_embed = crear_embed(client,mute_titulo, en_descripcion, mute_color, miembro, message.author, message.server,
 									razon, frown_usuario,tiempo=tiempo_texto,miniatura="avatar",pie=pie_embed,
 									ed=("silenciado","en",""))
 			base_de_datos = sqlite3.connect("basesdatos{}{}.db".format(os.sep,message.server.id),isolation_level=None)
 			bd = base_de_datos.cursor()
 			bd.execute(tabla_mute)
+			bd.execute("DELETE FROM silenciados WHERE discord_id = '{}'".format(miembro.id))
 			bd.execute(nuevo_mute.format(miembro.id,termina_muteo))
 			base_de_datos.close()
 			await client.add_roles(miembro, silenciado)
 			await client.send_typing(message.channel)
 			await client.send_message(message.channel, embed=mute_embed[0])
 			if len(mute_embed) == 2:
-				await client.send_message(miembro, embed=mute_embed[1])
+				try: await client.send_message(miembro, embed=mute_embed[1])
+				except Forbidden: pass
+
 
 async def unmute(client, message, nick_autor, avatar_autor, mensaje_separado, prefijo):
 	"""Comando "unmute". Quita el silencio a uno o más usuarios pudiendo especificar una razón (individual para cada uno).
@@ -134,7 +138,7 @@ async def unmute(client, message, nick_autor, avatar_autor, mensaje_separado, pr
 			if razon == "":
 				razon = "No se ha especificado una razón."
 			pie_embed = pie_texto.format("desilenciado",nick_autor,message.author.name,message.author.discriminator)
-			unmute_embed = crear_embed(unmute_titulo, en_descripcion, mute_color, miembro, message.author,
+			unmute_embed = crear_embed(client,unmute_titulo, en_descripcion, mute_color, miembro, message.author,
 								 message.server, razon, un_usuario, miniatura="avatar", pie=pie_embed,
 								 ed=("desilenciado","en"," y ya puedes hablar de nuevo"))
 			base_de_datos = sqlite3.connect("basesdatos{}{}.db".format(os.sep,message.server.id), isolation_level=None)
@@ -145,4 +149,5 @@ async def unmute(client, message, nick_autor, avatar_autor, mensaje_separado, pr
 			await client.send_typing(message.channel)
 			await client.send_message(message.channel, embed=unmute_embed[0])
 			if len(unmute_embed) == 2:
-				await client.send_message(miembro, embed=unmute_embed[1])
+				try: await client.send_message(miembro, embed=unmute_embed[1])
+				except Forbidden: pass

@@ -40,11 +40,12 @@ async def ban(client, message, nick_autor, avatar_autor, mensaje_separado, prefi
 				await client.send_message(message.channel, "No tienes los permisos necesarios.")
 				return
 			pie_embed = pie_texto.format(ban_kick,nick_autor,message.author.name,message.author.discriminator)
-			ban_embed = crear_embed((emoji,ban_kick), del_descripcion, ban_kick_color, miembro, message.author,
+			ban_embed = crear_embed(client,(emoji,ban_kick), del_descripcion, ban_kick_color, miembro, message.author,
 									message.server, razon, frown_usuario, miniatura="avatar", pie=pie_embed,
 									ed=(ban_kick,"de",""))
 			if len(ban_embed) == 2:
-				await client.send_message(miembro, embed=ban_embed[1])
+				try: await client.send_message(miembro, embed=ban_embed[1])
+				except Forbidden: pass
 			if ban_kick == "baneado":
 				await client.ban(miembro, delete_message_days=0)
 			else:
@@ -91,7 +92,7 @@ async def unban(client, message, nick_autor, avatar_autor, mensaje_separado, pre
 	miembro = discord.utils.get(lista, name = mensaje_separado[0][empieza::])
 	if miembro != None:
 		pie_embed = pie_texto.format("desbaneado",nick_autor,message.author.name,message.author.discriminator)
-		unban_embed = crear_embed(unban_titulo, del_descripcion, unban_color, miembro, message.author,
+		unban_embed = crear_embed(client,unban_titulo, del_descripcion, unban_color, miembro, message.author,
 								 message.server, razon, un_usuario, miniatura="avatar", pie=pie_embed,
 								 ed=("desbaneado","de",""))
 		await client.unban(message.server, miembro)
@@ -99,4 +100,4 @@ async def unban(client, message, nick_autor, avatar_autor, mensaje_separado, pre
 		await client.send_message(message.channel, embed=unban_embed[0])
 		if len(mensaje_separado) >= 3 and len(unban_embed) == 2:
 			try: await client.send_message(miembro, embed=unban_embed[1])
-			except Forbidden: return
+			except Forbidden: pass

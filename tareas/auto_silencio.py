@@ -28,7 +28,7 @@ async def auto_unmute(client):
 					razon="Ha transcurrido el tiempo de silencio especificado." #Establece la razón
 					#Define los parámetros para el tiempo del footer
 					pie_embed=pie_texto.format("desilenciado",client.user.name,client.user.name,client.user.discriminator)
-					unmute_embed = crear_embed(unmute_titulo,en_descripcion,mute_color,miembro,client.user,servidor,
+					unmute_embed = crear_embed(client,unmute_titulo,en_descripcion,mute_color,miembro,client.user,servidor,
 												razon,un_usuario,miniatura="avatar", pie=pie_embed,
 												ed=("desilenciado","en"," y ya puedes hablar de nuevo"))
 					silenciado = get_mute_role(servidor.roles) #Selecciona el rol de silenciados para el servidor
@@ -37,6 +37,7 @@ async def auto_unmute(client):
 					await client.send_typing(servidor) #Mensaje de "*BOT* está escribiendo"
 					await client.send_message(servidor, embed=unmute_embed[0]) #Envía el mensaje informativo
 					if len(unmute_embed) == 2: #Si hay un segundo mensaje
-						await client.send_message(miembro, embed=unmute_embed[1]) #Lo manda al usuario
+						try: await client.send_message(miembro, embed=unmute_embed[1]) #Lo manda al usuario
+						except discord.errors.Forbidden: pass
 			base_de_datos.close()
 		await asyncio.sleep(1) #Encargado de que se ejecute una vez por segundo

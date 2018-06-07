@@ -21,7 +21,10 @@ def lista_a_cadena(lista, inicio: int=None, final: int=None, caracter=" "):
 		final = len(lista)
 	mensaje_sin_comando = ""
 	for i in range(inicio,final):
-		mensaje_sin_comando += lista[i]+caracter
+		if lista[i] != "\n":
+			mensaje_sin_comando += lista[i]+caracter
+		else:
+			mensaje_sin_comando += lista[i]
 	return mensaje_sin_comando
 
 def get_mute_role(lista):
@@ -68,7 +71,7 @@ def get_nick_avatar(miembro):
 		avatar = miembro.avatar_url #Devuelve el del miembro
 	return nick, avatar
 
-def crear_embed(titulo:tuple,descripcion,color,miembro,autor,servidor,razon,
+def crear_embed(client,titulo:tuple,descripcion,color,miembro,autor,servidor,razon,
 				usuario=None,tiempo=None,miniatura=None,pie:str=None,ed:tuple=None):
 	"""Función que me permite crear embeds con un sólo código para no andar repitiendo
 		lo mismo una y otra vez.
@@ -111,7 +114,7 @@ def crear_embed(titulo:tuple,descripcion,color,miembro,autor,servidor,razon,
 	if pie != None: #Si debe llevar footer
 		embed[0].set_footer(text=pie, 
 						icon_url=avatar_autor) #Lo crea
-	if miembro != autor: #Si el usuario sobre el que se actúa no es quien llamó al comando
+	if miembro != autor and miembro != client.user: #Si el usuario sobre el que se actúa no es quien llamó al comando
 		#Crea un segundo embed que se le enviará
 		embed.append(discord.Embed(title=u"\U0001F50A "+servidor.name.capitalize(),
 									  description=ed_descripcion.format(ed[0],ed[1],servidor.name.capitalize(),ed[2]),
