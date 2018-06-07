@@ -41,6 +41,10 @@ coms = {
 	"setnick": nicks.manejar_apodos,
 	"apodos": nicks.manejar_apodos,
 	"apodo": nicks.manejar_apodos,
+	#Roles
+	"rol": roles.toggle_roles,
+	"role": roles.toggle_roles,
+	"roles": roles.toggle_roles,
 	#Cerrar
 	"ciérrate sésamo": cerrar.cerrar,
 	"close": cerrar.cerrar,
@@ -51,7 +55,8 @@ evs = {
 	"entra_miembro": [entra_miembro.silencio_entrar, 
 					entra_miembro.roles_superduperserver],
 	"entra_servidor": [entra_servidor.servidor_entro],
-	"por_mensaje": [por_mensaje.procesar_comandos, ]
+	"por_mensaje": [por_mensaje.procesar_comandos],
+	"en_error": [en_error.maneja_errores]
 }
 
 tasks = [auto_silencio.auto_unmute]

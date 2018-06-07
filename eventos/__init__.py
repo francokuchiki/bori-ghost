@@ -1,1 +1,1 @@
-__all__ = ["entra_servidor", "entra_miembro", "por_mensaje"]
+__all__ = ["entra_servidor", "entra_miembro", "por_mensaje", "en_error"]
