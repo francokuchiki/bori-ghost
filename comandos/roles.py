@@ -13,7 +13,8 @@ async def toggle_roles(client, message, nick_autor, avatar_autor, mensaje_separa
 					i = len(mensaje_separado)
 				else:
 					if not re.search("<@!?[0-9]+>", mensaje_separado[i]):
-						rol += mensaje_separado[i]
+						if mensaje_separado[i] != "\n":
+							rol += mensaje_separado[i]
 						i += 1
 					else:
 						i = len(mensaje_separado)
