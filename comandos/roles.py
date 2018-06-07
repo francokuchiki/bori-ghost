@@ -33,12 +33,10 @@ async def toggle_roles(client, message, nick_autor, avatar_autor, mensaje_separa
 						puede = True
 				if puede:
 					if Rol in miembro.roles:
-						try:
-							quita_mensaje = "A *{}* se le ha quitado el rol '**{}**'."
-							await client.remove_roles(miembro, Rol)
-							await client.send_typing(message.channel)
-							await client.send_message(message.channel, quita_mensaje.format(miembro.display_name,Rol.name))
-						except discord.errors.Forbidden: await client.send_message(message.channel, "ERROR 403: PROHIBIDO")
+						quita_mensaje = "A *{}* se le ha quitado el rol '**{}**'."
+						await client.remove_roles(miembro, Rol)
+						await client.send_typing(message.channel)
+						await client.send_message(message.channel, quita_mensaje.format(miembro.display_name,Rol.name))
 					else:
 						da_mensaje = "A *{}* se le ha concedido el rol '**{}**'."
 						await client.add_roles(miembro, Rol)
