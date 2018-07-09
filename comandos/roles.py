@@ -33,7 +33,7 @@ async def toggle_roles(client, message, nick_autor, avatar_autor, mensaje_separa
 				for rol_autor in message.author.roles:
 					if rol_autor.position > Rol.position:
 						puede = True
-				if puede:
+				if puede or message.author == message.server.owner:
 					if Rol in miembro.roles:
 						quita_mensaje = "A *{}* se le ha quitado el rol '**{}**'."
 						await client.remove_roles(miembro, Rol)
