@@ -21,7 +21,7 @@ async def toggle_roles(client, message, nick_autor, avatar_autor, mensaje_separa
 						i = len(mensaje_separado)
 			rol = borrar_repetidos(rol, " ")
 			for rol_server in message.server.roles:
-				print(rol_server.name.lower(),rol.lower())
+				print(rol_server.name.lower(),rol[1::].lower())
 				if rol_server.name.lower().startswith(rol.lower()):
 					Rol = rol_server
 				else:
