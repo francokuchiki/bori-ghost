@@ -20,7 +20,7 @@ async def toggle_roles(client, message, nick_autor, avatar_autor, mensaje_separa
 						i = len(mensaje_separado)
 			for rol_server in message.server.roles:
 				if rol_server.name.startswith(rol):
-					Rol = discord.utils.get(message.server.roles, name = rol)
+					Rol = discord.utils.get(message.server.roles, name = rol_server.name)
 				if Rol == None:
 					await client.send_typing(message.channel)
 					await client.send_message(message.channel, "No juegues conmigo que soy profesional, tienes que especificar un rol válido en tu mac.")
