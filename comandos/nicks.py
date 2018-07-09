@@ -20,14 +20,9 @@ async def manejar_apodos(client, message, nick_autor, avatar_autor, mensaje_sepa
 			await client.send_message(message.channel, "¡Tu nuevo apodo es demasiado largo! Debe tener **32 carácteres** o menos.")
 			return
 		await cambiar_apodo(client, message, message.author, nuevo_apodo)
-	if len(message.mentions) > 1 and not message.author.server_permissions.manage_nicknames:
-		mensaje_permisos = """"Dame un momento... ¡Listo!\n...\n...\n JA JA JA Ni lo creas, no tienes los permisos suficientes para cambiar apodos. Fue un buen intento, igualmente, {}. ¡Ánimo!"""
-		await client.send_typing(message.channel)
-		await client.send_message(message.channel, mensaje_permisos.format(message.author.mention))
 	if message.author.server_permissions.manage_nicknames:
 		for miembro in message.mentions:
 			mencion = re.search("<@!?{}>".format(miembro.id), message.content)
-			print (mencion,miembro.mention,mensaje_separado)
 			i = mensaje_separado.index(mencion.group())+1
 			nuevo_apodo = ""
 			while i < len(mensaje_separado):
@@ -44,6 +39,10 @@ async def manejar_apodos(client, message, nick_autor, avatar_autor, mensaje_sepa
 				await client.send_message(message.channel, "¡El nuevo apodo es demasiado largo! Debe tener **32 carácteres** o menos.")
 				return
 			await cambiar_apodo(client, message, miembro, nuevo_apodo)
+	elif not message.author.server_permissions.manage_nicknames:
+		mensaje_permisos = """"Dame un momento... ¡Listo!\n...\n...\n JA JA JA Ni lo creas, no tienes los permisos suficientes para cambiar apodos. Fue un buen intento, igualmente, {}. ¡Ánimo!"""
+		await client.send_typing(message.channel)
+		await client.send_message(message.channel, mensaje_permisos.format(message.author.mention))
 
 async def cambiar_apodo(client, message, miembro, apodo):
 	mensaje = "El nuevo apodo para *{}#{}* es **{}**"

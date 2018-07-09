@@ -18,34 +18,32 @@ async def toggle_roles(client, message, nick_autor, avatar_autor, mensaje_separa
 						i += 1
 					else:
 						i = len(mensaje_separado)
-			Rol = discord.utils.get(message.server.roles, name = rol)
-			if Rol == None:
-				Rol = discord.utils.get(message.server.roles, mention = rol)
-			if Rol == None:
-				Rol = discord.utils.get(message.server.roles, id = rol)
-			if Rol == None:
-				await client.send_typing(message.channel)
-				await client.send_message(message.channel, "No juegues conmigo que soy profesional, tienes que especificar un rol válido en tu mac.")
-			else:
-				puede = False
-				for rol_autor in message.author.roles:
-					if rol_autor.position > Rol.position:
-						puede = True
-				if puede:
-					if Rol in miembro.roles:
-						quita_mensaje = "A *{}* se le ha quitado el rol '**{}**'."
-						await client.remove_roles(miembro, Rol)
-						await client.send_typing(message.channel)
-						await client.send_message(message.channel, quita_mensaje.format(miembro.display_name,Rol.name))
-					else:
-						da_mensaje = "A *{}* se le ha concedido el rol '**{}**'."
-						await client.add_roles(miembro, Rol)
-						await client.send_typing(message.channel)
-						await client.send_message(message.channel, da_mensaje.format(miembro.display_name,Rol.name))
-				else:
-					error_permisos = "No tienes los permisos suficientes para eso. Tal vez no eres tan profesional como creí..."
+			for rol_server in message.server.roles:
+				if rol_server.name.startswith(rol):
+					Rol = discord.utils.get(message.server.roles, name = rol)
+				if Rol == None:
 					await client.send_typing(message.channel)
-					await client.send_message(message.channel, error_permisos)
+					await client.send_message(message.channel, "No juegues conmigo que soy profesional, tienes que especificar un rol válido en tu mac.")
+				else:
+					puede = False
+					for rol_autor in message.author.roles:
+						if rol_autor.position > Rol.position:
+							puede = True
+					if puede:
+						if Rol in miembro.roles:
+							quita_mensaje = "A *{}* se le ha quitado el rol '**{}**'."
+							await client.remove_roles(miembro, Rol)
+							await client.send_typing(message.channel)
+							await client.send_message(message.channel, quita_mensaje.format(miembro.display_name,Rol.name))
+						else:
+							da_mensaje = "A *{}* se le ha concedido el rol '**{}**'."
+							await client.add_roles(miembro, Rol)
+							await client.send_typing(message.channel)
+							await client.send_message(message.channel, da_mensaje.format(miembro.display_name,Rol.name))
+					else:
+						error_permisos = "No tienes los permisos suficientes para eso. Tal vez no eres tan profesional como creí..."
+						await client.send_typing(message.channel)
+						await client.send_message(message.channel, error_permisos)
 	else:
 		await client.send_typing(message.channel)
 		await client.send_message(message.channel, "No eres profesional, cómprate una MAC y tal vez puedas editar roles.")

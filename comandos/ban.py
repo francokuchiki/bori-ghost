@@ -1,4 +1,5 @@
 import discord
+import re
 from variables import pie_texto, unban_titulo, del_descripcion, ban_kick_color, unban_color, frown_usuario, un_usuario
 from funciones import get_mute_role, crear_embed, borrar_repetidos
 from discord import Forbidden
@@ -18,7 +19,8 @@ async def ban(client, message, nick_autor, avatar_autor, mensaje_separado, prefi
 			return
 		for miembro in message.mentions:
 			razon = ""
-			i = mensaje_separado.index(miembro.mention)+1
+			mencion = re.search("<@!?{}>".format(miembro.id))
+			i = mensaje_separado.index(mencion.group())+1
 			while i < len(mensaje_separado):
 				if discord.utils.get(message.mentions, id = mensaje_separado[i][2:len(mensaje_separado[i])-1:]) == None:
 					razon += " "+mensaje_separado[i]
