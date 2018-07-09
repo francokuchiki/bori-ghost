@@ -1,5 +1,6 @@
 import discord
 import re
+from funciones import borrar_repetidos
 
 async def toggle_roles(client, message, nick_autor, avatar_autor, mensaje_separado, prefijo):
 	if message.author.server_permissions.manage_roles:
@@ -9,7 +10,7 @@ async def toggle_roles(client, message, nick_autor, avatar_autor, mensaje_separa
 			rol = ""
 			while i < len(mensaje_separado):
 				if mensaje_separado[i] in message.role_mentions:
-					rol = discord.utils.get(message.server.roles, mention= mensaje_separado[i])
+					rol = discord.utils.get(message.server.roles, mention = mensaje_separado[i])
 					i = len(mensaje_separado)
 				else:
 					if not re.search("<@!?[0-9]+>", mensaje_separado[i]):
@@ -18,8 +19,9 @@ async def toggle_roles(client, message, nick_autor, avatar_autor, mensaje_separa
 						i += 1
 					else:
 						i = len(mensaje_separado)
+			rol = borrar_repetidos(rol, " ")
 			for rol_server in message.server.roles:
-				if rol_server.name.startswith(rol):
+				if rol_server.name.lower().startswith(rol.lower()):
 					Rol = rol_server
 				else:
 					Rol = None
