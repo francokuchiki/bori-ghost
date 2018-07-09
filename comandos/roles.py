@@ -20,12 +20,11 @@ async def toggle_roles(client, message, nick_autor, avatar_autor, mensaje_separa
 					else:
 						i = len(mensaje_separado)
 			rol = borrar_repetidos(rol, " ")
+			Rol = None
 			for rol_server in message.server.roles:
-				print(rol_server.name.lower(),rol[1::].lower())
-				if rol_server.name.lower().startswith(rol.lower()):
-					Rol = rol_server
-				else:
-					Rol = None
+				if Rol == None:
+					if rol_server.name.lower().startswith(rol.lower()):
+						Rol = rol_server
 			if Rol == None:
 				await client.send_typing(message.channel)
 				await client.send_message(message.channel, "No juegues conmigo que soy profesional, tienes que especificar un rol válido en tu mac.")
