@@ -19,7 +19,7 @@ async def ban(client, message, nick_autor, avatar_autor, mensaje_separado, prefi
 			return
 		for miembro in message.mentions:
 			razon = ""
-			mencion = re.search("<@!?{}>".format(miembro.id))
+			mencion = re.search("<@!?{}>".format(miembro.id), mensaje_separado)
 			i = mensaje_separado.index(mencion.group())+1
 			while i < len(mensaje_separado):
 				if discord.utils.get(message.mentions, id = mensaje_separado[i][2:len(mensaje_separado[i])-1:]) == None:
