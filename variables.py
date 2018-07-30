@@ -50,7 +50,7 @@ VALUES ('{}','{}');
 
 quita_mute="""
 DELETE FROM silenciados
-WHERE discord_id='{}';
+WHERE discord_id='%s';
 """
 
 tabla_encuestas="""
@@ -66,7 +66,7 @@ votantes VARCHAR(30));
 
 nueva_encuesta="""
 INSERT INTO encuestas (channel_id,titulo,opciones,votos,terminada, votantes)
-VALUES ('{}','{}','{}','{}',{}, '{}');
+VALUES ('%s','%s','%s','%s',%s, '%s');
 """
 
 tabla_prefijos = """
@@ -75,4 +75,4 @@ key INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 prefijo VARCHAR(20) NOT NULL);
 """
 
-default_prefix = "$"
+default_prefix = "g$"

@@ -1,5 +1,5 @@
 import re
-import sqlite3
+import psycopg2
 import os
 from datetime import datetime, timedelta
 from variables import (pie_texto, mute_titulo, unmute_titulo, en_descripcion, mute_color,
@@ -96,11 +96,14 @@ async def mute(client, message, nick_autor, avatar_autor, mensaje_separado, pref
 			mute_embed = crear_embed(client,mute_titulo, en_descripcion, mute_color, miembro, message.author, message.server,
 									razon, frown_usuario,tiempo=tiempo_texto,miniatura="avatar",pie=pie_embed,
 									ed=("silenciado","en",""))
-			base_de_datos = sqlite3.connect("basesdatos{}{}.db".format(os.sep,message.server.id),isolation_level=None)
+			BD_URL = os.getenv("DATABASE_URL")
+			base_de_datos = psycopg2.connect(BD_URL, sslmode='require')
 			bd = base_de_datos.cursor()
 			bd.execute(tabla_mute)
-			bd.execute("DELETE FROM silenciados WHERE discord_id = '{}'".format(miembro.id))
+			bd.execute("DELETE FROM silenciados WHERE discord_id = '%s'", (miembro.id))
 			bd.execute(nuevo_mute.format(miembro.id,termina_muteo))
+			bd.commit()
+			bd.close()
 			base_de_datos.close()
 			await client.add_roles(miembro, silenciado)
 			await client.send_typing(message.channel)
@@ -141,9 +144,12 @@ async def unmute(client, message, nick_autor, avatar_autor, mensaje_separado, pr
 			unmute_embed = crear_embed(client,unmute_titulo, en_descripcion, mute_color, miembro, message.author,
 								 message.server, razon, un_usuario, miniatura="avatar", pie=pie_embed,
 								 ed=("desilenciado","en"," y ya puedes hablar de nuevo"))
-			base_de_datos = sqlite3.connect("basesdatos{}{}.db".format(os.sep,message.server.id), isolation_level=None)
+			BD_URL = os.getenv("DATABASE_URL")
+			base_de_datos = psycopg2.connect(BD_URL, sslmode='require')
 			bd = base_de_datos.cursor()
-			bd.execute(quita_mute.format(miembro.id))
+			bd.execute(quita_mute, (miembro.id))
+			bd.commit()
+			bd.close()
 			base_de_datos.close()
 			await client.remove_roles(miembro,silenciado)
 			await client.send_typing(message.channel)

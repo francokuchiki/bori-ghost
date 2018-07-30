@@ -1,16 +1,18 @@
 import discord
-import sqlite3
+import psycopg2
 import os
 from funciones import get_mute_role
 
 async def silencio_entrar(client, miembro):
+	BD_URL = os.getenv('DATABASE_URL')
 	silenciado = get_mute_role(miembro.server.roles) #Establece el rol de silenciados para el servidor
-	base_de_datos = sqlite3.connect("basesdatos{}{}.db".format(os.sep,miembro.server.id), isolation_level=None)
+	base_de_datos = psycopg2.connect(BD_URL, sslmode='require')
 	bd = base_de_datos.cursor()
 	muteados = bd.execute("SELECT discord_id FROM silenciados").fetchall()
 	muteados = [dato[0] for dato in muteados] #Lista de ids de los muteados en el server
 	if miembro.id in muteados: #Para cada miembro en la lista de silenciados
 		await client.add_roles(miembro, silenciado) #Le pone el rol (para evitar perder el silencio)
+	bd.close()
 	base_de_datos.close()
 
 async def roles_superduperserver(client, miembro):

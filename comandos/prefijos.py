@@ -1,5 +1,5 @@
 import os
-import sqlite3
+import psycopg2
 from funciones import lista_a_cadena
 from discord import Embed
 
@@ -26,11 +26,14 @@ async def agregar_prefijo(client, message, mensaje_separado):
 			await client.send_typing(message.channel)
 			await client.send_message(message.channel, "La longitud máxima es de 20 carácteres, {}.".format(message.author.mention))
 			return
-		base_de_datos = sqlite3.connect("basesdatos{}{}.db".format(os.sep, message.server.id), isolation_level=None)
+		BD_URL = os.getenv("DATABASE_URL")
+		base_de_datos = psycopg2.connect(BD_URL, sslmode='require')
 		bd = base_de_datos.cursor()
-		bd.execute("INSERT INTO prefijos(prefijo) VALUES('{}')".format(mensaje_separado[2]))
+		bd.execute("INSERT INTO prefijos(prefijo) VALUES('%s')", (mensaje_separado[2]))
+		bd.commit()
 		await client.send_typing(message.channel)
 		await client.send_message(message.channel, "El prefijo '*{}*' ha sido añadido con éxito.".format(mensaje_separado[2]))
+		bd.close()
 		base_de_datos.close()
 	else:
 		msg_permisos = "No tienes los permisos suficientes para editar permisos, {}, debes ser administrador."
@@ -39,7 +42,8 @@ async def agregar_prefijo(client, message, mensaje_separado):
 
 async def quitar_prefijo(client, message, mensaje_separado):
 	if message.author.server_permissions.administrator:
-		base_de_datos = sqlite3.connect("basesdatos{}{}.db".format(os.sep, message.server.id), isolation_level=None)
+		BD_URL = os.getenv("DATABASE_URL")
+		base_de_datos = psycopg2.connect(BD_URL, sslmode='require')
 		bd = base_de_datos.cursor()
 		prefijos = bd.execute("SELECT prefijo FROM prefijos;").fetchall()
 		prefijos = [prefijo[0] for prefijo in prefijos]
@@ -54,9 +58,11 @@ async def quitar_prefijo(client, message, mensaje_separado):
 			await client.send_message(message.channel, msg_solouno.format(message.author.mention))
 			return
 		else:
-			bd.execute("DELETE FROM prefijos WHERE prefijo = '{}';".format(mensaje_separado[2]))
+			bd.execute("DELETE FROM prefijos WHERE prefijo = '%s';", (mensaje_separado[2]))
+			bd.commit()
 			await client.send_typing(message.channel)
 			await client.send_message(message.channel, "El prefijo '*{}*' ha sido eliminado exitosamente.".format(mensaje_separado[2]))
+		bd.close()
 		base_de_datos.close()
 	else:
 		msg_permisos = "No tienes los permisos suficientes para editar permisos, {}, debes ser administrador."
@@ -69,12 +75,15 @@ async def cambiar_prefijo(client, message, mensaje_separado):
 			await client.send_typing(message.channel)
 			await client.send_message(message.channel, "El prefijo no debe contener espacios, {}.".format(message.author.mention))
 			return
-		base_de_datos = sqlite3.connect("basesdatos{}{}.db".format(os.sep, message.server.id), isolation_level=None)
+		BD_URL = os.getenv("DATABASE_URL")
+		base_de_datos = psycopg2.connect(BD_URL, sslmode='require')
 		bd = base_de_datos.cursor()
 		bd.execute("DELETE FROM prefijos")
-		bd.execute("INSERT INTO prefijos(prefijo) VALUES ('{}')".format(mensaje_separado[2]))
+		bd.execute("INSERT INTO prefijos(prefijo) VALUES ('%s')", (mensaje_separado[2]))
+		bd.commit()
 		await client.send_typing(message.channel)
 		await client.send_message(message.channel, "El prefijo '*{}*'' es ahora el único prefijo válido.".format(mensaje_separado[2]))
+		bd.close()
 		base_de_datos.close()
 	else:
 		msg_permisos = "No tienes los permisos suficientes para editar permisos, {}, debes ser administrador."
@@ -82,9 +91,11 @@ async def cambiar_prefijo(client, message, mensaje_separado):
 		await client.send_message(message.channel, msg_permisos.format(message.author.mention))
 
 async def ver_prefijos(client, message, nick_autor, avatar_autor):
-	base_de_datos = sqlite3.connect("basesdatos{}{}.db".format(os.sep, message.server.id), isolation_level=None)
+	BD_URL = os.getenv("DATABASE_URL")
+	base_de_datos = psycopg2.connect(BD_URL, sslmode='require')
 	bd = base_de_datos.cursor()
 	prefijos = bd.execute("SELECT prefijo FROM prefijos;").fetchall()
+	bd.close()
 	base_de_datos.close()
 	prefijos = [prefijo[0] for prefijo in prefijos]
 	prefijos = lista_a_cadena(prefijos, caracter="\n")

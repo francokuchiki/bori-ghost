@@ -1,12 +1,13 @@
 import discord
 import os
-import sqlite3
+import psycopg2
 from variables import (embed_titulo, embed_descripcion, usuario_texto, razon_titulo, 
 						tiempo_titulo, tiempo_texto, ed_descripcion, fue_usuario_texto,
 						tabla_prefijos)
 
 def get_prefijos(message):
-	base_de_datos = sqlite3.connect("basesdatos{}{}.db".format(os.sep, message.server.id), isolation_level=None)
+	BD_URL = os.getenv("DATABASE_URL")
+	base_de_datos = psycopg2.connect(BD_URL, sslmode='require')
 	bd = base_de_datos.cursor()
 	bd.execute(tabla_prefijos)
 	prefijos = bd.execute("SELECT prefijo FROM prefijos;").fetchall()

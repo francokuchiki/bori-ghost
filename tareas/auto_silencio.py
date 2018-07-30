@@ -1,5 +1,5 @@
 import discord
-import sqlite3
+import psycopg2
 import asyncio
 import os
 from funciones import crear_embed, get_mute_role
@@ -16,7 +16,8 @@ async def auto_unmute(client):
 	while not client.is_closed: #Mientras esté abierto el bot
 		for servidor in client.servers: #Para cada servidor en el que esté
 			#Conecta con la base de datos o la crea si no existe
-			base_de_datos = sqlite3.connect("basesdatos{}{}.db".format(os.sep,servidor.id), isolation_level=None)
+			BD_URL = os.getenv('DATABASE_URL')
+			base_de_datos = psycopg2.connect(BD_URL, sslmode='require')
 			bd = base_de_datos.cursor()
 			bd.execute(tabla_mute) #Crea la tabla de silenciados si no existe
 			#Seleciona la id de usuario y la fecha en que debe levantarse cada silencio (tupla)
@@ -32,12 +33,14 @@ async def auto_unmute(client):
 												razon,un_usuario,miniatura="avatar", pie=pie_embed,
 												ed=("desilenciado","en"," y ya puedes hablar de nuevo"))
 					silenciado = get_mute_role(servidor.roles) #Selecciona el rol de silenciados para el servidor
-					bd.execute(quita_mute.format(usuario[0])) #Quita al usuario de la lista en la bd
+					bd.execute(quita_mute, usuario[0]) #Quita al usuario de la lista en la bd
+					bd.commit()
 					await client.remove_roles(miembro, silenciado) #Le quita el rol en el server
 					await client.send_typing(servidor) #Mensaje de "*BOT* está escribiendo"
 					await client.send_message(servidor, embed=unmute_embed[0]) #Envía el mensaje informativo
 					if len(unmute_embed) == 2: #Si hay un segundo mensaje
 						try: await client.send_message(miembro, embed=unmute_embed[1]) #Lo manda al usuario
 						except discord.errors.Forbidden: pass
+			bd.close()
 			base_de_datos.close()
 		await asyncio.sleep(1) #Encargado de que se ejecute una vez por segundo
