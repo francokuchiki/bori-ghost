@@ -40,7 +40,7 @@ tabla_mute="""
 CREATE TABLE IF NOT EXISTS silenciados(
 key SERIAL NOT NULL PRIMARY KEY,
 discord_id VARCHAR(30) NOT NULL,
-termina DATETIME NOT NULL);
+termina TIMESTAMP WITHOUT TIME ZONE NOT NULL);
 """
 
 nuevo_mute="""
