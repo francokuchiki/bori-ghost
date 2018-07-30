@@ -12,7 +12,7 @@ async def servidor_entro(client, servidor):
 		bd.execute(tabla_mute) #Crea la tabla de silenciados si no existe
 		bd.execute(tabla_encuestas)
 		bd.execute(tabla_prefijos)
-		bd.execute("INSERT INTO prefijos('prefijo') VALUES(%s);", (default_prefix,))
+		bd.execute("INSERT INTO prefijos(prefijo) VALUES(%s);", (default_prefix,))
 		bd.commit()
 		bd.close()
 		base_de_datos.close() #Cierra la conexión
