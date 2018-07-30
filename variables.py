@@ -45,7 +45,7 @@ termina DATETIME NOT NULL);
 
 nuevo_mute="""
 INSERT INTO silenciados (discord_id,termina)
-VALUES ('{}','{}');
+VALUES ('%s','%s');
 """
 
 quita_mute="""
@@ -55,7 +55,7 @@ WHERE discord_id='%s';
 
 tabla_encuestas="""
 CREATE TABLE IF NOT EXISTS encuestas(
-key INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+key INTEGER NOT NULL PRIMARY KEY SERIAL,
 channel_id VARCHAR(30) NOT NULL,
 titulo VARCHAR(2000) NOT NULL,
 opciones VARCHAR(2000) NOT NULL,
@@ -71,7 +71,7 @@ VALUES ('%s','%s','%s','%s',%s, '%s');
 
 tabla_prefijos = """
 CREATE TABLE IF NOT EXISTS prefijos(
-key INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+key INTEGER NOT NULL PRIMARY KEY SERIAL,
 prefijo VARCHAR(20) NOT NULL);
 """
 
