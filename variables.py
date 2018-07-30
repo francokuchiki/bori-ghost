@@ -38,7 +38,7 @@ unban_color = 0x00AA00
 
 tabla_mute="""
 CREATE TABLE IF NOT EXISTS silenciados(
-key INTEGER NOT NULL PRIMARY KEY SERIAL,
+key SERIAL NOT NULL PRIMARY KEY,
 discord_id VARCHAR(30) NOT NULL,
 termina DATETIME NOT NULL);
 """
@@ -55,7 +55,7 @@ WHERE discord_id='%s';
 
 tabla_encuestas="""
 CREATE TABLE IF NOT EXISTS encuestas(
-key INTEGER NOT NULL PRIMARY KEY SERIAL,
+key SERIAL NOT NULL PRIMARY KEY,
 channel_id VARCHAR(30) NOT NULL,
 titulo VARCHAR(2000) NOT NULL,
 opciones VARCHAR(2000) NOT NULL,
@@ -71,7 +71,7 @@ VALUES ('%s','%s','%s','%s',%s, '%s');
 
 tabla_prefijos = """
 CREATE TABLE IF NOT EXISTS prefijos(
-key INTEGER NOT NULL PRIMARY KEY SERIAL,
+key SERIAL NOT NULL PRIMARY KEY,
 prefijo VARCHAR(20) NOT NULL);
 """
 
