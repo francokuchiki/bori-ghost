@@ -8,7 +8,8 @@ async def silencio_entrar(client, miembro):
 	silenciado = get_mute_role(miembro.server.roles) #Establece el rol de silenciados para el servidor
 	base_de_datos = psycopg2.connect(BD_URL, sslmode='require')
 	bd = base_de_datos.cursor()
-	muteados = bd.execute("SELECT discord_id FROM silenciados").fetchall()
+	bd.execute("SELECT discord_id FROM silenciados")
+	muteados = bd.fetchall()
 	muteados = [dato[0] for dato in muteados] #Lista de ids de los muteados en el server
 	if miembro.id in muteados: #Para cada miembro en la lista de silenciados
 		await client.add_roles(miembro, silenciado) #Le pone el rol (para evitar perder el silencio)

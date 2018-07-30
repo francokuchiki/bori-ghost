@@ -21,7 +21,8 @@ async def auto_unmute(client):
 			bd = base_de_datos.cursor()
 			bd.execute(tabla_mute) #Crea la tabla de silenciados si no existe
 			#Seleciona la id de usuario y la fecha en que debe levantarse cada silencio (tupla)
-			tiempos_muteo = bd.execute("SELECT discord_id, termina FROM silenciados").fetchall()
+			tiempos_muteo = bd.execute("SELECT discord_id, termina FROM silenciados")
+			tiempos_muteo = bd.fetchall()
 			for usuario in tiempos_muteo: #Por cada pareja usuario-fecha
 				tiempo_unmute = datetime.strptime(usuario[1], "%Y-%m-%d %H:%M:%S.%f") #Le da formato de fecha
 				if datetime.now() >= tiempo_unmute: #Lo compara con la hora actual (UTC)

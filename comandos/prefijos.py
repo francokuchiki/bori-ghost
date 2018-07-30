@@ -30,7 +30,7 @@ async def agregar_prefijo(client, message, mensaje_separado):
 		base_de_datos = psycopg2.connect(BD_URL, sslmode='require')
 		bd = base_de_datos.cursor()
 		bd.execute("INSERT INTO prefijos(prefijo) VALUES('%s')", (mensaje_separado[2]))
-		bd.commit()
+		base_de_datos.commit()
 		await client.send_typing(message.channel)
 		await client.send_message(message.channel, "El prefijo '*{}*' ha sido añadido con éxito.".format(mensaje_separado[2]))
 		bd.close()
@@ -45,7 +45,8 @@ async def quitar_prefijo(client, message, mensaje_separado):
 		BD_URL = os.getenv("DATABASE_URL")
 		base_de_datos = psycopg2.connect(BD_URL, sslmode='require')
 		bd = base_de_datos.cursor()
-		prefijos = bd.execute("SELECT prefijo FROM prefijos;").fetchall()
+		bd.execute("SELECT prefijo FROM prefijos;")
+		prefijos = bd.fetchall()
 		prefijos = [prefijo[0] for prefijo in prefijos]
 		if mensaje_separado[2] not in prefijos:
 			msg_novalido = "Actualmente '*{}*' no es un prefijo válido, {}."
@@ -59,7 +60,7 @@ async def quitar_prefijo(client, message, mensaje_separado):
 			return
 		else:
 			bd.execute("DELETE FROM prefijos WHERE prefijo = '%s';", (mensaje_separado[2]))
-			bd.commit()
+			base_de_datos.commit()
 			await client.send_typing(message.channel)
 			await client.send_message(message.channel, "El prefijo '*{}*' ha sido eliminado exitosamente.".format(mensaje_separado[2]))
 		bd.close()
@@ -80,7 +81,7 @@ async def cambiar_prefijo(client, message, mensaje_separado):
 		bd = base_de_datos.cursor()
 		bd.execute("DELETE FROM prefijos")
 		bd.execute("INSERT INTO prefijos(prefijo) VALUES ('%s')", (mensaje_separado[2]))
-		bd.commit()
+		base_de_datos.commit()
 		await client.send_typing(message.channel)
 		await client.send_message(message.channel, "El prefijo '*{}*'' es ahora el único prefijo válido.".format(mensaje_separado[2]))
 		bd.close()
@@ -94,7 +95,8 @@ async def ver_prefijos(client, message, nick_autor, avatar_autor):
 	BD_URL = os.getenv("DATABASE_URL")
 	base_de_datos = psycopg2.connect(BD_URL, sslmode='require')
 	bd = base_de_datos.cursor()
-	prefijos = bd.execute("SELECT prefijo FROM prefijos;").fetchall()
+	bd.execute("SELECT prefijo FROM prefijos;")
+	prefijos = bd.fetchall()
 	bd.close()
 	base_de_datos.close()
 	prefijos = [prefijo[0] for prefijo in prefijos]

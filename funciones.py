@@ -10,7 +10,8 @@ def get_prefijos(message):
 	base_de_datos = psycopg2.connect(BD_URL, sslmode='require')
 	bd = base_de_datos.cursor()
 	bd.execute(tabla_prefijos)
-	prefijos = bd.execute("SELECT prefijo FROM prefijos;").fetchall()
+	bd.execute("SELECT prefijo FROM prefijos;")
+	prefijos = bd.fetchall()
 	base_de_datos.close()
 	lista_prefijos = [prefijo[0] for prefijo in prefijos]
 	return lista_prefijos

@@ -34,7 +34,8 @@ async def crear_encuesta(client, message, prefijo):
 	bd = base_de_datos.cursor()
 	bd.execute(tabla_encuestas)
 	select = "SELECT terminada FROM encuestas WHERE channel_id = '%s' and terminada = %s"
-	estado = bd.execute(select, (message.channel.id, 0)).fetchall()
+	bd.execute(select, (message.channel.id, 0))
+	estado = bd.fetchall()
 	if len(estado) != 0:
 		await client.send_typing(message.channel)
 		await client.send_message(message.channel, "Ya hay una encuesta iniciada en este canal.")
@@ -60,7 +61,7 @@ async def crear_encuesta(client, message, prefijo):
 	if titulo == None:
 		titulo = "No se ha especificado un título o tema para esta votación."
 	bd.execute(nueva_encuesta, (message.channel.id,titulo,opciones,votos,0,""))
-	bd.commit()
+	base_de_datos.commit()
 	bd.close()
 	base_de_datos.close()
 	await client.send_typing(message.channel)
@@ -71,7 +72,8 @@ async def revisa_encuesta(client, message, nick_autor, avatar_autor):
 	BD_URL = os.getenv('DATABASE_URL')
 	base_de_datos = psycopg2.connect(BD_URL, sslmode='require')
 	bd = base_de_datos.cursor()
-	encuesta = bd.execute("SELECT titulo,opciones,votos FROM encuestas WHERE channel_id = %s AND terminada = %s", (message.channel.id, 0)).fetchall()
+	bd.execute("SELECT titulo,opciones,votos FROM encuestas WHERE channel_id = %s AND terminada = %s", (message.channel.id, 0))
+	encuesta = bd.fetchall()
 	if len(encuesta) > 0:
 		opciones = encuesta[0][1].split(",")
 		votos = encuesta[0][2].split(",")
@@ -101,7 +103,8 @@ async def vota_encuesta(client, message, nick_autor, mensaje_separado):
 	base_de_datos = psycopg2.connect(BD_URL, sslmode='require')
 	bd = base_de_datos.cursor()
 	select = "SELECT titulo,opciones,votos,votantes FROM encuestas WHERE channel_id = {} AND terminada = 0"
-	encuesta = bd.execute(select, (message.channel.id)).fetchall()
+	bd.execute(select, (message.channel.id))
+	encuesta = bd.fetchall()
 	if len(encuesta) > 0:
 		opciones = encuesta[0][1].split(",")
 		votos = encuesta[0][2].split(",")
@@ -129,7 +132,7 @@ async def vota_encuesta(client, message, nick_autor, mensaje_separado):
 			votantes = ",".join(votantes)
 			nuevo_voto = "UPDATE encuestas SET votos = '%s', votantes = '%s' WHERE channel_id = '%s';"
 			bd.execute(nuevo_voto, (votos,votantes, message.channel.id))
-			bd.commit()
+			base_de_datos.commit()
 			await client.delete_message(message)
 			await client.send_typing(message.channel)
 			await client.send_message(message.channel, message.author.mention+": ¡Tu voto ha sido añadido!")
@@ -144,10 +147,11 @@ async def cierra_encuesta(client, message, nick_autor, avatar_autor):
 	base_de_datos = psycopg2.connect(BD_URL, sslmode='require')
 	bd = base_de_datos.cursor()
 	select = "SELECT key,titulo,opciones,votos FROM encuestas WHERE channel_id = {} AND terminada = 0"
-	encuesta = bd.execute(select, (message.channel.id)).fetchall()
+	bd.execute(select, (message.channel.id))
+	encuesta = bd.fetchall()
 	if len(encuesta) > 0:
 		bd.execute("UPDATE encuestas SET terminada = 1 WHERE key = %s", (encuesta[0][0]))
-		bd.commit()
+		base_de_datos.commit()
 		opciones = encuesta[0][2].split(",")
 		votos = encuesta[0][3].split(",")
 		res_lista = [(opciones[i],votos[i]) for i in range(len(opciones))]
