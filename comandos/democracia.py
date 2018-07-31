@@ -33,7 +33,7 @@ async def crear_encuesta(client, message, prefijo):
 	base_de_datos = psycopg2.connect(BD_URL, sslmode='require')
 	bd = base_de_datos.cursor()
 	bd.execute(tabla_encuestas)
-	select = "SELECT terminada FROM encuestas WHERE channel_id = '%s' and terminada = %s"
+	select = "SELECT terminada FROM encuestas WHERE channel_id = %s and terminada = %s"
 	bd.execute(select, (message.channel.id, 0))
 	estado = bd.fetchall()
 	if len(estado) != 0:
@@ -102,7 +102,7 @@ async def vota_encuesta(client, message, nick_autor, mensaje_separado):
 	BD_URL = os.getenv('DATABASE_URL')
 	base_de_datos = psycopg2.connect(BD_URL, sslmode='require')
 	bd = base_de_datos.cursor()
-	select = "SELECT titulo,opciones,votos,votantes FROM encuestas WHERE channel_id = {} AND terminada = 0"
+	select = "SELECT titulo,opciones,votos,votantes FROM encuestas WHERE channel_id = %s AND terminada = 0"
 	bd.execute(select, (message.channel.id))
 	encuesta = bd.fetchall()
 	if len(encuesta) > 0:
@@ -130,7 +130,7 @@ async def vota_encuesta(client, message, nick_autor, mensaje_separado):
 			votos = lista_a_cadena(votos[0:len(votos)-1:],caracter=",")
 			votantes.append(message.author.id)
 			votantes = ",".join(votantes)
-			nuevo_voto = "UPDATE encuestas SET votos = '%s', votantes = '%s' WHERE channel_id = '%s';"
+			nuevo_voto = "UPDATE encuestas SET votos = %s, votantes = '%s' WHERE channel_id = %s;"
 			bd.execute(nuevo_voto, (votos,votantes, message.channel.id))
 			base_de_datos.commit()
 			await client.delete_message(message)
@@ -146,7 +146,7 @@ async def cierra_encuesta(client, message, nick_autor, avatar_autor):
 	BD_URL = os.getenv('DATABASE_URL')
 	base_de_datos = psycopg2.connect(BD_URL, sslmode='require')
 	bd = base_de_datos.cursor()
-	select = "SELECT key,titulo,opciones,votos FROM encuestas WHERE channel_id = {} AND terminada = 0"
+	select = "SELECT key,titulo,opciones,votos FROM encuestas WHERE channel_id = %s AND terminada = 0"
 	bd.execute(select, (message.channel.id))
 	encuesta = bd.fetchall()
 	if len(encuesta) > 0:
