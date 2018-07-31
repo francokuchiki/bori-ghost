@@ -45,12 +45,12 @@ termina TIMESTAMP WITHOUT TIME ZONE NOT NULL);
 
 nuevo_mute="""
 INSERT INTO silenciados (discord_id,termina)
-VALUES ('%s','%s');
+VALUES (%s,%s);
 """
 
 quita_mute="""
 DELETE FROM silenciados
-WHERE discord_id='%s';
+WHERE discord_id=%s;
 """
 
 tabla_encuestas="""
@@ -66,7 +66,7 @@ votantes VARCHAR(30));
 
 nueva_encuesta="""
 INSERT INTO encuestas (channel_id,titulo,opciones,votos,terminada, votantes)
-VALUES ('%s','%s','%s','%s',%s, '%s');
+VALUES (%s,%s,%s,%s,%s, %s);
 """
 
 tabla_prefijos = """
