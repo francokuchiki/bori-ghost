@@ -24,7 +24,7 @@ async def auto_unmute(client):
 			tiempos_muteo = bd.execute("SELECT discord_id, termina FROM silenciados")
 			tiempos_muteo = bd.fetchall()
 			for usuario in tiempos_muteo: #Por cada pareja usuario-fecha
-				tiempo_unmute = datetime.strptime(usuario[1], "%Y-%m-%d %H:%M:%S.%f") #Le da formato de fecha
+				tiempo_unmute = usuario[1] #Le da formato de fecha
 				if datetime.now() >= tiempo_unmute: #Lo compara con la hora actual (UTC)
 					miembro = discord.utils.get(servidor.members, id = usuario[0]) #Selecciona el miembro con esa id
 					razon="Ha transcurrido el tiempo de silencio especificado." #Establece la razón
