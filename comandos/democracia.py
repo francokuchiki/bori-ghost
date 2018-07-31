@@ -150,7 +150,7 @@ async def cierra_encuesta(client, message, nick_autor, avatar_autor):
 	bd.execute(select, (message.channel.id,))
 	encuesta = bd.fetchall()
 	if len(encuesta) > 0:
-		bd.execute("UPDATE encuestas SET terminada = 1 WHERE key = %s", (encuesta[0][0]))
+		bd.execute("UPDATE encuestas SET terminada = 1 WHERE key = %s", (encuesta[0][0],))
 		base_de_datos.commit()
 		opciones = encuesta[0][2].split(",")
 		votos = encuesta[0][3].split(",")
