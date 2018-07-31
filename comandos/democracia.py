@@ -103,7 +103,7 @@ async def vota_encuesta(client, message, nick_autor, mensaje_separado):
 	base_de_datos = psycopg2.connect(BD_URL, sslmode='require')
 	bd = base_de_datos.cursor()
 	select = "SELECT titulo,opciones,votos,votantes FROM encuestas WHERE channel_id = %s AND terminada = 0"
-	bd.execute(select, (message.channel.id))
+	bd.execute(select, (message.channel.id,))
 	encuesta = bd.fetchall()
 	if len(encuesta) > 0:
 		opciones = encuesta[0][1].split(",")
@@ -147,7 +147,7 @@ async def cierra_encuesta(client, message, nick_autor, avatar_autor):
 	base_de_datos = psycopg2.connect(BD_URL, sslmode='require')
 	bd = base_de_datos.cursor()
 	select = "SELECT key,titulo,opciones,votos FROM encuestas WHERE channel_id = %s AND terminada = 0"
-	bd.execute(select, (message.channel.id))
+	bd.execute(select, (message.channel.id,))
 	encuesta = bd.fetchall()
 	if len(encuesta) > 0:
 		bd.execute("UPDATE encuestas SET terminada = 1 WHERE key = %s", (encuesta[0][0]))
