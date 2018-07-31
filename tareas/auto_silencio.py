@@ -34,7 +34,7 @@ async def auto_unmute(client):
 												razon,un_usuario,miniatura="avatar", pie=pie_embed,
 												ed=("desilenciado","en"," y ya puedes hablar de nuevo"))
 					silenciado = get_mute_role(servidor.roles) #Selecciona el rol de silenciados para el servidor
-					bd.execute(quita_mute, usuario[0]) #Quita al usuario de la lista en la bd
+					bd.execute(quita_mute, (usuario[0],)) #Quita al usuario de la lista en la bd
 					bd.commit()
 					await client.remove_roles(miembro, silenciado) #Le quita el rol en el server
 					await client.send_typing(servidor) #Mensaje de "*BOT* está escribiendo"
