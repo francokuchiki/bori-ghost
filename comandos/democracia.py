@@ -130,7 +130,7 @@ async def vota_encuesta(client, message, nick_autor, mensaje_separado):
 			votos = lista_a_cadena(votos[0:len(votos)-1:],caracter=",")
 			votantes.append(message.author.id)
 			votantes = ",".join(votantes)
-			nuevo_voto = "UPDATE encuestas SET votos = %s, votantes = '%s' WHERE channel_id = %s;"
+			nuevo_voto = "UPDATE encuestas SET votos = %s, votantes = %s WHERE channel_id = %s;"
 			bd.execute(nuevo_voto, (votos,votantes, message.channel.id))
 			base_de_datos.commit()
 			await client.delete_message(message)
