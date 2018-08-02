@@ -22,7 +22,7 @@ async def pone_destacados(client, reaction, user):
 		elif minimo == None:
 			await client.send_message(channel, "No se ha establecido la cantidad necesaria de reacciones "+
 														"para destacar mensajes.")
-		elif reaction.count == minimo:
+		elif reaction.emoji == emoji and reaction.count == minimo:
 			canal = discord.utils.get(message.server.channels, id=id_canal)
 			if canal == None:
 				await client.send_message(channel, "El canal elegido no es válido. Por favor cámbialo con "+
