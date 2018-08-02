@@ -10,12 +10,12 @@ async def canal_destacado(client, message, nick_autor, avatar_autor, mensaje_sep
 	bd = base_de_datos.cursor()
 	bd.execute(tabla_destacados)
 	bd.execute("SELECT id_canal FROM destacados")
-	canal_destacados = bd.fetchone()
+	canal_destacados = bd.fetchone()[0]
 	if len(message.channel_mentions) == 0:
 		if canal_destacados == None:
 			await client.send_message(message.channel, "No han seleccionado ningún canal para mensajes destacados.")
 		else:
-			canalDestacado = discord.utils.get(message.server.channels, id = canal_destacados[0])
+			canalDestacado = discord.utils.get(message.server.channels, id = canal_destacados)
 			await client.send_message(message.channel, "El canal para mensajes destacados es: "+canalDestacado.mention)
 	else:
 		if not message.author.server_permissions.manage_channels:
@@ -46,7 +46,7 @@ async def emoji_destacado(client, message, nick_autor, avatar_autor, mensaje_sep
 	bd = base_de_datos.cursor()
 	bd.execute(tabla_destacados)
 	bd.execute("SELECT emoji FROM destacados")
-	emoji_destacados = bd.fetchone()
+	emoji_destacados = bd.fetchone()[0]
 	if len(mensaje_separado) < 2:
 		if emoji_destacados == None:
 			await client.send_message(message.channel, "No se ha seleccionado ningún emoji para mensajes destacados.")
@@ -76,7 +76,7 @@ async def minimo_destacado(client, message, nick_autor, avatar_autor, mensaje_se
 	bd = base_de_datos.cursor()
 	bd.execute(tabla_destacados)
 	bd.execute("SELECT minimo FROM destacados")
-	minimo_destacados = bd.fetchone()
+	minimo_destacados = bd.fetchone()[0]
 	if len(mensaje_separado) < 2:
 		if minimo_destacados == None:
 			await client.send_message(message.channel, "No se ha establecido la cantidad de reacciones necesarias para "+
