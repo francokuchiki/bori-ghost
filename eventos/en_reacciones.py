@@ -29,14 +29,14 @@ async def pone_destacados(client, reaction, user):
 				await client.send_message(channel, "El canal elegido no es válido. Por favor cámbialo con "+
 													"el comando *dcanal*.")
 			elif canal != channel:
-					embed = discord.Embed(title=u"\U0001F4CC"+user.display_name+" en "+channel.mention,
+					embed = discord.Embed(title=u"\U0001F4CC"+user.display_name+" en #"+channel.name,
 											description=reaction.message.content,
 											colour=0xFFFF00)
 					embed.set_thumbnail(url=user.avatar_url)
 					fecha = datetime.datetime.strftime(reaction.message.timestamp, "%d/%m/%Y %H:%M:%S")
 					embed.set_footer(text=reaction.message.id+" | "+fecha, icon_url=client.user.avatar_url)
 					mensaje = await client.send_message(canal, embed=embed)
-					ids_detacados += reaction.message.id+","
+					ids_destacados += reaction.message.id+","
 					ids_destaque += mensaje.id+","
 					bd.execute("UPDATE destacados SET ids_destacados = %s, ids_destaque = %s"+
 								"WHERE minimo = %s", (ids_destacados, ids_destaque, minimo))
