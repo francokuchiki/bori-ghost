@@ -10,7 +10,7 @@ async def pone_destacados(client, reaction, user):
 	bd = base_de_datos.cursor()
 	bd.execute(tabla_destacados)
 	bd.execute("SELECT id_canal, emoji, minimo, ids_destacados, ids_destaque FROM destacados")
-	id_canal, emoji, minimo, ids_destacados, ids_destaque = bd.fetchone()[0]
+	id_canal, emoji, minimo, ids_destacados, ids_destaque = bd.fetchone()
 	if user == reaction.message.author or user.bot:
 		await client.send_message(channel, "Ni tú ni los bots puedes destacar tus propios mensajes, "+
 											user.display_name+".")
@@ -48,7 +48,7 @@ async def quita_destacados(client, reaction, user):
 	bd = base_de_datos.cursor()
 	bd.execute(tabla_destacados)
 	bd.execute("SELECT canal, emoji, ids_destacados, ids_destaque FROM destacados")
-	canal, emoji, ids_destacados, ids_destaque = bd.execute.fetchone()[0]
+	canal, emoji, ids_destacados, ids_destaque = bd.execute.fetchone()
 	ids_destacados = ids_destacados.split(",")
 	ids_destaque = ids_destaque.split(",")
 	if reaction.emoji == emoji:
