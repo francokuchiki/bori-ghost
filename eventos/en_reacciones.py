@@ -58,7 +58,8 @@ async def quita_destacados(client, reaction, user):
 			i = ids_destacados.index(reaction.message.id)
 			canalObjeto = discord.utils.get(reaction.message.server.channels, id=canal)
 			mensaje = await client.get_message(canalObjeto, ids_destaque[i])
-			ids_destacados_new = ids_destacados.remove(reaction.message.id)
+			ids_destacados_new = ids_destacados
+			ids_destacados_new.remove(reaction.message.id)
 			del ids_destaque[i]
 			await client.delete_message(mensaje)
 			bd.execute("UPDATE destacados SET ids_destacados = %s, ids_destaque = %s WHERE ids_destacados = %s", (",".join(ids_destacados_new),
