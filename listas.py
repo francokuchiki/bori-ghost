@@ -45,6 +45,13 @@ coms = {
 	"rol": roles.toggle_roles,
 	"role": roles.toggle_roles,
 	"roles": roles.toggle_roles,
+	#Destacados
+	"dcanal": destacados.canal_destacado,
+	"dchannel": destacados.canal_destacado,
+	"demoji": destacados.emoji_destacado,
+	"dminimo": destacados.minimo_destacado,
+	"dminimum": destacados.minimo_destacado,
+	"dmin": destacados.minimo_destacado,
 	#Cerrar
 	"ciérrate sésamo": cerrar.cerrar,
 	"close": cerrar.cerrar,
@@ -56,6 +63,8 @@ evs = {
 					entra_miembro.roles_superduperserver],
 	"entra_servidor": [entra_servidor.servidor_entro],
 	"por_mensaje": [por_mensaje.procesar_comandos],
+	"pone_reaccion": [en_reacciones.pone_destacados],
+	"quita_reaccion": [en_reacciones.quita_destacados],
 	"en_error": [en_error.maneja_errores]
 }
 

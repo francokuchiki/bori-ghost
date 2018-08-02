@@ -1,6 +1,6 @@
 import psycopg2
 import os
-from variables import tabla_mute, tabla_encuestas, tabla_prefijos, default_prefix
+from variables import tabla_mute, tabla_encuestas, tabla_prefijos, tabla_destacados, default_prefix
 
 async def servidor_entro(client, servidor):
 	"""Al unirse al server, crea una base de datos."""
@@ -12,6 +12,7 @@ async def servidor_entro(client, servidor):
 		bd.execute(tabla_mute) #Crea la tabla de silenciados si no existe
 		bd.execute(tabla_encuestas)
 		bd.execute(tabla_prefijos)
+		bd.execute(tabla_destacados)
 		bd.execute("INSERT INTO prefijos(prefijo) VALUES(%s);", (default_prefix,))
 		base_de_datos.commit()
 		bd.close()
