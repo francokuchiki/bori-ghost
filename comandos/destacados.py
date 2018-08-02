@@ -83,7 +83,7 @@ async def minimo_destacado(client, message, nick_autor, avatar_autor, mensaje_se
 														"destacar mensajes.")
 		else:
 			await client.send_message(message.channel, "La cantidad de reacciones necesarias para destacar un mensaje es "+
-														"de: **"+minimo_destacados+"**.")
+														"de: **"+str(minimo_destacados)+"**.")
 	elif len(mensaje_separado) > 3:
 		await client.send_message(message.channel, "Para hacerte llamar profesional creo que necesitas demasiada "+
 													"suerte. Sólo dime el número y nada más.")
