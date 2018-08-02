@@ -32,7 +32,7 @@ async def canal_destacado(client, message, nick_autor, avatar_autor, mensaje_sep
 				agregar_bd = "INSERT INTO destacados(id_canal, emoji, minimo) VALUES(%s, %s, %s)"
 				bd.execute(agregar_bd,(canal_agregar.id,estrella,1))
 			else:
-				bd.execute("UPDATE destacados SET id_canal = %s WHERE id_canal = %s", (canal_agregar.id, canal_destacados.id))
+				bd.execute("UPDATE destacados SET id_canal = %s WHERE id_canal = %s", (canal_agregar.id, canal_destacados))
 			await client.send_message(message.channel, exito.format(canal_agregar.mention))
 			base_de_datos.commit()
 	bd.close()
