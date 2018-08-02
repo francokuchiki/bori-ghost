@@ -2,7 +2,7 @@ import os
 import discord
 import psycopg2
 from emoji import UNICODE_EMOJI
-from variables import tabla_destacados
+from variables import tabla_destacados, whitelist
 
 async def canal_destacado(client, message, nick_autor, avatar_autor, mensaje_separado, prefijo):
 	BD_URL = os.getenv("DATABASE_URL")

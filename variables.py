@@ -86,5 +86,5 @@ ids_destacados VARCHAR NOT NULL,
 ids_destaque VARCHAR NOT NULL);
 """
 
-tabla_destacados2 = "INSERT INTO ids_destacados VALUES ('');"
-tabla_destacados3 = "INSERT INTO ids_destaque VALUES ('');"
+tabla_destacados2 = "INSERT INTO ids_destacados VALUES ('') ON CONFLICT(ids_destacados) DO NOTHING;"
+tabla_destacados3 = "INSERT INTO ids_destaque VALUES ('') ON CONFLICT(ids_destaque) DO NOTHING;"
