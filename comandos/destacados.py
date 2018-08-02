@@ -93,7 +93,7 @@ async def minimo_destacado(client, message, nick_autor, avatar_autor, mensaje_se
 			if minimo_destacados == None:
 				bd.execute("INSERT INTO destacados(minimo) VALUES(%s)", (mensaje_separado[1],))
 			else:
-				bd.execute("UPDATE destacados SET minimo = %s WHERE minimo = %s", (mensaje_separado[1], emoji_destacados))
+				bd.execute("UPDATE destacados SET minimo = %s WHERE minimo = %s", (mensaje_separado[1], minimo_destacados))
 			await client.send_message(message.channel, "**¡Ding ding ding!** La cantidad de reacciones necesarias para "+
 														"destacar un mensaje es, ahora, de: **"+mensaje_separado[1]+"**.")
 			base_de_datos.commit()
@@ -109,6 +109,19 @@ async def crear_tabla(client, message, nick_autor, avatar_autor, mensaje_separad
 		base_de_datos = psycopg2.connect(BD_URL, sslmode='require')
 		bd = base_de_datos.cursor()
 		bd.execute(tabla_destacados)
+		base_de_datos.commit()
+		bd.close()
+		base_de_datos.close()
+		await client.send_message(message.channel, "Tarea finalizada.")
+	else:
+		await client.send_message(message.channel, "Buen intento pero sólo el profesional que me creó puede hacer eso.")
+
+async def vaciar_tabla(client, message, nick_autor, avatar_autor, mensaje_separado, prefijo):
+	if whitelist[message.author.id] == "franco":
+		BD_URL = os.getenv("DATABASE_URL")
+		base_de_datos = psycopg2.connect(BD_URL, sslmode='require')
+		bd = base_de_datos.cursor()
+		bd.execute("TRUNCATE %s", ("destacados",))
 		base_de_datos.commit()
 		bd.close()
 		base_de_datos.close()
