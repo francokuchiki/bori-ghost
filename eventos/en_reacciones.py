@@ -49,7 +49,7 @@ async def quita_destacados(client, reaction, user):
 	base_de_datos = psycopg2.connect(BD_URL, sslmode='require')
 	bd = base_de_datos.cursor()
 	bd.execute(tabla_destacados)
-	bd.execute("SELECT canal, emoji, ids_destacados, ids_destaque FROM destacados")
+	bd.execute("SELECT id_canal, emoji, ids_destacados, ids_destaque FROM destacados")
 	canal, emoji, ids_destacados, ids_destaque = bd.execute.fetchone()
 	ids_destacados = ids_destacados.split(",")
 	ids_destaque = ids_destaque.split(",")
