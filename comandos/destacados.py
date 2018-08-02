@@ -21,7 +21,7 @@ async def canal_destacado(client, message, nick_autor, avatar_autor, mensaje_sep
 		if not message.author.server_permissions.manage_channels:
 			error = "¡Todo listo! Espera... Tú no tienes permisos para hacer eso. Mejor cómprate una MAC, {}."
 			await client.send_message(message.channel, error.format(nick_autor))
-		if len(message.channel_mentions) > 1:
+		elif len(message.channel_mentions) > 1:
 			await client.send_message(message.channel, "ERROR: Tienes que elegir un solo canal.")
 			return
 		else:
@@ -104,7 +104,7 @@ async def minimo_destacado(client, message, nick_autor, avatar_autor, mensaje_se
 													"¡TE LA CREÍSTE! Sólo hago favores a los **profesionales**.")
 
 async def crear_tabla(client, message, nick_autor, avatar_autor, mensaje_separado, prefijo):
-	if whitelist[message.author.id] == "franco":
+	if message.author.id in whitelist and whitelist[message.author.id] == "franco":
 		BD_URL = os.getenv("DATABASE_URL")
 		base_de_datos = psycopg2.connect(BD_URL, sslmode='require')
 		bd = base_de_datos.cursor()
@@ -117,7 +117,7 @@ async def crear_tabla(client, message, nick_autor, avatar_autor, mensaje_separad
 		await client.send_message(message.channel, "Buen intento pero sólo el profesional que me creó puede hacer eso.")
 
 async def vaciar_tabla(client, message, nick_autor, avatar_autor, mensaje_separado, prefijo):
-	if whitelist[message.author.id] == "franco":
+	if message.author.id in whitelist and whitelist[message.author.id] == "franco":
 		BD_URL = os.getenv("DATABASE_URL")
 		base_de_datos = psycopg2.connect(BD_URL, sslmode='require')
 		bd = base_de_datos.cursor()
