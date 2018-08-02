@@ -49,12 +49,12 @@ async def quita_destacados(client, reaction, user):
 	base_de_datos = psycopg2.connect(BD_URL, sslmode='require')
 	bd = base_de_datos.cursor()
 	bd.execute(tabla_destacados)
-	bd.execute("SELECT id_canal, emoji, ids_destacados, ids_destaque FROM destacados")
-	canal, emoji, ids_destacados, ids_destaque = bd.fetchone()
+	bd.execute("SELECT id_canal, emoji, minimo, ids_destacados, ids_destaque FROM destacados")
+	canal, emoji, minimo, ids_destacados, ids_destaque = bd.fetchone()
 	ids_destacados = ids_destacados.split(",")
 	ids_destaque = ids_destaque.split(",")
 	if reaction.emoji == emoji:
-		if reaction.message.id in ids_destacados and reaction.count == 0:
+		if reaction.message.id in ids_destacados and reaction.count < minimo:
 			i = ids_destacados.index(reaction.message.id)
 			canalObjeto = discord.utils.get(reaction.message.server.channels, id=canal)
 			mensaje = await client.get_message(canalObjeto, ids_destaque[i])
