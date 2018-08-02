@@ -12,7 +12,7 @@ async def pone_destacados(client, reaction, user):
 	bd.execute(tabla_destacados)
 	bd.execute("SELECT id_canal, emoji, minimo, ids_destacados, ids_destaque FROM destacados")
 	id_canal, emoji, minimo, ids_destacados, ids_destaque = bd.fetchone()
-	if reaction.emoji == emoji:
+	if reaction.emoji == emoji or str(reaction.emoji) == emoji:
 		if user == reaction.message.author or user.bot:
 			await client.send_message(channel, "Ni tú ni los bots pueden destacar tus mensajes, "+
 												user.display_name+".")
