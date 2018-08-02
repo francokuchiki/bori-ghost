@@ -10,12 +10,12 @@ async def canal_destacado(client, message, nick_autor, avatar_autor, mensaje_sep
 	bd = base_de_datos.cursor()
 	bd.execute(tabla_destacados)
 	bd.execute("SELECT id_canal FROM destacados")
-	canal_destacados = bd.fetchone()[0]
+	canal_destacados = bd.fetchone()
 	if len(message.channel_mentions) == 0:
 		if canal_destacados == None:
 			await client.send_message(message.channel, "No han seleccionado ningún canal para mensajes destacados.")
 		else:
-			canalDestacado = discord.utils.get(message.server.channels, id = canal_destacados)
+			canalDestacado = discord.utils.get(message.server.channels, id = canal_destacados[0])
 			await client.send_message(message.channel, "El canal para mensajes destacados es: "+canalDestacado.mention)
 	else:
 		if not message.author.server_permissions.manage_channels:
@@ -46,12 +46,12 @@ async def emoji_destacado(client, message, nick_autor, avatar_autor, mensaje_sep
 	bd = base_de_datos.cursor()
 	bd.execute(tabla_destacados)
 	bd.execute("SELECT emoji FROM destacados")
-	emoji_destacados = bd.fetchone()[0]
+	emoji_destacados = bd.fetchone()
 	if len(mensaje_separado) < 2:
 		if emoji_destacados == None:
 			await client.send_message(message.channel, "No se ha seleccionado ningún emoji para mensajes destacados.")
 		else:
-			await client.send_message(message.channel, "Ya puedes destacar mensajes con el emoji: "+emoji_destacados)
+			await client.send_message(message.channel, "Ya puedes destacar mensajes con el emoji: "+emoji_destacados[0])
 	elif len(mensaje_separado) > 3:
 		await client.send_message(message.channel, "Dime sólo el emoji, no me cuentes tu vida.")
 	elif mensaje_separado[1] in emojis:
@@ -76,14 +76,14 @@ async def minimo_destacado(client, message, nick_autor, avatar_autor, mensaje_se
 	bd = base_de_datos.cursor()
 	bd.execute(tabla_destacados)
 	bd.execute("SELECT minimo FROM destacados")
-	minimo_destacados = bd.fetchone()[0]
+	minimo_destacados = bd.fetchone()
 	if len(mensaje_separado) < 2:
 		if minimo_destacados == None:
 			await client.send_message(message.channel, "No se ha establecido la cantidad de reacciones necesarias para "+
 														"destacar mensajes.")
 		else:
 			await client.send_message(message.channel, "La cantidad de reacciones necesarias para destacar un mensaje es "+
-														"de: **"+str(minimo_destacados)+"**.")
+														"de: **"+str(minimo_destacados[0])+"**.")
 	elif len(mensaje_separado) > 3:
 		await client.send_message(message.channel, "Para hacerte llamar profesional creo que necesitas demasiada "+
 													"suerte. Sólo dime el número y nada más.")
