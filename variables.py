@@ -82,8 +82,6 @@ CREATE TABLE IF NOT EXISTS destacados(
 id_canal VARCHAR(30) NOT NULL PRIMARY KEY,
 emoji VARCHAR(30) NOT NULL,
 minimo INT NOT NULL,
-ids_destacados VARCHAR NOT NULL,
-ids_destaque VARCHAR NOT NULL);
-INSERT INTO destacados(ids_destacados) VALUES ('') ON CONFLICT(ids_destacados) DO NOTHING;
-INSERT INTO destacados(ids_destaque) VALUES ('') ON CONFLICT(ids_destaque) DO NOTHING;
+ids_destacados VARCHAR NOT NULL DEFAULT '',
+ids_destaque VARCHAR NOT NULL DEFAULT '');
 """

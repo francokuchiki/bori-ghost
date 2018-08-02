@@ -52,7 +52,7 @@ coms = {
 	"dminimo": destacados.minimo_destacado,
 	"dminimum": destacados.minimo_destacado,
 	"dmin": destacados.minimo_destacado,
-	"gcrear": destacados.crear_tabla,
+	"dcrear": destacados.crear_tabla,
 	#Cerrar
 	"ciérrate sésamo": cerrar.cerrar,
 	"close": cerrar.cerrar,
