@@ -53,16 +53,13 @@ async def quita_destacados(client, reaction, user):
 	canal, emoji, ids_destacados, ids_destaque = bd.fetchone()
 	ids_destacados = ids_destacados.split(",")
 	ids_destaque = ids_destaque.split(",")
-	print(ids_destacados, ids_destaque)
 	if reaction.emoji == emoji:
 		if reaction.message.id in ids_destacados and reaction.count == 0:
 			i = ids_destacados.index(reaction.message.id)
-			print (i, ids_destacados[i], ids_destaque[i])
 			canalObjeto = discord.utils.get(reaction.message.server.channels, id=canal)
 			mensaje = await client.get_message(canalObjeto, ids_destaque[i])
 			ids_destacados.remove(reaction.message.id)
 			del ids_destaque[i]
-			print(i, ids_destacados, ids_destaque)
 			await client.delete_message(mensaje)
 			bd.execute("UPDATE destacados SET ids_destacados = %s, ids_destaque = %s WHERE id_canal=%s", (",".join(ids_destacados),
 						",".join(ids_destaque), canal))
