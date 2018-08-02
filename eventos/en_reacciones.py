@@ -53,6 +53,7 @@ async def quita_destacados(client, reaction, user):
 	canal, emoji, ids_destacados, ids_destaque = bd.fetchone()
 	ids_destacados = ids_destacados.split(",")
 	ids_destaque = ids_destaque.split(",")
+	print(ids_destacados, ids_destaque)
 	if reaction.emoji == emoji:
 		if reaction.message.id in ids_destacados and reaction.count == 0:
 			i = ids_destacados.index(reaction.message.id)
