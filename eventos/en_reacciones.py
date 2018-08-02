@@ -34,7 +34,7 @@ async def pone_destacados(client, reaction, user):
 											colour=0xFFFF00)
 					embed.set_thumbnail(url=user.avatar_url)
 					fecha = datetime.datetime.strftime(reaction.message.timestamp, "%d/%m/%Y %H:%M:%S")
-					embed.set_footer(reaction.message.id+" | "+fecha)
+					embed.set_footer(text=reaction.message.id+" | "+fecha, icon_url=client.avatar_url)
 					mensaje = await client.send_message(canal, embed=embed)
 					ids_detacados += reaction.message.id+","
 					ids_destaque += mensaje.id+","
