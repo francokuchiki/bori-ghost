@@ -20,3 +20,6 @@ async def procesar_comandos(client, message):
 			await listas.coms[mensaje_separado[0][len(usa)::]](client, message, nick_autor, avatar_autor, mensaje_separado, prefijo=usa)
 		elif message.content.lower()[len(usa)::] in listas.coms:
 			await listas.coms['ciérrate sésamo'](client, message)
+	if message.mention_everyone:
+		await client.send_message(message.channel, "¿Qué te pasa, hijo de puta? ¿Por qué me mencionas? Esto es poco profesional, ya estoy harto."+
+													"\nhttps://media.discordapp.net/attachments/337854421876736003/474381150245224448/9k.png")
