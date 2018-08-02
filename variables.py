@@ -81,5 +81,9 @@ tabla_destacados = """
 CREATE TABLE IF NOT EXISTS destacados(
 id_canal NOT NULL PRIMARY KEY,
 emoji VARCHAR(30) NOT NULL,
-minimo INT NOT NULL);
+minimo INT NOT NULL,
+ids_destacados VARCHAR NOT NULL,
+ids_destaque VARCHAR NOT NULL);
+INSERT INTO ids_destacados VALUES ("");
+INSERT INTO ids_destaque VALUES ("");
 """
