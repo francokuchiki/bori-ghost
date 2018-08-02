@@ -3,7 +3,7 @@ import discord
 import psycopg2
 from variables import tabla_destacados
 
-async def pone_reaccion(client, reaction, user):
+async def pone_destacados(client, reaction, user):
 	chanel = reaction.message.channel
 	if user == reaction.message.author or user.bot:
 		await client.send_message(channel, "Ni tú ni los bots puedes destacar tus propios mensajes, "+
@@ -43,7 +43,7 @@ async def pone_reaccion(client, reaction, user):
 		bd.close()
 		base_de_datos.close()
 
-async def quita_reaccion(client, reaction, user):
+async def quita_destacados(client, reaction, user):
 	BD_URL = os.getenv("DATABASE_URL")
 	base_de_datos = psycopg2.connect(BD_URL, sslmode='require')
 	bd = base_de_datos.cursor()
