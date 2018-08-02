@@ -15,9 +15,9 @@ async def canal_destacado(client, message, nick_autor, avatar_autor, mensaje_sep
 		if canal_destacados == None:
 			await client.send_message(message.channel, "No han seleccionado ningún canal para mensajes destacados.")
 		else:
-			canalDestacado = discord.utils.get(message.server.channels, id = canal_destacados)
+			canalDestacado = discord.utils.get(message.server.channels, id = canal_destacados[0])
 			await client.send_message(message.channel, "El canal para mensajes destacados es: "+canalDestacado.mention)
-	elif mensaje_separado[1] in {"set", "pon", "en", "aquí", "aqui", "seleccionar", "choose"}:
+	else:
 		if not message.author.server_permissions.manage_channels:
 			error = "¡Todo listo! Espera... Tú no tienes permisos para hacer eso. Mejor cómprate una MAC, {}."
 			await client.send_message(message.channel, error.format(nick_autor))

@@ -80,8 +80,8 @@ default_prefix = "g$"
 tabla_destacados = """
 CREATE TABLE IF NOT EXISTS destacados(
 id_canal VARCHAR(30) NOT NULL PRIMARY KEY,
-emoji VARCHAR(30) NOT NULL,
-minimo INT NOT NULL,
+emoji VARCHAR(30) NOT NULL DEFAULT '⭐',
+minimo INT NOT NULL DEFAULT 1,
 ids_destacados VARCHAR NOT NULL DEFAULT '',
 ids_destaque VARCHAR NOT NULL DEFAULT '');
 """
