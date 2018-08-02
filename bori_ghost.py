@@ -36,7 +36,7 @@ async def on_reaction_add(reaction,user):
 
 @client.event
 async def on_reaction_remove(reaction,user):
-	if hasattr(message.server, "id"):
+	if hasattr(reaction.message.server, "id"):
 		for funcion in listas.evs["quita_reaccion"]:
 			await funcion(client,reaction,user)
 

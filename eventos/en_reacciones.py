@@ -1,6 +1,7 @@
 import os
 import discord
 import psycopg2
+import datetime
 from variables import tabla_destacados
 
 async def pone_destacados(client, reaction, user):
