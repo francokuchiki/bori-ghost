@@ -50,7 +50,7 @@ async def quita_destacados(client, reaction, user):
 	bd = base_de_datos.cursor()
 	bd.execute(tabla_destacados)
 	bd.execute("SELECT id_canal, emoji, ids_destacados, ids_destaque FROM destacados")
-	canal, emoji, ids_destacados, ids_destaque = bd.execute.fetchone()
+	canal, emoji, ids_destacados, ids_destaque = bd.fetchone()
 	ids_destacados = ids_destacados.split(",")
 	ids_destaque = ids_destaque.split(",")
 	if reaction.emoji == emoji:
