@@ -27,7 +27,7 @@ async def pone_destacados(client, reaction, user):
 			if canal == None:
 				await client.send_message(channel, "El canal elegido no es válido. Por favor cámbialo con "+
 													"el comando *dcanal*.")
-			elif canal != channel and canal not in canales_excluidos:
+			elif canal != channel:
 				embed = discord.Embed(title=u"\U0001F4CC"+user.display_name+" en "+channel.mention,
 										description=reaction.message.content,
 										colour=0xFFFF00)
