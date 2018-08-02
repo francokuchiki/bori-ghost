@@ -15,26 +15,26 @@ async def pone_reaccion(client, reaction, user):
 		bd.execute(tabla_destacados)
 		bd.execute("SELECT id_canal, emoji, minimo, ids_destacados, ids_destaque FROM destacados")
 		id_canal, emoji, minimo, ids_destacados, ids_destaque = bd.execute.fetchone()
-			if id_canal == None:
-				await client.send_message(channel, "Aún no han seleccionado ningún canal para mensajes destacados.")
-			elif emoji == None:
-				await client.send_message(channel, "No se ha seleccionado ningún emoji para mensajes destacados.")
-			elif minimo == None:
-				await client.send_message(channel, "No se ha establecido la cantidad necesaria de reacciones "+
-															"para destacar mensajes.")
-			elif reaction.count == minimo:
-				canal = discord.utils.get(message.server.channels, id=id_canal)
-				if canal == None:
-					await client.send_message(channel, "El canal elegido no es válido. Por favor cámbialo con "+
-														el comando *dcanal*.")
-				elif canal != channel and canal not in canales_excluidos:
-					embed = discord.Embed(title=u"\U0001F4CC"user.display_name+" en "+channel.mention,
-											description=reaction.message.content,
-											colour=0xFFFF00)
-					embed.set_thumbnail(url=user.avatar_url)
-					fecha = datetime.strftime(reaction.message.timestamp, "%d/%m/%Y %H:%M:%S")
-					embed.set_footer(reaction.message.id+" | "+fecha)
-					mensaje = await client.send_message(canal, embed=embed)
+		if id_canal == None:
+			await client.send_message(channel, "Aún no han seleccionado ningún canal para mensajes destacados.")
+		elif emoji == None:
+			await client.send_message(channel, "No se ha seleccionado ningún emoji para mensajes destacados.")
+		elif minimo == None:
+			await client.send_message(channel, "No se ha establecido la cantidad necesaria de reacciones "+
+														"para destacar mensajes.")
+		elif reaction.count == minimo:
+			canal = discord.utils.get(message.server.channels, id=id_canal)
+			if canal == None:
+				await client.send_message(channel, "El canal elegido no es válido. Por favor cámbialo con "+
+													"el comando *dcanal*.")
+			elif canal != channel and canal not in canales_excluidos:
+				embed = discord.Embed(title=u"\U0001F4CC"user.display_name+" en "+channel.mention,
+										description=reaction.message.content,
+										colour=0xFFFF00)
+				embed.set_thumbnail(url=user.avatar_url)
+				fecha = datetime.strftime(reaction.message.timestamp, "%d/%m/%Y %H:%M:%S")
+				embed.set_footer(reaction.message.id+" | "+fecha)
+				mensaje = await client.send_message(canal, embed=embed)
 				ids_detacados += reaction.message.id+","
 				ids_destaque += mensaje.id+","
 				bd.execute("UPDATE destacados SET ids_destacados = %s, ids_destaque = %s"+
