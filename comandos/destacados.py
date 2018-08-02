@@ -95,7 +95,7 @@ async def minimo_destacado(client, message, nick_autor, avatar_autor, mensaje_se
 			else:
 				bd.execute("UPDATE destacados SET minimo = %s WHERE minimo = %s", (mensaje_separado[1], minimo_destacados))
 			await client.send_message(message.channel, "**¡Ding ding ding!** La cantidad de reacciones necesarias para "+
-														"destacar un mensaje es, ahora, de: **"+mensaje_separado[1]+"**.")
+														"destacar un mensaje es, ahora, de: **"+str(mensaje_separado[1])+"**.")
 			base_de_datos.commit()
 		except ValueError: await client.send_message(message.channel, "No necesitas suerte para saber que eso no "+
 																		"es un número entero.")
