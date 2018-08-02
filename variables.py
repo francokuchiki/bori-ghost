@@ -84,6 +84,7 @@ emoji VARCHAR(30) NOT NULL,
 minimo INT NOT NULL,
 ids_destacados VARCHAR NOT NULL,
 ids_destaque VARCHAR NOT NULL);
-INSERT INTO "ids_destacados" VALUES ('');
-INSERT INTO ids_destaque VALUES ('');
 """
+
+tabla_destacados2 = "INSERT INTO ids_destacados VALUES ('');"
+tabla_destacados3 = "INSERT INTO ids_destaque VALUES ('');"

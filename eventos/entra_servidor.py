@@ -13,6 +13,8 @@ async def servidor_entro(client, servidor):
 		bd.execute(tabla_encuestas)
 		bd.execute(tabla_prefijos)
 		bd.execute(tabla_destacados)
+		bd.execute(tabla_destacados2)
+		bd.execute(tabla_destacados3)
 		bd.execute("INSERT INTO prefijos(prefijo) VALUES(%s);", (default_prefix,))
 		base_de_datos.commit()
 		bd.close()

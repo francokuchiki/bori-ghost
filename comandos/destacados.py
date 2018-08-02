@@ -8,7 +8,6 @@ async def canal_destacado(client, message, nick_autor, avatar_autor, mensaje_sep
 	BD_URL = os.getenv("DATABASE_URL")
 	base_de_datos = psycopg2.connect(BD_URL, sslmode='require')
 	bd = base_de_datos.cursor()
-	bd.execute(tabla_destacados)
 	bd.execute("SELECT id_canal FROM destacados")
 	canal_destacados = bd.fetchone()
 	if len(message.channel_mentions) > 0:
@@ -44,7 +43,6 @@ async def emoji_destacado(client, message, nick_autor, avatar_autor, mensaje_sep
 	BD_URL = os.getenv("DATABASE_URL")
 	base_de_datos = psycopg2.connect(BD_URL, sslmode='require')
 	bd = base_de_datos.cursor()
-	bd.execute(tabla_destacados)
 	bd.execute("SELECT emoji FROM destacados")
 	emoji_destacados = bd.fetchone()
 	if len(mensaje_separado) < 2:
@@ -74,7 +72,6 @@ async def minimo_destacado(client, message, nick_autor, avatar_autor, mensaje_se
 	BD_URL = os.getenv("DATABASE_URL")
 	base_de_datos = psycopg2.connect(BD_URL, sslmode='require')
 	bd = base_de_datos.cursor()
-	bd.execute(tabla_destacados)
 	bd.execute("SELECT minimo FROM destacados")
 	minimo_destacados = bd.fetchone()
 	if len(mensaje_separado) < 2:
@@ -109,6 +106,8 @@ async def crear_tabla(client, message, nick_autor, avatar_autor, mensaje_separad
 		base_de_datos = psycopg2.connect(BD_URL, sslmode='require')
 		bd = base_de_datos.cursor()
 		bd.execute(tabla_destacados)
+		bd.execute(tabla_destacados2)
+		bd.execute(tabla_destacados3)
 		base_de_datos.commit()
 		bd.close()
 		base_de_datos.close()
