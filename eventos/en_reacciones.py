@@ -56,7 +56,8 @@ async def quita_destacados(client, reaction, user):
 	if reaction.emoji == emoji:
 		if reaction.message.id in ids_destacados and reaction.count == 0:
 			i = ids_destacados.index(reaction.message.id)
-			mensaje = await client.get_message(canal, ids_destaque[i])
+			canalObjeto = discord.utils.get(reaction.message.server.channels, id=canal)
+			mensaje = await client.get_message(canalObjeto, ids_destaque[i])
 			ids_destacados_new = ids_destacados.remove(reaction.message.id)
 			del ids_destaque[i]
 			await client.delete_message(mensaje)
