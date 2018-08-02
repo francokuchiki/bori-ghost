@@ -14,7 +14,7 @@ async def pone_destacados(client, reaction, user):
 		bd = base_de_datos.cursor()
 		bd.execute(tabla_destacados)
 		bd.execute("SELECT id_canal, emoji, minimo, ids_destacados, ids_destaque FROM destacados")
-		id_canal, emoji, minimo, ids_destacados, ids_destaque = bd.execute.fetchone()
+		id_canal, emoji, minimo, ids_destacados, ids_destaque = bd.fetchone()[0]
 		if id_canal == None:
 			await client.send_message(channel, "Aún no han seleccionado ningún canal para mensajes destacados.")
 		elif emoji == None:
@@ -49,7 +49,7 @@ async def quita_destacados(client, reaction, user):
 	bd = base_de_datos.cursor()
 	bd.execute(tabla_destacados)
 	bd.execute("SELECT canal, ids_destacados, ids_destaque FROM destacados")
-	canal, ids_destacados, ids_destaque = bd.execute.fetchone()
+	canal, ids_destacados, ids_destaque = bd.execute.fetchone()[0]
 	ids_destacados = ids_destacados.split(",")
 	ids_destaque = ids_destaque.split(",")
 	if reaction.message.id in ids_destacados and reaction.count == 0:
