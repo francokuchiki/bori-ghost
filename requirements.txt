@@ -1,3 +1,4 @@
 discord.py==0.16.12
 discord==0.0.2
 psycopg2==2.7.5
+emojis== 0.5.0
