@@ -11,7 +11,7 @@ async def canal_destacado(client, message, nick_autor, avatar_autor, mensaje_sep
 	bd.execute(tabla_destacados)
 	bd.execute("SELECT id_canal FROM destacados")
 	canal_destacados = bd.fetchone()
-	if len(message.channel_mentions) > 0:
+	if len(message.channel_mentions) == 0:
 		if canal_destacados == None:
 			await client.send_message(message.channel, "No han seleccionado ningún canal para mensajes destacados.")
 		else:
