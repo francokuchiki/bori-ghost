@@ -61,8 +61,8 @@ async def quita_destacados(client, reaction, user):
 			ids_destacados_new = ids_destacados.remove(reaction.message.id)
 			del ids_destaque[i]
 			await client.delete_message(mensaje)
-			bd.execute("UPDATE destacados SET ids_destacados = %s, ids_destaque = %s WHERE ids_destacados = %s", (ids_destacados_new,
-						ids_destaque, ids_destacados))
+			bd.execute("UPDATE destacados SET ids_destacados = %s, ids_destaque = %s WHERE ids_destacados = %s", (",".join(ids_destacados_new),
+						",".join(ids_destaque), ",".join(ids_destacados)))
 			base_de_datos.commit()
 	bd.close()
 	base_de_datos.close()
