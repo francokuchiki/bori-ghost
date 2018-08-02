@@ -84,7 +84,6 @@ emoji VARCHAR(30) NOT NULL,
 minimo INT NOT NULL,
 ids_destacados VARCHAR NOT NULL,
 ids_destaque VARCHAR NOT NULL);
+INSERT INTO destacados(ids_destacados) VALUES ('') ON CONFLICT(ids_destacados) DO NOTHING;
+INSERT INTO destacados(ids_destaque) VALUES ('') ON CONFLICT(ids_destaque) DO NOTHING;
 """
-
-tabla_destacados2 = "INSERT INTO ids_destacados VALUES ('') ON CONFLICT(ids_destacados) DO NOTHING;"
-tabla_destacados3 = "INSERT INTO ids_destaque VALUES ('') ON CONFLICT(ids_destaque) DO NOTHING;"

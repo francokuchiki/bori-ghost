@@ -12,6 +12,7 @@ async def pone_destacados(client, reaction, user):
 		BD_URL = os.getenv("DATABASE_URL")
 		base_de_datos = psycopg2.connect(BD_URL, sslmode='require')
 		bd = base_de_datos.cursor()
+		bd.execute(tabla_destacados)
 		bd.execute("SELECT id_canal, emoji, minimo, ids_destacados, ids_destaque FROM destacados")
 		id_canal, emoji, minimo, ids_destacados, ids_destaque = bd.execute.fetchone()
 		if id_canal == None:
@@ -46,6 +47,7 @@ async def quita_destacados(client, reaction, user):
 	BD_URL = os.getenv("DATABASE_URL")
 	base_de_datos = psycopg2.connect(BD_URL, sslmode='require')
 	bd = base_de_datos.cursor()
+	bd.execute(tabla_destacados)
 	bd.execute("SELECT canal, ids_destacados, ids_destaque FROM destacados")
 	canal, ids_destacados, ids_destaque = bd.execute.fetchone()
 	ids_destacados = ids_destacados.split(",")
