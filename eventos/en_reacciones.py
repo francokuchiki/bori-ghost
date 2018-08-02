@@ -53,7 +53,7 @@ async def quita_destacados(client, reaction, user):
 	canal, emoji, minimo, ids_destacados, ids_destaque = bd.fetchone()
 	ids_destacados = ids_destacados.split(",")
 	ids_destaque = ids_destaque.split(",")
-	if reaction.emoji == emoji or str(reaction.emoji == emoji):
+	if reaction.emoji == emoji or str(reaction.emoji) == emoji:
 		if reaction.message.id in ids_destacados and reaction.count < minimo:
 			i = ids_destacados.index(reaction.message.id)
 			canalObjeto = discord.utils.get(reaction.message.server.channels, id=canal)
