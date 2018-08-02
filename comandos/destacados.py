@@ -121,7 +121,7 @@ async def vaciar_tabla(client, message, nick_autor, avatar_autor, mensaje_separa
 		BD_URL = os.getenv("DATABASE_URL")
 		base_de_datos = psycopg2.connect(BD_URL, sslmode='require')
 		bd = base_de_datos.cursor()
-		bd.execute("TRUNCATE TABLE %s;", ("destacados",))
+		bd.execute("TRUNCATE TABLE destacados;")
 		base_de_datos.commit()
 		bd.close()
 		base_de_datos.close()
