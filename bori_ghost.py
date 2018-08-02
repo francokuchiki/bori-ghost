@@ -29,6 +29,18 @@ async def on_message(message):
 			await funcion(client, message)
 
 @client.event
+async def on_reaction_add(reaction,user):
+	if hasattr(message.server, "id"):
+		for funcion in listas.evs["pone_reaccion"]:
+			await funcion(client,reaction,user)
+
+@client.event
+async def on_reaction_remove(reaction,user):
+	if hasattr(message.server, "id"):
+		for funcion in listas.evs["quita_reaccion"]:
+			await funcion(client,reaction,user)
+
+@client.event
 async def on_error(event, *args, **kwargs):
 	for funcion in listas.evs["en_error"]:
 		await funcion(client,event,args[0])
