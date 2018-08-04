@@ -57,7 +57,7 @@ async def pone_destacados(client, reaction, user):
 												adjunto['url']+")"
 					if len(reaction.message.embeds) == 1:
 						if reaction.message.embeds[0]['title'] != None:
-						embed.description += "\n\n**__"+reaction.message.embeds[0]['title']+"__**"
+							embed.description += "\n\n**__"+reaction.message.embeds[0]['title']+"__**"
 						if reaction.message.embeds[0]['description'] != None:
 							embed.description += "\n\n"+reaction.message.embeds[0]['description']
 						for campo in reaction.message.embeds[0]['fields']:
