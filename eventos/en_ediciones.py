@@ -18,7 +18,7 @@ async def editar_destacados(client, antes, despues):
 		if despues.content != None:
 			mensaje_a_editar.embeds[0]['description'] = despues.content
 		else:
-			mensaje_a_editar.embeds[0]['description'] = ""
+			mensaje_a_editar.embeds[0]['description'] = "a"
 		embed = discord.Embed.from_data(mensaje_a_editar.embeds[0])
 		if 'thumbnail' in mensaje_a_editar.embeds[0]:
 			embed.set_thumbnail(url=mensaje_a_editar.embeds[0]['thumbnail']['url'])
