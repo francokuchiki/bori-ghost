@@ -56,8 +56,10 @@ async def pone_destacados(client, reaction, user):
 								embed.description += "\n"+str(cuenta)+") ["+adjunto['filename']+"]("+\
 												adjunto['url']+")"
 					if len(reaction.message.embeds) == 1:
-						embed.description += "\n\n**__"+reaction.message.embeds[0]['title']+"__**"+"\n\n"+\
-												reaction.message.embeds[0]['description']
+						if reaction.message.embeds[0]['title'] != None:
+						embed.description += "\n\n**__"+reaction.message.embeds[0]['title']+"__**"
+						if reaction.message.embeds[0]['description'] != None:
+							embed.description += "\n\n"+reaction.message.embeds[0]['description']
 						for campo in reaction.message.embeds[0]['fields']:
 							embed.add_field(name=campo['name'], value=campo['value'])
 						if reaction.message.embeds[0]['img'] != None:
