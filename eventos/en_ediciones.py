@@ -19,4 +19,4 @@ async def editar_destacados(client, antes, despues):
 			mensaje_a_editar.embeds[0]['description'] = despues.content
 			embed = discord.Embed
 			embed.from_data(mensaje_a_editar.embeds[0])
-			await client.edit_message(mensaje_a_editar, embed = mensaje_a_editar.embeds[0])
+			await client.edit_message(mensaje_a_editar, embed = embed)
