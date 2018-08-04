@@ -16,7 +16,13 @@ async def editar_destacados(client, antes, despues):
 		channel = discord.utils.get(antes.server.channels, id= id_canal)
 		mensaje_a_editar = await client.get_message(channel, ids_destaque[i])
 		if antes.content != despues.content:
-			print (mensaje_a_editar.embeds[0])
 			mensaje_a_editar.embeds[0]['description'] = despues.content
 			embed = discord.Embed.from_data(mensaje_a_editar.embeds[0])
+			if 'thumbnail' in mensaje_a_editar.embeds[0]:
+				embed.set_thumbnail(url=mensaje_a_editar_embeds[0]['thumbnail']['url'])
+			if 'image' in mensaje_a_editar.embeds[0]:
+				embed.set_image(url=mensaje_a_editar.embeds[0]['image']['url'])
+			if 'footer' in mensaje_a_editar.embeds[0]:
+				embed.set_footer(icon_url=mensaje_a_editar.embeds[0]['footer']['icon_url'],
+									text=mensaje_a_editar.embeds[0]['footer']['text'])
 			await client.edit_message(mensaje_a_editar, embed=embed)
