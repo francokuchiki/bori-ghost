@@ -67,6 +67,7 @@ evs = {
 	"por_mensaje": [por_mensaje.procesar_comandos],
 	"pone_reaccion": [en_reacciones.pone_destacados],
 	"quita_reaccion": [en_reacciones.quita_destacados],
+	"en_edicion": [en_ediciones.editar_destacados],
 	"en_error": [en_error.maneja_errores]
 }
 

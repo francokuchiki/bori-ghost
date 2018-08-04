@@ -56,6 +56,9 @@ async def pone_destacados(client, reaction, user):
 								embed.description += "\n"+str(cuenta)+") ["+adjunto['filename']+"]("+\
 												adjunto['url']+")"
 					if len(reaction.message.embeds) == 1:
+						if 'author' in reaction.message.embeds[0]:
+							embed.description += "\n\n[*"+reaction.message.embeds[0]['author']['name']+"*]("+\
+													reaction.message.embeds[0]['author']['url']+")"
 						if 'title' in reaction.message.embeds[0]:
 							embed.description += "\n\n**__"+reaction.message.embeds[0]['title']+"__**"
 						if 'description' in reaction.message.embeds[0]:
