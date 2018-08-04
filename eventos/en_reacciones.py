@@ -56,15 +56,15 @@ async def pone_destacados(client, reaction, user):
 								embed.description += "\n"+str(cuenta)+") ["+adjunto['filename']+"]("+\
 												adjunto['url']+")"
 					if len(reaction.message.embeds) == 1:
-						if reaction.message.embeds[0]['title'] != None:
+						if 'title' in reaction.message.embeds[0]:
 							embed.description += "\n\n**__"+reaction.message.embeds[0]['title']+"__**"
-						if reaction.message.embeds[0]['description'] != None:
+						if 'description' in reaction.message.embeds[0]:
 							embed.description += "\n\n"+reaction.message.embeds[0]['description']
 						for campo in reaction.message.embeds[0]['fields']:
 							embed.add_field(name=campo['name'], value=campo['value'])
-						if reaction.message.embeds[0]['img'] != None:
+						if 'img' in reaction.message.embeds[0]:
 							embed.set_image(url=reaction.message.embeds[0]['img']['url'])
-						if reaction.message.embeds[0]['footer'] != None:
+						if 'footer' in reaction.message.embeds[0]:
 							embed.add_field(name="Footer", value=reaction.message.embeds[0]['footer']['text'])
 					fecha = datetime.datetime.strftime(reaction.message.timestamp, "%d/%m/%Y %H:%M:%S")
 					embed.set_footer(text=reaction.message.id+" | "+fecha, icon_url=client.user.avatar_url)
