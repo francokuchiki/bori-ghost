@@ -17,12 +17,30 @@ async def editar_destacados(client, antes, despues):
 		mensaje_a_editar = await client.get_message(channel, ids_destaque[i])
 		if antes.content != despues.content:
 			mensaje_a_editar.embeds[0]['description'] = despues.content
-			embed = discord.Embed.from_data(mensaje_a_editar.embeds[0])
-			if 'thumbnail' in mensaje_a_editar.embeds[0]:
-				embed.set_thumbnail(url=mensaje_a_editar_embeds[0]['thumbnail']['url'])
-			if 'image' in mensaje_a_editar.embeds[0]:
-				embed.set_image(url=mensaje_a_editar.embeds[0]['image']['url'])
-			if 'footer' in mensaje_a_editar.embeds[0]:
-				embed.set_footer(icon_url=mensaje_a_editar.embeds[0]['footer']['icon_url'],
-									text=mensaje_a_editar.embeds[0]['footer']['text'])
-			await client.edit_message(mensaje_a_editar, embed=embed)
+		embed = discord.Embed.from_data(mensaje_a_editar.embeds[0])
+		if 'thumbnail' in mensaje_a_editar.embeds[0]:
+			embed.set_thumbnail(url=mensaje_a_editar_embeds[0]['thumbnail']['url'])
+		if 'image' in mensaje_a_editar.embeds[0]:
+			embed.set_image(url=mensaje_a_editar.embeds[0]['image']['url'])
+		if 'footer' in mensaje_a_editar.embeds[0]:
+			embed.set_footer(icon_url=mensaje_a_editar.embeds[0]['footer']['icon_url'],
+								text=mensaje_a_editar.embeds[0]['footer']['text'])
+		if antes.embeds != despues.embeds:
+			if 'author' in despues.embeds[0]:
+				if 'url' in despues.embeds[0]['author']:
+					embed.description += "\n\n[**"+despues.embeds[0]['author']['name']+"**]("+\
+											despues.embeds[0]['author']['url']+")"
+				else:
+					embed.description += "\n\n**"+despues.embeds[0]['author']['name']+"**"
+				if 'title' in despues.embeds[0]:
+					embed.description += "\n\n**__"+despues.embeds[0]['title']+"__**"
+				if 'description' in despues.embeds[0]:
+					embed.description += "\n\n"+despues.embeds[0]['description']
+				if 'fields' in despues.embeds[0]:
+					for campo in despues.embeds[0]['fields']:
+						embed.add_field(name=campo['name'], value=campo['value'])
+				if 'image' in despues.embeds[0]:
+					embed.set_image(url=despues.embeds[0]['image']['url'])
+				if 'footer' in despues.embeds[0]:
+					embed.add_field(name="Footer", value=despues.embeds[0]['footer']['text'])
+		await client.edit_message(mensaje_a_editar, embed=embed)
