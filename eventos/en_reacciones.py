@@ -63,11 +63,10 @@ async def pone_destacados(client, reaction, user):
 						if 'fields' in reaction.message.embeds[0]:
 							for campo in reaction.message.embeds[0]['fields']:
 								embed.add_field(name=campo['name'], value=campo['value'])
-						if 'img' in reaction.message.embeds[0]:
-							embed.set_image(url=reaction.message.embeds[0]['img']['url'])
+						if 'image' in reaction.message.embeds[0]:
+							embed.set_image(url=reaction.message.embeds[0]['image']['url'])
 						if 'footer' in reaction.message.embeds[0]:
 							embed.add_field(name="Footer", value=reaction.message.embeds[0]['footer']['text'])
-						print (reaction.message.embeds)
 					fecha = datetime.datetime.strftime(reaction.message.timestamp, "%d/%m/%Y %H:%M:%S")
 					embed.set_footer(text=reaction.message.id+" | "+fecha, icon_url=client.user.avatar_url)
 					mensaje = await client.send_message(canal, embed=embed)
