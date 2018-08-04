@@ -55,6 +55,14 @@ async def pone_destacados(client, reaction, user):
 								adjuntos += 1
 								embed.description += "\n"+str(cuenta)+") ["+adjunto['filename']+"]("+\
 												adjunto['url']+")"
+					if len(reaction.message.embeds) == 1:
+						embed.description += "\n\n**__"+mensaje.embeds[0]['title']+"__**"+"\n\n"+mensaje.embeds[0]['description']
+						for campo in mensaje.embeds[0]['fields']:
+							embed.add_field(name=campo['name'], value=campo['value'])
+						if mensaje.embeds[0]['img'] != None:
+							embed.set_image(url=mensaje.embeds[0]['img']['url'])
+						if mensaje.embeds[0]['footer'] != None:
+							embed.add_field(name="Footer", value=mensaje.embeds[0]['footer']['text'])
 					fecha = datetime.datetime.strftime(reaction.message.timestamp, "%d/%m/%Y %H:%M:%S")
 					embed.set_footer(text=reaction.message.id+" | "+fecha, icon_url=client.user.avatar_url)
 					mensaje = await client.send_message(canal, embed=embed)
