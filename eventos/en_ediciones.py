@@ -15,5 +15,5 @@ async def editar_destacados(client, antes, despues):
 		i = ids_destacados.index(antes.id)
 		channel = discord.utils.get(antes.server.channels, id= id_canal)
 		mensaje_a_editar = await client.get_message(channel, ids_destaque[i])
-		if antes.content != despues.content:
+		if mensaje_a_editar.embeds[0]['description'] != despues.content:
 			await client.edit_message(mensaje_a_editar, new_content = despues.content)
