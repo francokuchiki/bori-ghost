@@ -60,8 +60,9 @@ async def pone_destacados(client, reaction, user):
 							embed.description += "\n\n**__"+reaction.message.embeds[0]['title']+"__**"
 						if 'description' in reaction.message.embeds[0]:
 							embed.description += "\n\n"+reaction.message.embeds[0]['description']
-						for campo in reaction.message.embeds[0]['fields']:
-							embed.add_field(name=campo['name'], value=campo['value'])
+						if 'fields' in reaction.message.embeds[0]:
+							for campo in reaction.message.embeds[0]['fields']:
+								embed.add_field(name=campo['name'], value=campo['value'])
 						if 'img' in reaction.message.embeds[0]:
 							embed.set_image(url=reaction.message.embeds[0]['img']['url'])
 						if 'footer' in reaction.message.embeds[0]:
