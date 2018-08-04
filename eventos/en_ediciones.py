@@ -32,15 +32,15 @@ async def editar_destacados(client, antes, despues):
 											despues.embeds[0]['author']['url']+")"
 				else:
 					embed.description += "\n\n**"+despues.embeds[0]['author']['name']+"**"
-				if 'title' in despues.embeds[0]:
-					embed.description += "\n\n**__"+despues.embeds[0]['title']+"__**"
-				if 'description' in despues.embeds[0]:
-					embed.description += "\n\n"+despues.embeds[0]['description']
-				if 'fields' in despues.embeds[0]:
-					for campo in despues.embeds[0]['fields']:
-						embed.add_field(name=campo['name'], value=campo['value'])
-				if 'image' in despues.embeds[0]:
-					embed.set_image(url=despues.embeds[0]['image']['url'])
-				if 'footer' in despues.embeds[0]:
-					embed.add_field(name="Footer", value=despues.embeds[0]['footer']['text'])
+			if 'title' in despues.embeds[0]:
+				embed.description += "\n\n**__"+despues.embeds[0]['title']+"__**"
+			if 'description' in despues.embeds[0]:
+				embed.description += "\n\n"+despues.embeds[0]['description']
+			if 'fields' in despues.embeds[0]:
+				for campo in despues.embeds[0]['fields']:
+					embed.add_field(name=campo['name'], value=campo['value'])
+			if 'image' in despues.embeds[0]:
+				embed.set_image(url=despues.embeds[0]['image']['url'])
+			if 'footer' in despues.embeds[0]:
+				embed.add_field(name="Footer", value=despues.embeds[0]['footer']['text'])
 		await client.edit_message(mensaje_a_editar, embed=embed)
