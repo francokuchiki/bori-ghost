@@ -38,7 +38,6 @@ async def editar_destacados(client, antes, despues):
 				embed.set_image(url=despues.embeds[0]['image']['url'])
 			if 'footer' in despues.embeds[0]:
 				embed.add_field(name="Footer", value=despues.embeds[0]['footer']['text'])
-			mensaje_a_editar.embeds[0]['description'] =
 		if 'thumbnail' in mensaje_a_editar.embeds[0]:
 			embed.set_thumbnail(url=mensaje_a_editar.embeds[0]['thumbnail']['url'])
 		if 'image' in mensaje_a_editar.embeds[0]:
