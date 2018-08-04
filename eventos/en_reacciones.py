@@ -2,6 +2,7 @@ import os
 import discord
 import psycopg2
 import datetime
+import re
 from variables import tabla_destacados
 
 async def pone_destacados(client, reaction, user):
@@ -33,6 +34,27 @@ async def pone_destacados(client, reaction, user):
 											description=reaction.message.content,
 											colour=0xFFFF00)
 					embed.set_thumbnail(url=reaction.message.author.avatar_url)
+					if len(reaction.message.attachments) == 1:
+						if re.search("https://.+\.png|jpg|jpeg|bmp|gif", reaction.message.attachments[0]['url']):
+							embed.set_image(url=reaction.message.attachments[0]['url'])
+						else:
+							embed.description += "\n**__Adjunto__**"+"\n["+message.attachments[0]['filename']+"]("+\
+													message.attachments[0]['url']+")"
+					elif len(reaction.message.attachments) > 1:
+						imagenes = 0
+						adjuntos = 0
+						for adjunto in reaction.message.attachments:
+							if re.search("https://.+\.png|jpg|jpeg|bmp|gif", adjunto['url']):
+								if imagenes == 0:
+									embed.description += "\n**__Imágenes__**"
+								imagenes += 1
+								embed.description += "\n"+str(imagenes)+") "+adjunto['url']
+							else:
+								if adjuntos == 0:
+									embed.description += "\n**__Adjuntos__**"
+								adjuntos += 1
+								embed.description += "\n"+str(cuenta)+") ["+adjunto['filename']+"]("+\
+												adjunto['url']+")"
 					fecha = datetime.datetime.strftime(reaction.message.timestamp, "%d/%m/%Y %H:%M:%S")
 					embed.set_footer(text=reaction.message.id+" | "+fecha, icon_url=client.user.avatar_url)
 					mensaje = await client.send_message(canal, embed=embed)
