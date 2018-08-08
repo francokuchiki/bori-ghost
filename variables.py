@@ -85,3 +85,17 @@ minimo INT NOT NULL DEFAULT 1,
 ids_destacados VARCHAR NOT NULL DEFAULT '',
 ids_destaque VARCHAR NOT NULL DEFAULT '');
 """
+
+tabla_confiables = """
+CREATE TABLE IF NOT EXISTS confiables(
+user_id VARCHAR(30) NOT NULL);
+"""
+
+nuevo_confiable = """
+INSERT INTO confiables(user_id) VALUES (%s);
+"""
+
+quita_confiable = """
+DELETE FROM confiables
+WHERE user_id = %s;
+"""

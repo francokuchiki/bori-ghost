@@ -54,6 +54,13 @@ coms = {
 	"dmin": destacados.minimo_destacado,
 	"dcrear": destacados.crear_tabla,
 	"dvaciar": destacados.vaciar_tabla,
+	#Confiables
+	"confiable": confiables.confiables,
+	"confiables": confiables.confiables,
+	"conf": confiables.confiables,
+	"confi": confiables.confiables,
+	"confia": confiables.confiables,
+	"confio": confiables.confiables,
 	#Cerrar
 	"ciérrate sésamo": cerrar.cerrar,
 	"close": cerrar.cerrar,

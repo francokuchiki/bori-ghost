@@ -1,1 +1,1 @@
-__all__ = ["ping", "cerrar", "silencio", "ban", "mix", "democracia", "prefijos", "nicks", "roles", "destacados"]
+__all__ = ["ping", "cerrar", "silencio", "ban", "mix", "democracia", "prefijos", "nicks", "roles", "destacados", "confiables"]

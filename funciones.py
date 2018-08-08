@@ -3,7 +3,7 @@ import os
 import psycopg2
 from variables import (embed_titulo, embed_descripcion, usuario_texto, razon_titulo, 
 						tiempo_titulo, tiempo_texto, ed_descripcion, fue_usuario_texto,
-						tabla_prefijos)
+						tabla_prefijos, tabla_confiables)
 
 def get_prefijos(message):
 	BD_URL = os.getenv("DATABASE_URL")
@@ -15,6 +15,16 @@ def get_prefijos(message):
 	base_de_datos.close()
 	lista_prefijos = [prefijo[0] for prefijo in prefijos]
 	return lista_prefijos
+
+def get_confiables():
+	BD_URL = os.getenv("DATABASE_URL")
+	base_de_datos = psycopg2.connect(BD_URL, sslmode='require')
+	bd = base_de_datos.cursor()
+	bd.execute(tabla_confiables)
+	bd.execute("SELECT user_id FROM confiables;")
+	confiables = bd.fetchall()
+	confiables_whitelist = {confiable[0] for confiable in confiables}
+	return confiables_whitelist
 
 def lista_a_cadena(lista, inicio: int=None, final: int=None, caracter=" "):
 	if inicio == None:
@@ -43,6 +53,16 @@ def get_mute_role(lista):
 	if silenciado == None: #Si no lo encuentra
 		silenciado = ""
 	return silenciado #Devuelve el rol
+
+def get_confiable_role(lista):
+	confiable = discord.utils.get(lista, id="")
+	if confiable == None:
+		confiable = discord.utils.get(lista, name="confiable")
+	if confiable == None:
+		confiable = discord.utils.get(lista, name="Confiable")
+	if confiable == None:
+		confiable = discord.utils.get(lista, name="CONFIABLE")
+	return confiable
 
 def borrar_repetidos(mensaje, caracter):
 	"""Borra los caracteres repetidos al principio y al final de un mensaje.

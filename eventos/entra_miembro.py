@@ -1,7 +1,14 @@
 import discord
 import psycopg2
 import os
-from funciones import get_mute_role
+from funciones import get_mute_role, get_confiables, get_confiable_role
+
+async def confiable_entrar(client, miembro):
+	confiables = get_confiables()
+	if miembro.id in confiables:
+		confiable_rol = get_confiable_role(miembro.server.roles)
+		await client.add_roles(miembro, confiable_rol)
+
 
 async def silencio_entrar(client, miembro):
 	BD_URL = os.getenv('DATABASE_URL')
@@ -29,4 +36,3 @@ async def roles_superduperserver(client, miembro):
 		amorcito = discord.utils.get(miembro.server.roles, id="338021657082068992")
 		superdupermenos = discord.utils.get(miembro.server.roles, id="338017217650360321")
 		await client.add_roles(miembro, rey, amorcito, superdupermenos) #Le pone sus roles
-
