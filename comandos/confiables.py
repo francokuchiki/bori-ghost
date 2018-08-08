@@ -49,7 +49,11 @@ async def confiables(client, message, nick_autor, avatar_autor, mensaje_separado
 				await client.send_typing(message.channel)
 				await client.send_message(message.channel, error_faltan.format(message.author.display_name))
 		elif mensaje_separado[1] == "muestra":
-			await client.send_message(message.channel, confiables)
+			mensaje = "{"
+			for a in confiables:
+				mensaje += a+","
+			mensaje += "}"
+			await client.send_message(message.channel, mensaje)
 		bd.close()
 		base_de_datos.commit()
 		base_de_datos.close()
