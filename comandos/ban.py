@@ -18,42 +18,50 @@ async def ban(client, message, nick_autor, avatar_autor, mensaje_separado, prefi
 		if not message.author.server_permissions.ban_members:
 			return
 		for miembro in message.mentions:
-			razon = ""
-			mencion = re.search("<@!?{}>".format(miembro.id), message.content)
-			i = mensaje_separado.index(mencion.group())+1
-			while i < len(mensaje_separado):
-				if discord.utils.get(message.mentions, id = mensaje_separado[i][2:len(mensaje_separado[i])-1:]) == None:
-					razon += " "+mensaje_separado[i]
-					i += 1
+			if message.author.top_role.position > miembro.top_role.position:
+				razon = ""
+				mencion = re.search("<@!?{}>".format(miembro.id), message.content)
+				i = mensaje_separado.index(mencion.group())+1
+				while i < len(mensaje_separado):
+					if discord.utils.get(message.mentions, id = mensaje_separado[i][2:len(mensaje_separado[i])-1:]) == None:
+						razon += " "+mensaje_separado[i]
+						i += 1
+					else:
+						i = len(mensaje_separado)
+				razon = borrar_repetidos(razon, " ")
+				if razon == "":
+					razon = "No se ha especificado ninguna razón."
+				if message.content.startswith("ban",len(prefijo),len(prefijo)+4):
+					ban_kick="baneado"
+					emoji=u"\U0000274E"
+					puede = message.author.server_permissions.ban_members
 				else:
-					i = len(mensaje_separado)
-			razon = borrar_repetidos(razon, " ")
-			if razon == "":
-				razon = "No se ha especificado ninguna razón."
-			if message.content.startswith("ban",len(prefijo),len(prefijo)+4):
-				ban_kick="baneado"
-				emoji=u"\U0000274E"
-				puede = message.author.server_permissions.ban_members
+					ban_kick="expulsado"
+					emoji=u"\U0001F462"
+					puede = message.author.server_permissions.kick_members
+				if puede == False:
+					await client.send_typing(message.channel)
+					await client.send_message(message.channel, "No tienes los permisos necesarios.")
+					return
+				pie_embed = pie_texto.format(ban_kick,nick_autor,message.author.name,message.author.discriminator)
+				ban_embed = crear_embed(client,(emoji,ban_kick), del_descripcion, ban_kick_color, miembro, message.author,
+										message.server, razon, frown_usuario, miniatura="avatar", pie=pie_embed,
+										ed=(ban_kick,"de",""))
+				if len(ban_embed) == 2:
+					try:
+						await client.send_typing(miembro)
+						await client.send_message(miembro, embed=ban_embed[1])
+					except Forbidden: pass
+				if ban_kick == "baneado":
+					await client.ban(miembro, delete_message_days=0)
+				else:
+					await client.kick(miembro)
+				await client.send_typing(message.channel)
+				await client.send_message(message.channel, embed=ban_embed[0])
 			else:
-				ban_kick="expulsado"
-				emoji=u"\U0001F462"
-				puede = message.author.server_permissions.kick_members
-			if puede == False:
-				await client.send_message(message.channel, "No tienes los permisos necesarios.")
-				return
-			pie_embed = pie_texto.format(ban_kick,nick_autor,message.author.name,message.author.discriminator)
-			ban_embed = crear_embed(client,(emoji,ban_kick), del_descripcion, ban_kick_color, miembro, message.author,
-									message.server, razon, frown_usuario, miniatura="avatar", pie=pie_embed,
-									ed=(ban_kick,"de",""))
-			if len(ban_embed) == 2:
-				try: await client.send_message(miembro, embed=ban_embed[1])
-				except Forbidden: pass
-			if ban_kick == "baneado":
-				await client.ban(miembro, delete_message_days=0)
-			else:
-				await client.kick(miembro)
-			await client.send_typing(message.channel)
-			await client.send_message(message.channel, embed=ban_embed[0])
+				await client.send_typing(message.channel)
+				await client.send_message(message.channel, "{} es más profesional que tú, {}".format(miembro.display_name,
+																							message.author.display_name))
 
 async def unban(client, message, nick_autor, avatar_autor, mensaje_separado, prefijo):
 	"""Comando "unban". Desbanea a un usuario del servidor pudiendo especificar una razón para ello.
@@ -101,5 +109,7 @@ async def unban(client, message, nick_autor, avatar_autor, mensaje_separado, pre
 		await client.send_typing(message.channel)
 		await client.send_message(message.channel, embed=unban_embed[0])
 		if len(mensaje_separado) >= 3 and len(unban_embed) == 2:
-			try: await client.send_message(miembro, embed=unban_embed[1])
+			try:
+				await client.send_typing(message.channel)
+				await client.send_message(miembro, embed=unban_embed[1])
 			except Forbidden: pass
