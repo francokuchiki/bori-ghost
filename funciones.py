@@ -21,9 +21,12 @@ def get_confiables():
 	base_de_datos = psycopg2.connect(BD_URL, sslmode='require')
 	bd = base_de_datos.cursor()
 	bd.execute(tabla_confiables)
+	base_de_datos.commit()
 	bd.execute("SELECT user_id FROM confiables;")
 	confiables = bd.fetchall()
 	confiables_whitelist = {confiable[0] for confiable in confiables}
+	bd.close()
+	base_de_datos.close()
 	return confiables_whitelist
 
 def lista_a_cadena(lista, inicio: int=None, final: int=None, caracter=" "):
