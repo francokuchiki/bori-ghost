@@ -10,7 +10,7 @@ async def confiables(client, message, nick_autor, avatar_autor, mensaje_separado
 		base_de_datos = psycopg2.connect(BD_URL, sslmode='require')
 		bd = base_de_datos.cursor()
 		confiables = get_confiables()
-		confiable_rol = get_confiable_role(miembro.server.roles)
+		confiable_rol = get_confiable_role(message.server.roles)
 		error_faltan = "Chico, déjame seguir con mi jueguito de Star Wars, tienes que mencionar usuarios para hacer eso, {}."
 		if len(mensaje_separado) > 1 + len(message.mentions):
 			if message.mentions != None:
