@@ -1,7 +1,6 @@
 import os
 import discord
-from listas import comandos_ayuda
-from variables import ayuda
+from variables import ayuda, comandos_ayuda
 
 async def ayuda_general(client, message, nick_autor, avatar_autor, mensaje_separado, prefijo):
 	embed = discord.Embed(title="**BORI GHOST** Mensaje de Ayuda",
