@@ -3,8 +3,8 @@ import discord
 from variables import ayuda, comandos_ayuda
 
 async def ayuda_general(client, message, nick_autor, avatar_autor, mensaje_separado, prefijo):
-	embed = discord.Embed(title="**BORI GHOST** Mensaje de Ayuda",
-							description=ayuda.format(client.user.mention, prefijo),
+	embed = discord.Embed(title="BORI GHOST: Mensaje de Ayuda",
+							description=ayuda.format(client.user.mention, prefijo, prefijo),
 							colour=0xAAAAAA)
 	mod_i = 1
 	for key in comandos_ayuda:
