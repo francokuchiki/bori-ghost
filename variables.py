@@ -99,3 +99,12 @@ quita_confiable = """
 DELETE FROM confiables
 WHERE user_id = %s;
 """
+
+ayuda = """
+Esta es la lista de comandos del bot {}. Debajo encontrarán los módulos y, dentro de ellos, cada uno de los comandos.
+Al consultar la ayuda general, recibirán este mensaje. Para obtener más información sobre cada una de las funciones
+pueden llamar a este mismo comando pero especificando como primer parámetro el nombre particular. Ídem con los
+módulos.
+Por ejemplo, para obtener ayuda respecto al módulo `Prefijos`, pueden hacer:
+```{}ayuda prefijos```
+"""

@@ -61,6 +61,9 @@ coms = {
 	"confi": confiables.confiables,
 	"confia": confiables.confiables,
 	"confio": confiables.confiables,
+	#Ayuda
+	"ayuda": ayuda.ayuda_general,
+	"help": ayuda.ayuda_general,
 	#Cerrar
 	"ciérrate sésamo": cerrar.cerrar,
 	"close": cerrar.cerrar,
@@ -79,3 +82,18 @@ evs = {
 }
 
 tasks = [auto_silencio.auto_unmute]
+
+comandos_ayuda = {
+"Utilidad": {"Información": ("Información",),
+			"Ayuda": ("Ayuda",),
+			"Prefijos": ("Ver", "Añadir", "Quitar", "Cambiar"),
+			"Ping": ("Ping",)},
+"Moderación": {"Nicks": ("Nick (Cambiar)",),
+				"Roles": ("Dar", "Quitar", "Cambiar", "Toggle"),
+				"Silencio": ("Silenciar", "Desilenciar"),
+				"Exclusión": ("Expulsar", "Banear", "Desbanear"),
+				"Confiables": ("Agregar", "Quitar", "Toggle")}
+"Usuarios": {"Democracia": ("Crear", "Revisar", "Votar", "Cerrar"),
+				"Destacados": ("Canal", "Emoji", "Mínimo")}
+"Entretenimiento": ("Reverso", "Decir", "Elegir", "Avatar")
+}
