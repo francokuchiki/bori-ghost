@@ -109,6 +109,8 @@ Por ejemplo, para obtener ayuda respecto al módulo `Prefijos`, pueden hacer:
 ```{}ayuda prefijos```
 Y para obtener información sobre el comando `Añadir` del módulo nombrado, usen:
 ```{}ayuda prefijos.añadir```
+También pueden usar el orden numérico. Considerando el mismo ejemplo quedaría:
+```{}ayuda 1.3.2```
 """
 
 comandos_ayuda = {
