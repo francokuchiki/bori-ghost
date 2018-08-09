@@ -92,7 +92,7 @@ comandos_ayuda = {
 				"Roles": ("Dar", "Quitar", "Cambiar", "Toggle"),
 				"Silencio": ("Silenciar", "Desilenciar"),
 				"Exclusión": ("Expulsar", "Banear", "Desbanear"),
-				"Confiables": ("Agregar", "Quitar", "Toggle"),
+				"Confiables": ("Agregar", "Quitar", "Toggle")},
 "Usuarios": {"Democracia": ("Crear", "Revisar", "Votar", "Cerrar"),
 				"Destacados": ("Canal", "Emoji", "Mínimo")},
 "Entretenimiento": {"Reverso": ("Reverso",),
