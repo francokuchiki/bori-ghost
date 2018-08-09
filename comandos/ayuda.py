@@ -11,7 +11,7 @@ async def ayuda_general(client, message, nick_autor, avatar_autor, mensaje_separ
 		valor = ""
 		for sub_key in comandos_ayuda[key]:
 			for i in range(1,len(comandos_ayuda[key][sub_key])+1):
-				valor += str(mod_i)+"."+str(i)+". "+comandos_ayuda[key][i]+"\n"
+				valor += str(mod_i)+"."+str(i)+". "+comandos_ayuda[key][sub_key][i]+"\n"
 		embed.add_field(name=mod_i+key,
 						value=valor)
 	embed.set_thumbnail(url=client.user.avatar_url)
