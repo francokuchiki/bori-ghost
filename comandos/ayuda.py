@@ -10,7 +10,7 @@ async def ayuda_general(client, message, nick_autor, avatar_autor, mensaje_separ
 	for key in comandos_ayuda:
 		valor = ""
 		for sub_key in comandos_ayuda[key]:
-			for i in range(1,len(comandos_ayuda[key][subkey])+1):
+			for i in range(1,len(comandos_ayuda[key][sub_key])+1):
 				valor += mod_i+"."+i+". "+comandos_ayuda[key][i]+"\n"
 		embed.add_field(name=mod_i+key,
 						value=valor)
