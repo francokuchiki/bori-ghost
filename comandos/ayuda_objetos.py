@@ -27,7 +27,13 @@ info_utilidad = informacionComando(
 (None,),
 "{}informacion",
 "{}info",
-[]),
+[("Información",
+"Comando que brinda información sobre este bot.",
+("information", "info"),
+(None,),
+"{}informacion",
+"{}info",
+[])]),
 #info_ayuda
 ("Ayuda",
 "Muestra la lista de comandos o el modo de uso y la información sobre cada uno, \
