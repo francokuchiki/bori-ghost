@@ -14,7 +14,6 @@ async def ayuda_general(client, message, nick_autor, avatar_autor, mensaje_separ
 					for sub_elemento in elemento.subs:
 						if comando_separado[i].lower() == sub_elemento.ident.lower():
 							elemento = sub_elemento
-						print(comando_separado[i], sub_elemento.ident)
 					i += 1
 				descripcion = elemento.descripcion
 				if elemento.sintaxis[0] != None:
@@ -25,7 +24,10 @@ async def ayuda_general(client, message, nick_autor, avatar_autor, mensaje_separ
 					if elemento.parametros != None:
 						descripcion += "\n**__Parámetros: "+str(len(elemento.parametros))+"__**\n"
 						for i in range(len(elemento.parametros)):
-							descripcion += str(i)+") "+elemento.parametros[i]
+							if elemento.parametros[i] == None:
+								descripcion += "**NO**"
+							else:
+								descripcion += str(i)+") "+elemento.parametros[i]
 					descripcion += "\n**__Sintaxis__**\n"+"```{}```".format(elemento.sintaxis.format(prefijo))
 					descripcion += "\n**__Ejemplo__**\n"+"```{}```".format(elemento.ejemplo.format(prefijo))
 				embed = discord.Embed(title="Ayuda: "+elemento.nombre,
