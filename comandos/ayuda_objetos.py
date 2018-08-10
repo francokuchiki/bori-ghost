@@ -298,9 +298,6 @@ desea hacerlo con uno, este parámetro **no** debe incluirse.",
 "{}desbanear <usuario>; <razón> (opcional); <aviso> (opcional)",
 "{}desbanear @BORI GHOST#1213; Prueba de desbaneo; a",
 [])
-]),
-#info_confiables
-("Confiables",
-)
+])
 ],
 "moderacion")
