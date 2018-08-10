@@ -38,7 +38,7 @@ async def ayuda_general(client, message, nick_autor, avatar_autor, mensaje_separ
 					valor += "——"+str(mod_i)+"."+str(sub_i)+"."+str(i+1)+". "+descripciones_ayuda[mod_i].subs[sub_i].subs[i].nombre+"\n"
 			embed.add_field(name=str(mod_i)+". "+descripciones_ayuda[mod_i].nombre,
 							value=valor)
-		mod_i = 1
+		"""mod_i = 1
 		for key in comandos_ayuda:
 			valor = ""
 			sub_i = 1
@@ -49,7 +49,7 @@ async def ayuda_general(client, message, nick_autor, avatar_autor, mensaje_separ
 				sub_i += 1
 			embed.add_field(name=str(mod_i)+". "+key,
 							value=valor)
-			mod_i += 1
+			mod_i += 1"""
 	embed.set_thumbnail(url=client.user.avatar_url)
 	embed.set_footer(icon_url=avatar_autor,
 					text="Este mensaje ha sido solicitado por {} ({}#{})".format(nick_autor,
