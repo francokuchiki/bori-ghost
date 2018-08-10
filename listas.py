@@ -16,6 +16,7 @@ coms = {
 	"ban": ban.ban,
 	"excluir": ban.ban,
 	"kick": ban.ban,
+	"desbanear": ban.unban,
 	"unban": ban.unban,
 	#Mix
 	"reverse": mix.reverso,
