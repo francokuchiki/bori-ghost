@@ -20,10 +20,12 @@ async def ayuda_general(client, message, nick_autor, avatar_autor, mensaje_separ
 					descripcion += "\n**__Sintaxis__**\n"+"```{}```".format(elemento.sintaxis.format(prefijo))
 					descripcion += "\n**__Ejemplo__**\n"+"```{}```".format(elemento.ejemplo.format(prefijo))
 				embed = discord.Embed(title="Ayuda: "+elemento.nombre,
-									description=elemento.descripcion+"\n**__Alias__**\n"+str(elemento.alias),
+									description=elemento.descripcion,
 									colour=0xAAAAAA)
 				for i in range(len(elemento.subs)):
-					valor = "**"+str(i+1)+". "+elemento.subs[i].nombre+"**\n"
+					valor = ""
+					for index in range(len(elemento.subs[i].subs)):
+						valor = str(i+1)+"."+str(index+1)+". "+elemento.subs[i].subs[index].nombre+"\n"
 					embed.add_field(name=str(i+1)+". "+elemento.subs[i].nombre,
 									value=valor)
 	else:
