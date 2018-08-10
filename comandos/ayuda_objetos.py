@@ -298,6 +298,62 @@ desea hacerlo con uno, este parámetro **no** debe incluirse.",
 "{}desbanear <usuario>; <razón> (opcional); <aviso> (opcional)",
 "{}desbanear @BORI GHOST#1213; Prueba de desbaneo; a",
 [])
+],
+"exclusion"),
+#info_confiables
+("Confiables",
+"Comandos que permiten añadir o quitar miembros de la lista de usuarios confiables así como darles el rol correspondiente. Al \
+incluirlos en la lista, se les otorgará el rol automáticamente cada vez que entren al servidor.\n\
+Funciona con un rol creado a mano llamado \"Confiable\".\n\
+Requiere permiso de *administrar roles* en el servidor.",
+("confiable", "conf", "confi", "confia", "confio"),
+("Acción a realizar. **Opcional**: Si no se especifica, se asume que es toggle.", "Usuario a quien se desea añadir o quitar\
+de la lista. **Nota**: Debe ser una mención.", "Usuario a quien se desea añadir o quitar de la lista. **Nota**: Debe ser una \
+mención. **Opcional**: Puedes confiar o desconfiar en múltiples usuarios a la vez. Si sólo quieres hacerlo con uno, **no**\
+incluyas este parámetro.",
+"**IMPORTANTE**: Si no deseas usar la confianza múltiple, sólo deben incluirse los parámetros 1 y 2."),
+"{}confiables <acción> (opcional) <usuario> (mención) <usuario> (mención) (opcional)",
+"{}confiables @BORI GHOST#1213",
+[
+#info_confiables.añadir
+("Añadir",
+"Este comando añade a un usuario a la lista de confiables y le otorga el rol. Si el usuario ya está allí y tiene el rol, no\
+hace nada.\n\
+Requiere permiso de *administrar roles* en el servidor.",
+("agregar", "añade", "agrega", "pon", "add", "put", "a"),
+("Usuario a quien se desea añadir a la lista. **Nota**: Debe ser una mención.", "Usuario a quien se desea añadir a la lista. \
+**Nota**: Debe ser una mención. **Opcional**: Puedes añadir múltiples usuarios a la vez. Si sólo quieres \
+hacerlo con uno, **no** incluyas este parámetro.",
+"**IMPORTANTE**: Si no deseas usar la confianza múltiple, sólo debe incluirse el primer parámetro."),
+"{}confiables añadir <usuario> (mención) <usuario> (mención) (opcional)",
+"{}confiables añadir @BORI GHOST#1213",
+[]),
+#info_confiables.quitar
+("Quitar",
+"Este comando elimina a un usuario de la lista de confiables y le quita el rol. Si el usuario no está allí ni tiene el rol, no\
+hace nada.\n\
+Requiere permiso de *administrar roles* en el servidor.",
+("sacar", "quita", "saca", "remove", "delete", "rm", "del", "q"),
+("Usuario a quien se desea quitar de la lista. **Nota**: Debe ser una mención.", "Usuario a quien se desea quitar de la lista. \
+**Nota**: Debe ser una mención. **Opcional**: Puedes quitar múltiples usuarios a la vez. Si sólo quieres \
+hacerlo con uno, **no** incluyas este parámetro.",
+"**IMPORTANTE**: Si no deseas usar la confianza múltiple, sólo debe incluirse el primer parámetro."),
+"{}confiables quitar <usuario> (mención) <usuario> (mención) (opcional)",
+"{}confiables quitar @BORI GHOST#1213",
+[]),
+#info_confiables.toggle
+("Toggle",
+"Este comando agrega o elimina usuarios de la lista de confiables y les otorga o les quita el rol. Si el usuario está \
+en la lista, lo quita; y si no está, lo añade.\n\
+Requiere permiso de *administrar roles* en el servidor.",
+(None,),
+("Usuario a quien se desea añadir o quitar de la lista. **Nota: Debe ser una mención.", "Usuario a quien se desea \
+añadir o quitar de la lista. **Nota: Debe ser una mención. **Opcional**: Puedes añadir o  quitar múltiples usuarios\
+a la vez. Si sólo quieres hacerlo con uno, **no** incluyas este parámetro.",
+"**IMPORTANTE**: Si no deseas usar la confianza múltiple, sólo debe incluirse el primer parámetro."),
+"{}confiables toggle <usuario> (mención) <usuario> (mención) (opcional)",
+"{}confiables toggle @BORI GHOST#1213",
+[])
 ])
 ],
 "moderacion")

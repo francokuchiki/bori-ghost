@@ -28,7 +28,7 @@ async def confiables(client, message, nick_autor, avatar_autor, mensaje_separado
 			else:
 				await client.send_typing(message.channel)
 				await client.send_message(message.channel, error_faltan.format(message.author.display_name))
-		elif mensaje_separado[1] in {"agrega", "pon", "add", "put", "a"}:
+		elif mensaje_separado[1] in {"añadir", "agregar", "añade", "agrega", "pon", "add", "put", "a"}:
 			if message.mentions != None:
 				for miembro in message.mentions:
 					bd.execute(nuevo_confiable, (miembro.id,))
@@ -38,7 +38,7 @@ async def confiables(client, message, nick_autor, avatar_autor, mensaje_separado
 			else:
 				await client.send_typing(message.channel)
 				await client.send_message(message.channel, error_faltan.format(message.author.display_name))
-		elif mensaje_separado[1] in {"quita", "saca", "remove", "delete", "del", "rm", "q"}:
+		elif mensaje_separado[1] in {"quitar", "sacar", "quita", "saca", "remove", "delete", "del", "rm", "q"}:
 			if message.mentions != None:
 				for miembro in message.mentions:
 					bd.execute(quita_confiable, (miembro.id,))
