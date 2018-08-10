@@ -100,7 +100,7 @@ async def mute(client, message, nick_autor, avatar_autor, mensaje_separado, pref
 			base_de_datos = psycopg2.connect(BD_URL, sslmode='require')
 			bd = base_de_datos.cursor()
 			bd.execute(tabla_mute)
-			bd.execute("DELETE FROM silenciados WHERE discord_id = %s", (miembro.id,))
+			bd.execute(quita_mute, (miembro.id,))
 			bd.execute(nuevo_mute, (miembro.id,termina_muteo))
 			base_de_datos.commit()
 			bd.close()

@@ -21,12 +21,13 @@ async def auto_unmute(client):
 			bd = base_de_datos.cursor()
 			bd.execute(tabla_mute) #Crea la tabla de silenciados si no existe
 			#Seleciona la id de usuario y la fecha en que debe levantarse cada silencio (tupla)
-			tiempos_muteo = bd.execute("SELECT discord_id, termina FROM silenciados")
+			bd.execute("SELECT discord_id, termina FROM silenciados")
 			tiempos_muteo = bd.fetchall()
 			for usuario in tiempos_muteo: #Por cada pareja usuario-fecha
 				tiempo_unmute = usuario[1] #Le da formato de fecha
 				if datetime.now() >= tiempo_unmute: #Lo compara con la hora actual (UTC)
 					miembro = discord.utils.get(servidor.members, id = usuario[0]) #Selecciona el miembro con esa id
+					print (usuario[0])
 					razon="Ha transcurrido el tiempo de silencio especificado." #Establece la razón
 					#Define los parámetros para el tiempo del footer
 					pie_embed=pie_texto.format("desilenciado",client.user.name,client.user.name,client.user.discriminator)
