@@ -14,7 +14,7 @@ async def ayuda_manejador(client, message, nick_autor, avatar_autor, mensaje_sep
 				while len(comando_separado) > i:
 					for sub_elemento in elemento.subs:
 						if comando_separado[i].lower() == sub_elemento.ident.lower():
-							elem = sub_elemento
+							elemento = sub_elemento
 					i += 1
 				if elem == None:
 					elem = elemento
