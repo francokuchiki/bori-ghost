@@ -133,10 +133,4 @@ comandos_ayuda = {
 					"Avatar": ("Avatar",)}
 }
 
-descripciones_ayuda = {
-"Este módulo contiene los comandos que son útiles para el usuario del bot.": (
-						info_informacion,
-						info_ayuda,
-						info_prefijos
-)
-}
+descripciones_ayuda = (info_utilidad)
