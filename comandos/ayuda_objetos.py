@@ -48,7 +48,7 @@ None,
 "Muestra la lista de comandos o el modo de uso y la información sobre cada uno, \
 según accedas a la ayuda general o específica.",
 ("help", "comandos", "commands"),
-("Módulo o comando sobre el que se quiere recibir información.*",),
+("Módulo o comando sobre el que se quiere recibir información. **Opcional**: Si no se especifica, se accederá a la ayuda general.",),
 "{}ayuda <modulo/comando> (opcional)",
 "{}ayuda prefijos.ver",
 []),
