@@ -147,6 +147,7 @@ los dos primeros parámetros."),
 "{}roles dar <usuario> (mención) <rol> (comienzo del nombre o mención)",
 "{}roles dar <@452961583316992000> Developer Profesional",
 []),
+#info_roles.quitar
 ("Quitar",
 "Este comando remueve un rol a un usuario. Si el usuario ya tiene ese rol, no hace nada.\n\
 Requiere permiso de *administrar roles* en el servidor.",
@@ -161,6 +162,7 @@ los dos primeros parámetros."),
 "{}roles quitar <usuario> (mención) <rol> (comienzo del nombre o mención)",
 "{}roles quitar <@452961583316992000> Dev",
 []),
+#info_roles.cambiar
 ("Cambiar",
 "Este comando modifica los roles a un usuario, dejándole únicamente con el especificado.\n\
 Requiere permiso de *administrar roles* en el servidor.",
@@ -175,6 +177,7 @@ los dos primeros parámetros."),
 "{}roles cambiar <usuario> (mención) <rol> (comienzo del nombre o mención)",
 "{}roles cambiar <@452961583316992000> Developer Prof",
 []),
+#info_roles.toggle
 ("Toggle",
 "Este comando otorga o remueve un rol a un usario. Si el usuario ya tiene el rol especificado, se lo quita y, si no lo tiene, se lo da.\n\
 Requiere permiso de *administrar roles* en el servidor.",
@@ -190,4 +193,7 @@ primeros parámetros."),
 "{}roles toggle <@452961583316992000> Develop",
 [])
 ])
+#info_silencio
+#("Silencio",
+#"")
 ])
