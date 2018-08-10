@@ -41,7 +41,7 @@ async def ayuda_general(client, message, nick_autor, avatar_autor, mensaje_separ
 				for i in range(len(elemento.subs)):
 					if len(elemento.subs[i].subs) != 0:
 						valor = ""
-						for indice in elemento.subs[i].subs:
+						for indice in range(len(elemento.subs[i].subs)):
 							valor += elemento.subs[i].subs[indice]+"\n"
 					else:
 						valor = elemento.subs[i].descripcion
