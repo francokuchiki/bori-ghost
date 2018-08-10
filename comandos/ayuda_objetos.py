@@ -115,7 +115,7 @@ múltiples usuarios a la vez si se especifica. Si sólo desea cambiársele a uno
 "Apodo que se desea darle al segundo usuario. **Nota**: Si sólo desea cambiársele a uno, este parámetro **no** debe incluirse",
 "**IMPORTANTE**: Si no quieres usar el cambio múltiple, pon solo los dos primeros parámetros."),
 "{}nick <usuario> (mención) <apodo>",
-"{}nick <@452961583316992000> Ghost",
+"{}nick @BORI GHOST#1213 Ghost",
 []),
 #info_roles
 ("Roles",
@@ -130,7 +130,7 @@ los roles a varios usuarios a la vez si se especifica. Si sólo se desea hacerlo
 modificarse los roles a varios usuarios a la vez si se especifica. Si sólo se desea hacerlo para uno, este parámetro **no** debe incluirse.",
 "**IMPORTANTE** Si no quieres usar la edición múltiple de roles, usa solo los tres primeros parámetros."),
 "{}roles <accion> (opcional) <usuario> (mencion) <rol> (comienzo del nombre o mención)",
-"{}roles <@452961583316992000> Developer",
+"{}roles @BORI GHOST#1213 Developer",
 [
 #info_roles.dar
 ("Dar",
@@ -145,7 +145,7 @@ parte) o bien una mención. **Opcional**: Puede dársele roles a varios usuarios
 hacerlo para uno, este parámetro **no** debe incluirse.", "**IMPORTANTE** Si no quieres usar la edición múltiple de roles, usa solo \
 los dos primeros parámetros."),
 "{}roles dar <usuario> (mención) <rol> (comienzo del nombre o mención)",
-"{}roles dar <@452961583316992000> Developer Profesional",
+"{}roles dar @BORI GHOST#1213 Developer Profesional",
 []),
 #info_roles.quitar
 ("Quitar",
@@ -160,7 +160,7 @@ parte) o bien una mención. **Opcional**: Puede quitársele roles a varios usuar
 hacerlo para uno, este parámetro **no** debe incluirse.", "**IMPORTANTE** Si no quieres usar la edición múltiple de roles, usa solo \
 los dos primeros parámetros."),
 "{}roles quitar <usuario> (mención) <rol> (comienzo del nombre o mención)",
-"{}roles quitar <@452961583316992000> Dev",
+"{}roles quitar @BORI GHOST#1213 Dev",
 []),
 #info_roles.cambiar
 ("Cambiar",
@@ -175,7 +175,7 @@ parte) o bien una mención. **Opcional**: Puede cambiársele roles a varios usua
 hacerlo para uno, este parámetro **no** debe incluirse.", "**IMPORTANTE** Si no quieres usar la edición múltiple de roles, usa solo \
 los dos primeros parámetros."),
 "{}roles cambiar <usuario> (mención) <rol> (comienzo del nombre o mención)",
-"{}roles cambiar <@452961583316992000> Developer Prof",
+"{}roles cambiar @BORI GHOST#1213 Developer Prof",
 []),
 #info_roles.toggle
 ("Toggle",
@@ -190,10 +190,41 @@ parte) o bien una mención. **Opcional**: Puede modificarse los roles a varios u
 para uno, este parámetro **no** debe incluirse.", "**IMPORTANTE** Si no quieres usar la edición múltiple de roles, usa solo los dos \
 primeros parámetros."),
 "{}roles toggle <usuario> (mención) <rol> (comienzo del nombre o mención)",
-"{}roles toggle <@452961583316992000> Develop",
+"{}roles toggle @BORI GHOST#1213 Develop",
+[])
+]),
+#info_silencio
+("Silencio",
+"Modúlo con comandos que permiten silenciar a los usuarios, impidiéndoles enviar mensajes, y desilenciarlos, cancelando esa prohibición.\n\
+Funciona dándoles un rol que debes crear manualmente llamado \"*CALLATE BOLUDO*\" o \"*Muted*\".\n\
+Requiere permiso de *administrar roles* o *expulsar miembros* en el servidor.",
+None,
+(None,),
+None,
+None,
+[
+#info_silencio.silenciar
+("Silenciar",
+"Silencia a uno o más usuarios, impidiéndoles hablar en el servidor por un tiempo determinado. Puede especificarse el motivo por \
+el que se los silencia y el tiempo (10min por defecto).\n\
+Envía un mensaje al servidor por cada usuario silenciado y otro al propio usuario que incluye el tiempo y el motivo (si fue \
+especificado).\n\
+Requiere permiso de *administrar roles* o *expulsar miembros* en el servidor.",
+("silencia", "mute"),
+("Usuario al que se desea silenciar. **Nota**: Debe ser una mención.", "Razón por la que se le desea silenciar. **Opcional**",
+"Tiempo durante el que se le desea silenciar. **Opcional**: Si no se especifica, será de 10 minutos. **Nota**: Pueden usarse sufijos \
+para indicar distintas unidades de tiempo: **s** = segundos, **m** = minutos, **h** = horas, **d** = días, **w** = semanas, \
+**a** = años.",
+"Usuario al que se desea silenciar. **Nota**: Debe ser una mención. **Opcional**: Puede silenciarse a múltiples usuarios a la vez. Si \
+sólo se desea hacerlo con uno, este parámetro **no** debe incluirse.", "Razón por la que se le desea silenciar. **Opcional**: Puede \
+silenciarse a múltiples usuarios a la vez. Si sólo se desea hacerlo con uno, este parámetro **no** debe incluirse.",
+"Tiempo durante el que se le desea silenciar. **Opcional**: Si no se especifica, será de 10 minutos. Puede \
+silenciarse a múltiples usuarios a la vez. Si sólo se desea hacerlo con uno, este parámetro **no** debe incluirse.",
+"**IMPORTANTE**: Si no se desea usar el silencio múltiple, sólo deben incluirse los parámetros 1, 2 y 3.",
+"**NOTA**: El orden de los parámetros 2 y 3 es indistinto."),
+"{}silenciar <usuario> (mención) <tiempo> <usuario> (opcional) (mención) <tiempo> (opcional)",
+"{}silenciar @BORI GHOST#1213 2a",
 [])
 ])
-#info_silencio
-#("Silencio",
-#"")
-])
+],
+"moderacion")

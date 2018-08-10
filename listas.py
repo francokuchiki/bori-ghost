@@ -5,10 +5,16 @@ from tareas import *
 coms = {
 	"ping": ping.ping,
 	#Moderación
+	#silencio
 	"mute": silencio.mute,
+	"silenciar": silencio.mute,
+	"silencia": silencio.mute,
+	"unmute": silencio.unmute,
+	"desilenciar": silencio.unmute,
+	"desilencia": silencio.unmute,
+	#expulsión
 	"ban": ban.ban,
 	"kick": ban.ban,
-	"unmute": silencio.unmute,
 	"unban": ban.unban,
 	#Mix
 	"reverse": mix.reverso,
