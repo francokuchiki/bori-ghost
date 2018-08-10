@@ -40,7 +40,7 @@ async def mute(client, message, nick_autor, avatar_autor, mensaje_separado, pref
 			"Muted" y configurar sus permisos para que no pueda hablar. Este comando les dará dicho rol.
 	"""
 	if message.mention_everyone == False: #Evita mutear a todos los usuarios
-		if not (message.author.server_permissions.kick_members and message.author.server_permissions.manage_roles):
+		if not (message.author.server_permissions.kick_members or message.author.server_permissions.manage_roles):
 			return
 		silenciado = get_mute_role(message.server.roles)
 		for miembro in message.mentions:
@@ -124,7 +124,7 @@ async def unmute(client, message, nick_autor, avatar_autor, mensaje_separado, pr
 			usuario (razón usuario razón usuario razón usuario razón usuario razón)*
 			* = opcionales."""
 	if message.mention_everyone == False:
-		if not (message.author.server_permissions.kick_members and message.author.server_permissions.manage_roles):
+		if not (message.author.server_permissions.kick_members or message.author.server_permissions.manage_roles):
 			return
 		silenciado = get_mute_role(message.server.roles)
 		for miembro in message.mentions:

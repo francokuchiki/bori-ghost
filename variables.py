@@ -59,11 +59,11 @@ tabla_encuestas="""
 CREATE TABLE IF NOT EXISTS encuestas(
 key SERIAL NOT NULL PRIMARY KEY,
 channel_id VARCHAR(30) NOT NULL,
-titulo VARCHAR(2000) NOT NULL,
-opciones VARCHAR(2000) NOT NULL,
-votos VARCHAR(1000) NOT NULL,
+titulo VARCHAR NOT NULL,
+opciones VARCHAR NOT NULL,
+votos VARCHAR NOT NULL,
 terminada INTEGER NOT NULL,
-votantes VARCHAR(30));
+votantes VARCHAR);
 """
 
 nueva_encuesta="""

@@ -17,6 +17,8 @@ async def maneja_encuestas(client, message, nick_autor, avatar_autor, mensaje_se
 		await revisa_encuesta(client, message, nick_autor, avatar_autor)
 	elif mensaje_separado[1] in {"cerrar", "end", "terminar", "finalizar", "close", "fin"}:
 		await cierra_encuesta(client, message, nick_autor, avatar_autor)
+	elif mensaje_separado[1] in {"borrar", "delete", "drop", "del"}:
+		await borra_tabla(client, message)
 	else:
 		await vota_encuesta(client, message, nick_autor, mensaje_separado)
 
@@ -176,3 +178,14 @@ async def cierra_encuesta(client, message, nick_autor, avatar_autor):
 		await client.send_message(message.channel, "No hay ninguna votación en proceso en este canal.")
 	bd.close()
 	base_de_datos.close()
+
+async def borra_tabla(client, message):
+	BD_URL= os.getenv("DATABASE_URL")
+	base_de_datos = psycopg2.connect(BD_URL, sslmode='require')
+	bd = base_de_datos.cursor()
+	bd.execute("DROP TABLE IF EXISTS encuestas")
+	base_de_datos.commit()
+	bd.close()
+	base_de_datos.close()
+	await client.send_typing(message.channel)
+	await client.send_message(message.channel, "Tabla borrada.")
