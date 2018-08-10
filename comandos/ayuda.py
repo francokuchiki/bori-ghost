@@ -29,8 +29,10 @@ async def ayuda_general(client, message, nick_autor, avatar_autor, mensaje_separ
 							if elemento.parametros[i] == None:
 								descripcion += "NO**"
 							else:
-								descripcion += str(len(elemento.parametros))+"**\n"+str(i+1)+") "+elemento.parametros[i]
-					descripcion += "\n**__Sintaxis__**\n"+"```{}```".format(elemento.sintaxis.format(prefijo))
+								if i == 0:
+									descripcion += str(len(elemento.parametros))+"**\n"
+								descripcion += str(i+1)+") "+elemento.parametros[i]
+					descripcion += "\n**__Sintaxis__**\n"+"``{}``".format(elemento.sintaxis.format(prefijo))
 					descripcion += "\n Los símbolos < y > y todo lo que esté entre paréntesis **no** debe escribirse."
 					descripcion += "\n**__Ejemplo__**\n"+"```{}```".format(elemento.ejemplo.format(prefijo))
 				embed = discord.Embed(title="Ayuda: "+elemento.nombre,
