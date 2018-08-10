@@ -37,10 +37,11 @@ async def ayuda_general(client, message, nick_autor, avatar_autor, mensaje_separ
 					descripcion += "\n**__Ejemplo__**\n"+"```{}```".format(elemento.ejemplo.format(prefijo))
 				embed = discord.Embed(title="Ayuda: "+elemento.nombre,
 									description=descripcion,
-									colour=0xAAAAAA)
+									colour=0x2464CC)
 				for i in range(len(elemento.subs)):
-					if len(elemento.subs[i].subs) != 0:
-						valor = elemento.subs[i].subs[0].nombre
+					valor = ""
+					for ind in range(len(elemento.subs[i].subs)):
+						valor += elemento.subs[i].subs[ind].nombre+"\n"
 					else:
 						valor = elemento.subs[i].descripcion
 					embed.add_field(name=str(i+1)+". "+elemento.subs[i].nombre,
@@ -48,7 +49,7 @@ async def ayuda_general(client, message, nick_autor, avatar_autor, mensaje_separ
 	else:
 		embed = discord.Embed(title="BORI GHOST: Mensaje de Ayuda",
 								description=ayuda.format(client.user.mention, prefijo, prefijo, prefijo),
-								colour=0xAAAAAA)
+								colour=0x2464CC)
 		for mod_i in range(len(descripciones_ayuda)):
 			valor = ""
 			for sub_i in range(len(descripciones_ayuda[mod_i].subs)):
