@@ -7,9 +7,27 @@ async def ayuda_general(client, message, nick_autor, avatar_autor, mensaje_separ
 		comando_separado = mensaje_separado[1].split(".")
 		for elemento in descripciones_ayuda:
 			if comando_separado[0].lower() == elemento.nombre.lower():
+				descripcion = elemento.descripcion
+				if elemento.sintaxis[0] != None:
+					if elemento.alias != None:
+						descripcion += "\n**__Alias__**\n"
+						for alias in elemento.alias:
+							descripcion += alias+", "
+					if elemento.parametros != None:
+						descripcion += "\n**__Parámetros: "+str(len(elemento.parametros))+"__**\n"
+						for i in range(len(elemento.parametros)):
+							descripcion += str(i)+") "+elemento.parametros[i]
+					descripcion += "\n**__Sintaxis__**\n"+"```{}```".format(elemento.sintaxis.format(prefijo))
+					descripcion += "\n**__Ejemplo__**\n"+"```{}```".format(elemento.ejemplo.format(prefijo))
 				embed = discord.Embed(title="Ayuda: "+elemento.nombre,
 									description=elemento.descripcion+"\n**__Alias__**\n"+str(elemento.alias),
 									colour=0xAAAAAA)
+				for i in range(elemento.subs):
+					valor = ""
+					for sub_i in range(len(elemento.subs[i].subs)):
+						valor += "**"+str(i)+"."+str(sub_i)+". "+elemento.subs[i].subs[sub_i].nombre+"**\n"
+					embed.add_field(name=str(i)+". "+elemento.subs[i].nombre,
+									value=valor)
 	else:
 		embed = discord.Embed(title="BORI GHOST: Mensaje de Ayuda",
 								description=ayuda.format(client.user.mention, prefijo, prefijo, prefijo),
@@ -19,7 +37,7 @@ async def ayuda_general(client, message, nick_autor, avatar_autor, mensaje_separ
 			valor = ""
 			sub_i = 1
 			for sub_key in comandos_ayuda[key]:
-				valor += "**__"+str(mod_i)+"."+str(sub_i)+". "+sub_key+"__**\n"
+				valor += "**"+str(mod_i)+"."+str(sub_i)+". "+sub_key+"**\n"
 				for i in range(len(comandos_ayuda[key][sub_key])):
 					valor += "——"+str(mod_i)+"."+str(sub_i)+"."+str(i+1)+". "+comandos_ayuda[key][sub_key][i]+"\n"
 				sub_i += 1
