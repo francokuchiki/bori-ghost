@@ -1,7 +1,7 @@
 import os
 import discord
 from variables import ayuda, comandos_ayuda, descripciones_ayuda
-from unicode import unidecode
+from unidecode import unidecode
 
 async def ayuda_general(client, message, nick_autor, avatar_autor, mensaje_separado, prefijo):
 	if len(mensaje_separado) > 1:
