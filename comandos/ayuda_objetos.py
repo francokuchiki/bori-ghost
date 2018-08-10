@@ -38,7 +38,7 @@ info_utilidad = informacionComando(
 "{}informacion",
 "{}info",
 [],
-"informacion")],
+ident="informacion")],
 "informacion"),
 #info_ayuda
 ("Ayuda",
