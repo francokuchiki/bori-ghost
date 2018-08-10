@@ -1,16 +1,21 @@
 import os
 import discord
 from variables import ayuda, comandos_ayuda, descripciones_ayuda
+from unidecodedata import unidecodedata
 
 async def ayuda_general(client, message, nick_autor, avatar_autor, mensaje_separado, prefijo):
 	if len(mensaje_separado) > 1:
 		comando_separado = mensaje_separado[1].split(".")
 		for elemento in descripciones_ayuda:
-			if comando_separado[0].lower() == elemento.nombre.lower():
+			nombre = unidecodedata(elemento.nombre.replace("ñ", "#"))
+			nombre.replace("#", "ñ")
+			if comando_separado[0].lower() == nombre.lower():
 				i = 1
 				while len(comando_separado) > i:
 					for sub_elemento in elemento.subs:
-						if comando_separado[1].lower() == sub_elemento.lower():
+						nombre = unidecodedata(sub_elemento.nombre.replace("ñ", "#"))
+						nombre.replace("#", "ñ")
+						if comando_separado[1].lower() == nombre.lower():
 							elemento = sub_elemento
 					i += 1
 				descripcion = elemento.descripcion
