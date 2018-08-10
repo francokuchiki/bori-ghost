@@ -1,11 +1,11 @@
 import os
 import discord
-from variables import ayuda, comandos_ayuda, descripcion_ayuda
+from variables import ayuda, comandos_ayuda, descripciones_ayuda
 
 async def ayuda_general(client, message, nick_autor, avatar_autor, mensaje_separado, prefijo):
 	if len(mensaje_separado) > 1 and mensaje_separado[1] == "utilidad.informacion":
 		embed = discord.Embed(title="Ayuda: Información",
-								description=descripcion_ayuda["Este módulo contiene los comandos que son útiles para el usuario del bot."][0].descripcion,
+								description=descripciones_ayuda["Este módulo contiene los comandos que son útiles para el usuario del bot."][0].descripcion,
 								colour=0xAAAAAA)
 	else:
 		embed = discord.Embed(title="BORI GHOST: Mensaje de Ayuda",
