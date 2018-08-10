@@ -8,17 +8,11 @@ async def ayuda_general(client, message, nick_autor, avatar_autor, mensaje_separ
 	if len(mensaje_separado) > 1:
 		comando_separado = mensaje_separado[1].split(".")
 		for elemento in descripciones_ayuda:
-			nombre = re.sub(r"([^n\u0300-\u036F]|n(?!\u0303(?![\u0300-\u036F])))[\u0300-\u036F]+", r"\1", normalize("NFD",
-							elemento.nombre), 0, re.I)
-			nombre = normalize("NFC", nombre)
-			if comando_separado[0].lower() == nombre.lower():
+			if comando_separado[0].lower() == elemento.ident.lower():
 				i = 1
 				while len(comando_separado) > i:
 					for sub_elemento in elemento.subs:
-						nombre = re.sub(r"([^n\u0300-\u036F]|n(?!\u0303(?![\u0300-\u036F])))[\u0300-\u036F]+", r"\1", normalize("NFD",
-							elemento.nombre), 0, re.I)
-						nombre = normalize("NFC", nombre)
-						if comando_separado[1].lower() == nombre.lower():
+						if comando_separado[i].lower() == elemento.ident.lower():
 							elemento = sub_elemento
 					i += 1
 				descripcion = elemento.descripcion

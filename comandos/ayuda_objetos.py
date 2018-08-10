@@ -1,5 +1,5 @@
 class informacionComando:
-	def __init__(self, nombre, descripcion, alias, parametros, sintaxis, ejemplo, subs):
+	def __init__(self, nombre, descripcion, alias, parametros, sintaxis, ejemplo, subs, ident=None):
 		self.nombre = nombre
 		self.descripcion = descripcion
 		self.alias = alias
@@ -9,6 +9,10 @@ class informacionComando:
 		self.subs = []
 		for i in range(len(subs)):
 			self.subs.append(informacionComando(subs[i][0], subs[i][1], subs[i][2], subs[i][3], subs[i][4], subs[i][5], subs[i][6]))
+		if ident != None:
+			self.ident = ident
+		else:
+			self.ident = nombre
 	def __str__(self):
 		return nombre+": "+descripcion
 
@@ -33,7 +37,9 @@ info_utilidad = informacionComando(
 (None,),
 "{}informacion",
 "{}info",
-[])]),
+[],
+"informacion")],
+"informacion"),
 #info_ayuda
 ("Ayuda",
 "Muestra la lista de comandos o el modo de uso y la información sobre cada uno, \
