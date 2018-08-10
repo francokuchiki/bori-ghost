@@ -235,7 +235,7 @@ Envía un mensaje al servidor por cada usuario desilenciado y uno al propio usua
 "Usuario al que se desea silenciar. **Nota**: Debe ser una mención. **Opcional**: Puede silenciarse a múltiples usuarios a la vez. Si \
 sólo se desea hacerlo con uno, este parámetro **no** debe incluirse.", "Razón por la que se le desea silenciar. **Opcional**: Puede \
 silenciarse a múltiples usuarios a la vez. Si sólo se desea hacerlo con uno, este parámetro **no** debe incluirse.",
-"**IMPORTANTE**: Si no se desea usar el desilenciado múltiple, sólo deben incluirse los parámetros 1 y 2.")
+"**IMPORTANTE**: Si no se desea usar el desilenciado múltiple, sólo deben incluirse los parámetros 1 y 2."),
 "{}desilenciar <usuario> (mención) <razón> <usuario> (opcional) (mención) <razón> (opcional)",
 "{}desilenciar @BORI GHOST#1213 Prueba de desilenciado.",
 [])
