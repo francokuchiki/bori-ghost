@@ -19,8 +19,10 @@ async def ayuda_general(client, message, nick_autor, avatar_autor, mensaje_separ
 				if elemento.sintaxis[0] != None:
 					if elemento.alias != None:
 						descripcion += "\n**__Alias__**\n"
-						for alias in elemento.alias:
-							descripcion += alias+", "
+						for i in range(len(elemento.alias)):
+							descripcion += elemento.alias[i]
+							if i < len(elemento.alias):
+								descripcion += ", "
 					if elemento.parametros != None:
 						descripcion += "\n**__Parámetros: "+str(len(elemento.parametros))+"__"
 						for i in range(len(elemento.parametros)):
