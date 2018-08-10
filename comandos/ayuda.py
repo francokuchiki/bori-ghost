@@ -7,19 +7,18 @@ from unicodedata import normalize
 async def ayuda_manejador(client, message, nick_autor, avatar_autor, mensaje_separado, prefijo):
 	if len(mensaje_separado) > 1:
 		comando_separado = mensaje_separado[1].split(".")
-		es_elemento = False
+		elem = None
 		for elemento in descripciones_ayuda:
-			if not es_elemento:
-				if comando_separado[0].lower() == elemento.ident.lower():
-					i = 1
-					while len(comando_separado) > i:
-						for sub_elemento in elemento.subs:
-							if comando_separado[i].lower() == sub_elemento.ident.lower():
-								elemento = sub_elemento
-						i += 1
-					es_elemento=True
-		if es_elemento:
-			await ayuda_especifica(client, message, elemento, nick_autor, avatar_autor, prefijo)
+			if comando_separado[0].lower() == elemento.ident.lower():
+				i = 1
+				while len(comando_separado) > i:
+					for sub_elemento in elemento.subs:
+						if comando_separado[i].lower() == sub_elemento.ident.lower():
+							elem = sub_elemento
+					i += 1
+				elem = elemento
+		if elem != None:
+			await ayuda_especifica(client, message, elem, nick_autor, avatar_autor, prefijo)
 		else:
 			await client.send_typing(message.channel)
 			await client.send_message(message.channel, "ERROR: No has especificado un módulo válido.")
