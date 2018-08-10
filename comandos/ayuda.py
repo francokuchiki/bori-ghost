@@ -14,6 +14,7 @@ async def ayuda_general(client, message, nick_autor, avatar_autor, mensaje_separ
 					for sub_elemento in elemento.subs:
 						if comando_separado[i].lower() == sub_elemento.ident.lower():
 							elemento = sub_elemento
+							print("a")
 					i += 1
 				descripcion = elemento.descripcion
 				if elemento.sintaxis[0] != None:
