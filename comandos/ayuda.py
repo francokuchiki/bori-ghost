@@ -27,7 +27,7 @@ async def ayuda_manejador(client, message, nick_autor, avatar_autor, mensaje_sep
 
 async def ayuda_especifica(client, message, elemento, nick_autor, avatar_autor, prefijo):
 	descripcion = elemento.descripcion
-	if elemento.sintaxis[0] != None:
+	if elemento.sintaxis != None:
 		if elemento.alias != None:
 			descripcion += "\n**__Alias__**\n"
 			for i in range(len(elemento.alias)):

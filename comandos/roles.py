@@ -8,6 +8,7 @@ async def toggle_roles(client, message, nick_autor, avatar_autor, mensaje_separa
 			mencion = re.search("<@!?{}>".format(miembro.id), message.content)
 			i = mensaje_separado.index(mencion.group())+1
 			rol = ""
+			Rol = None
 			while i < len(mensaje_separado):
 				if mensaje_separado[i] in message.role_mentions:
 					Rol = discord.utils.get(message.server.roles, mention = mensaje_separado[i])
@@ -20,11 +21,11 @@ async def toggle_roles(client, message, nick_autor, avatar_autor, mensaje_separa
 					else:
 						i = len(mensaje_separado)
 			rol = borrar_repetidos(rol, " ")
-			Rol = None
-			for rol_server in message.server.roles:
-				if Rol == None:
-					if rol_server.name.lower().startswith(rol.lower()):
-						Rol = rol_server
+			if Rol == None:
+				for rol_server in message.server.roles:
+					if Rol == None:
+						if rol_server.name.lower().startswith(rol.lower()):
+							Rol = rol_server
 			if Rol == None:
 				await client.send_typing(message.channel)
 				await client.send_message(message.channel, "No juegues conmigo que soy profesional, tienes que especificar un rol válido en tu mac.")

@@ -24,8 +24,8 @@ info_utilidad = informacionComando(
 "Este módulo contiene los comandos que son útiles para el usuario del bot.",
 None,
 (None,),
-(None,),
-(None,),
+None,
+None,
 [
 #info_informacion
 ("Información",
@@ -93,4 +93,15 @@ None,
 "{}ping",
 [])
 ]
+)
+
+info_moderacion = informacionComando(
+"Moderación",
+"En este módulo se encuentran todos los comandos de moderación que los administradores pueden usar. Se requieren permisos especiales \
+que varían según cada comando.",
+None,
+(None,),
+None,
+None,
+[]
 )
