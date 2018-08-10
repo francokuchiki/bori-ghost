@@ -47,7 +47,7 @@ según accedas a la ayuda general o específica.",
 []),
 #info_prefijos
 ("Prefijos",
-"Comandos que permiten ver o configurar los prefijos disponibles",
+"Comandos que permiten ver o configurar los prefijos disponibles.",
 ("prefijos", "prefix", "prefixes"),
 ("Acción que se desea realizar. **Opcional**: Si no se especifica, se asume que quiere verse la lista.","Si se quiere añadir, \
 quitar o cambiar a un prefijo, debe especificarse cuál. **Nota**: Sólo si la acción deseada es *añadir*, *quitar* o *cambiar*."),

@@ -64,6 +64,8 @@ coms = {
 	#Ayuda
 	"ayuda": ayuda.ayuda_general,
 	"help": ayuda.ayuda_general,
+	"comandos": ayuda.ayuda_general,
+	"commands": ayuda.ayuda_general,
 	#Cerrar
 	"ciérrate sésamo": cerrar.cerrar,
 	"close": cerrar.cerrar,
