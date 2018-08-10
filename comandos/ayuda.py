@@ -22,11 +22,11 @@ async def ayuda_general(client, message, nick_autor, avatar_autor, mensaje_separ
 				embed = discord.Embed(title="Ayuda: "+elemento.nombre,
 									description=elemento.descripcion+"\n**__Alias__**\n"+str(elemento.alias),
 									colour=0xAAAAAA)
-				for i in range(elemento.subs):
+				for i in range(len(elemento.subs)):
 					valor = ""
 					for sub_i in range(len(elemento.subs[i].subs)):
-						valor += "**"+str(i)+"."+str(sub_i)+". "+elemento.subs[i].subs[sub_i].nombre+"**\n"
-					embed.add_field(name=str(i)+". "+elemento.subs[i].nombre,
+						valor += "——**"+str(i+1)+"."+str(sub_i+1)+". "+elemento.subs[i].subs[sub_i].nombre+"**\n"
+					embed.add_field(name=str(i+1)+". "+elemento.subs[i].nombre,
 									value=valor)
 	else:
 		embed = discord.Embed(title="BORI GHOST: Mensaje de Ayuda",
