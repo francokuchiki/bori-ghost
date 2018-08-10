@@ -21,15 +21,15 @@ async def ayuda_general(client, message, nick_autor, avatar_autor, mensaje_separ
 						descripcion += "\n**__Alias__**\n"
 						for i in range(len(elemento.alias)):
 							descripcion += elemento.alias[i]
-							if i < len(elemento.alias):
+							if i < len(elemento.alias)-1:
 								descripcion += ", "
 					if elemento.parametros != None:
-						descripcion += "\n**__Parámetros: "
+						descripcion += "\n**__Parámetros:__ "
 						for i in range(len(elemento.parametros)):
 							if elemento.parametros[i] == None:
-								descripcion += "__NO**\n"
+								descripcion += "NO**\n"
 							else:
-								descripcion +=str(len(elemento.parametros))+"__**\n"+str(i)+") "+elemento.parametros[i]
+								descripcion +=str(len(elemento.parametros))+"**\n"+str(i)+") "+elemento.parametros[i]
 					descripcion += "\n**__Sintaxis__**\n"+"```{}```".format(elemento.sintaxis.format(prefijo))
 					descripcion += "\n**__Ejemplo__**\n"+"```{}```".format(elemento.ejemplo.format(prefijo))
 				embed = discord.Embed(title="Ayuda: "+elemento.nombre,

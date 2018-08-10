@@ -22,7 +22,7 @@ class informacionComando:
 info_utilidad = informacionComando(
 "Utilidad",
 "Este módulo contiene los comandos que son útiles para el usuario del bot.",
-(None,),
+None,
 (None,),
 (None,),
 (None,),
@@ -64,7 +64,7 @@ cambiar a un prefijo, debe especificarse cuál.**"),
 #info_ping
 ("Ping",
 "Consulta el tiempo de respuesta del bot.",
-(None,),
+None,
 (None,),
 "{}ping",
 "{}ping",
