@@ -20,19 +20,14 @@ async def ayuda_general(client, message, nick_autor, avatar_autor, mensaje_separ
 					descripcion += "\n**__Sintaxis__**\n"+"```{}```".format(elemento.sintaxis.format(prefijo))
 					descripcion += "\n**__Ejemplo__**\n"+"```{}```".format(elemento.ejemplo.format(prefijo))
 				embed = discord.Embed(title="Ayuda: "+elemento.nombre,
-									description=elemento.descripcion,
+									description=elemento.descripcion+"\n**__Alias__**\n"+str(elemento.alias),
 									colour=0xAAAAAA)
 				for i in range(len(elemento.subs)):
 					valor = ""
-					if len(elemento.subs[i].subs) >= 1:
-						for index in range(len(elemento.subs[i].subs)):
-							valor = "——"+str(i+1)+"."+str(index+1)+". "+elemento.subs[i].subs[index].nombre+"\n"
-					embed.add_field(name=str(i+1)+". "+elemento.subs[i].nombre,
-								value=valor)
-				a = len(embed.title+embed.description)
-				for field in embed.fields:
-					a += len(field.name+field.value)
-				print(a)
+					for sub_i in range(len(elemento.subs[i].subs)):
+						valor += elemento.subs[i].subs[sub_i].nombre
+					embed.add_field(name=str(i+1)+elemento.subs[i].nombre,
+									value=str(i+1)+"."+str(sub_i+1)+elemento.subs[i].subs[sub_i].nombre)
 	else:
 		embed = discord.Embed(title="BORI GHOST: Mensaje de Ayuda",
 								description=ayuda.format(client.user.mention, prefijo, prefijo, prefijo),
