@@ -1,4 +1,4 @@
-from comandos.ayuda_objetos import *
+from comandos import ayuda_objetos
 
 whitelist = {
 	"295748486253510658": "franco",
@@ -135,8 +135,8 @@ comandos_ayuda = {
 
 descripciones_ayuda = {
 "Este módulo contiene los comandos que son útiles para el usuario del bot.": (
-						info_informacion,
-						info_ayuda,
-						info_prefijos
+						ayuda_objetos.info_informacion,
+						ayuda_objetos.info_ayuda,
+						ayuda_objetos.info_prefijos
 )
 }
