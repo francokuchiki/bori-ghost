@@ -16,7 +16,8 @@ async def ayuda_manejador(client, message, nick_autor, avatar_autor, mensaje_sep
 						if comando_separado[i].lower() == sub_elemento.ident.lower():
 							elem = sub_elemento
 					i += 1
-				elem = elemento
+				if elem = None:
+					elem = elemento
 		if elem != None:
 			await ayuda_especifica(client, message, elem, nick_autor, avatar_autor, prefijo)
 		else:
