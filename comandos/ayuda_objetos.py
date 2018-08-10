@@ -222,8 +222,22 @@ silenciarse a múltiples usuarios a la vez. Si sólo se desea hacerlo con uno, e
 silenciarse a múltiples usuarios a la vez. Si sólo se desea hacerlo con uno, este parámetro **no** debe incluirse.",
 "**IMPORTANTE**: Si no se desea usar el silencio múltiple, sólo deben incluirse los parámetros 1, 2 y 3.",
 "**NOTA**: El orden de los parámetros 2 y 3 es indistinto."),
-"{}silenciar <usuario> (mención) <tiempo> <usuario> (opcional) (mención) <tiempo> (opcional)",
-"{}silenciar @BORI GHOST#1213 2a",
+"{}silenciar <usuario> (mención) <tiempo> (opcional) <razón> (opcional)\
+<usuario> (opcional) (mención) <razón> (opcional) <tiempo> (opcional)",
+"{}silenciar @BORI GHOST#1213 2a Prueba de silenciado.",
+[]),
+#info_silencio.desilenciar
+("Desilenciar",
+"Quita el silencio a uno o más usuarios pudiendo especificar una razón (individual para cada uno).\n\
+Envía un mensaje al servidor por cada usuario desilenciado y uno al propio usuario, incluyendo el motivo (si fue especificado).",
+("desilencia", "unmute"),
+("Usuario al que se desea silenciar. **Nota**: Debe ser una mención.", "Razón por la que se le desea silenciar. **Opcional**",
+"Usuario al que se desea silenciar. **Nota**: Debe ser una mención. **Opcional**: Puede silenciarse a múltiples usuarios a la vez. Si \
+sólo se desea hacerlo con uno, este parámetro **no** debe incluirse.", "Razón por la que se le desea silenciar. **Opcional**: Puede \
+silenciarse a múltiples usuarios a la vez. Si sólo se desea hacerlo con uno, este parámetro **no** debe incluirse.",
+"**IMPORTANTE**: Si no se desea usar el desilenciado múltiple, sólo deben incluirse los parámetros 1 y 2.")
+"{}desilenciar <usuario> (mención) <razón> <usuario> (opcional) (mención) <razón> (opcional)",
+"{}desilenciar @BORI GHOST#1213 Prueba de desilenciado.",
 [])
 ])
 ],
