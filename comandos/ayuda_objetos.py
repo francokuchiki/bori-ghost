@@ -245,7 +245,7 @@ silenciarse a múltiples usuarios a la vez. Si sólo se desea hacerlo con uno, e
 "Módulo con comandos que permiten expulsar, banear y desbanear usuarios del servidor.\n\
 Requiere permiso de *expulsar miembros*, en el primer caso, y de *banear miembros* en los otros dos.",
 None,
-(None,)
+(None,),
 None,
 None,
 [
@@ -298,6 +298,9 @@ desea hacerlo con uno, este parámetro **no** debe incluirse.",
 "{}desbanear <usuario>; <razón> (opcional); <aviso> (opcional)",
 "{}desbanear @BORI GHOST#1213; Prueba de desbaneo; a",
 [])
-])
+]),
+#info_confiables
+("Confiables",
+)
 ],
 "moderacion")
