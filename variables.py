@@ -1,3 +1,5 @@
+from ayuda_objetos import *
+
 whitelist = {
 	"295748486253510658": "franco",
 	"287554491916746752": "katie",
@@ -102,14 +104,14 @@ WHERE user_id = %s;
 
 ayuda = """
 Esta es la lista de comandos del bot {}. Debajo encontrarán los módulos y, dentro de ellos, cada uno de los comandos.
-Al consultar la ayuda general, recibirán este mensaje. Para obtener más información sobre cada una de las funciones\
-pueden llamar a este mismo comando pero especificando como primer parámetro el nombre particular. Ídem con los\
+Al consultar la ayuda general, recibirán este mensaje. Para obtener más información sobre cada una de las funciones \
+puedes llamar a este mismo comando pero especificando como primer parámetro el nombre particular. Ídem con los \
 módulos.
-Por ejemplo, para obtener ayuda respecto al módulo `Prefijos`, pueden hacer:
+Por ejemplo, para obtener ayuda respecto al módulo `Prefijos`, puedes hacer:
 ```{}ayuda prefijos```
-Y para obtener información sobre el comando `Añadir` del módulo nombrado, usen:
+Y para obtener información sobre el comando `Añadir` del módulo nombrado, usa:
 ```{}ayuda prefijos.añadir```
-También pueden usar el orden numérico. Considerando el mismo ejemplo quedaría:
+También puedes usar el orden numérico. Considerando el mismo ejemplo quedaría:
 ```{}ayuda 1.3.2```
 """
 
@@ -130,3 +132,10 @@ comandos_ayuda = {
 					"Elegir": ("Elegir",),
 					"Avatar": ("Avatar",)}
 }
+
+descripciones_ayuda = {
+"Este módulo contiene los comandos que son útiles para el usuario del bot.": (
+						info_informacion,
+						info_ayuda,
+						info_prefijos
+)
