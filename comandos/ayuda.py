@@ -23,9 +23,7 @@ async def ayuda_general(client, message, nick_autor, avatar_autor, mensaje_separ
 									description=elemento.descripcion+"\n**__Alias__**\n"+str(elemento.alias),
 									colour=0xAAAAAA)
 				for i in range(len(elemento.subs)):
-					valor = ""
-					for sub_i in range(len(elemento.subs[i].subs)):
-						valor += "——**"+str(i+1)+"."+str(sub_i+1)+". "+elemento.subs[i].subs[sub_i].nombre+"**\n"
+					valor += "**"+str(i+1)+"."+str(sub_i+1)+". "+elemento.subs[i].subs[sub_i].nombre+"**\n"
 					embed.add_field(name=str(i+1)+". "+elemento.subs[i].nombre,
 									value=valor)
 	else:
