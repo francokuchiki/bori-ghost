@@ -7,20 +7,18 @@ async def ayuda_general(client, message, nick_autor, avatar_autor, mensaje_separ
 		comando_separado = mensaje_separado[1].split(".")
 		for elemento in descripciones_ayuda:
 			if comando_separado[0].lower() == elemento.nombre.lower():
-				if len(comando_separado) > 1:
-					for sub_elemento in comando
-					descripcion = elemento.descripcion
-					if elemento.sintaxis[0] != None:
-						if elemento.alias != None:
-							descripcion += "\n**__Alias__**\n"
-							for alias in elemento.alias:
-								descripcion += alias+", "
-						if elemento.parametros != None:
-							descripcion += "\n**__Parámetros: "+str(len(elemento.parametros))+"__**\n"
-							for i in range(len(elemento.parametros)):
-								descripcion += str(i)+") "+elemento.parametros[i]
-						descripcion += "\n**__Sintaxis__**\n"+"```{}```".format(elemento.sintaxis.format(prefijo))
-						descripcion += "\n**__Ejemplo__**\n"+"```{}```".format(elemento.ejemplo.format(prefijo))
+				descripcion = elemento.descripcion
+				if elemento.sintaxis[0] != None:
+					if elemento.alias != None:
+						descripcion += "\n**__Alias__**\n"
+						for alias in elemento.alias:
+							descripcion += alias+", "
+					if elemento.parametros != None:
+						descripcion += "\n**__Parámetros: "+str(len(elemento.parametros))+"__**\n"
+						for i in range(len(elemento.parametros)):
+							descripcion += str(i)+") "+elemento.parametros[i]
+					descripcion += "\n**__Sintaxis__**\n"+"```{}```".format(elemento.sintaxis.format(prefijo))
+					descripcion += "\n**__Ejemplo__**\n"+"```{}```".format(elemento.ejemplo.format(prefijo))
 					embed = discord.Embed(title="Ayuda: "+elemento.nombre,
 										description=descripcion,
 										colour=0xAAAAAA)
