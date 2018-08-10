@@ -49,17 +49,16 @@ None,
 según accedas a la ayuda general o específica.",
 ("help", "comandos", "commands"),
 ("Módulo o comando sobre el que se quiere recibir información. **Opcional**: Si no se especifica, se accederá a la ayuda general.",),
-"{}ayuda <modulo/comando> (opcional)",
+"{}ayuda <modulo / comando> (opcional)",
 "{}ayuda prefijos.ver",
 []),
 #info_prefijos
 ("Prefijos",
 "Comandos que permiten ver o configurar los prefijos disponibles",
 ("prefijos", "prefix", "prefixes"),
-("Acción que se desea realizar. Si no se especifica, se asume que quiere verse la lista. **Opcional**: Si no se especifica, se \
-asume que quiere verse la lista.","Si se quiere añadir, quitar o cambiar a un prefijo, debe especificarse cuál. **Nota**: Sólo si \
-la acción deseada es *añadir*, *quitar* o *cambiar*."),
-"{}prefijos <acción> (opcional) <nuevo/viejo prefijo> (si se quiere añadir, quitar o cambiar)",
+("Acción que se desea realizar. **Opcional**: Si no se especifica, se asume que quiere verse la lista.","Si se quiere añadir, \
+quitar o cambiar a un prefijo, debe especificarse cuál. **Nota**: Sólo si la acción deseada es *añadir*, *quitar* o *cambiar*."),
+"{}prefijos <acción> (opcional) <nuevo / viejo prefijo> (si se quiere añadir, quitar o cambiar)",
 "{}prefijos ver",
 []),
 #info_ping
