@@ -7,7 +7,7 @@ from unicodedata import normalize
 async def ayuda_manejador(client, message, nick_autor, avatar_autor, mensaje_separado, prefijo):
 	if len(mensaje_separado) > 1:
 		comando_separado = mensaje_separado[1].split(".")
-		elemento = None
+		es_elemento = False
 		for elemento in descripciones_ayuda:
 			if comando_separado[0].lower() == elemento.ident.lower():
 				i = 1
@@ -16,7 +16,8 @@ async def ayuda_manejador(client, message, nick_autor, avatar_autor, mensaje_sep
 						if comando_separado[i].lower() == sub_elemento.ident.lower():
 							elemento = sub_elemento
 					i += 1
-		if elemento != None:
+				es_elemento=True
+		if es_elemento:
 			await ayuda_especifica(client, message, elemento, nick_autor, avatar_autor, prefijo)
 		else:
 			await client.send_typing(message.channel)
