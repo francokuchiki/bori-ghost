@@ -14,7 +14,7 @@ class informacionComando:
 
 info_informacion = informacionComando(
 "Comando que brinda información sobre este bot.",
-("information", "info")
+("information", "info"),
 (None,),
 "{}informacion",
 "{}info",
@@ -24,7 +24,7 @@ info_informacion = informacionComando(
 info_ayuda = informacionComando(
 "Muestra la lista de comandos o el modo de uso y la información sobre cada uno, \
 según accedas a la ayuda general o específica.",
-("help", "comandos", "commands")
+("help", "comandos", "commands"),
 ("Módulo o comando sobre el que se quiere recibir información.*",),
 "{}ayuda <modulo/comando> (opcional)",
 "{}ayuda prefijos.ver",
