@@ -1,4 +1,4 @@
-from ayuda_objetos import *
+from comandos.ayuda_objetos import *
 
 whitelist = {
 	"295748486253510658": "franco",
