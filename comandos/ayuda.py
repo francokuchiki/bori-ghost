@@ -12,7 +12,7 @@ async def ayuda_general(client, message, nick_autor, avatar_autor, mensaje_separ
 				i = 1
 				while len(comando_separado) > i:
 					for sub_elemento in elemento.subs:
-						if comando_separado[i].lower() == elemento.ident.lower():
+						if comando_separado[i].lower() == sub_elemento.ident.lower():
 							elemento = sub_elemento
 					i += 1
 				descripcion = elemento.descripcion
