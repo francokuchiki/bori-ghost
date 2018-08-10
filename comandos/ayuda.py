@@ -4,7 +4,7 @@ import re
 from variables import ayuda, comandos_ayuda, descripciones_ayuda
 from unicodedata import normalize
 
-async def ayuda_general(client, message, nick_autor, avatar_autor, mensaje_separado, prefijo):
+async def ayuda_manejador(client, message, nick_autor, avatar_autor, mensaje_separado, prefijo):
 	if len(mensaje_separado) > 1:
 		comando_separado = mensaje_separado[1].split(".")
 		elemento = None

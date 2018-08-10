@@ -62,10 +62,10 @@ coms = {
 	"confia": confiables.confiables,
 	"confio": confiables.confiables,
 	#Ayuda
-	"ayuda": ayuda.ayuda_general,
-	"help": ayuda.ayuda_general,
-	"comandos": ayuda.ayuda_general,
-	"commands": ayuda.ayuda_general,
+	"ayuda": ayuda.ayuda_manejador,
+	"help": ayuda.ayuda_manejador,
+	"comandos": ayuda.ayuda_manejador,
+	"commands": ayuda.ayuda_manejador,
 	#Cerrar
 	"ciérrate sésamo": cerrar.cerrar,
 	"close": cerrar.cerrar,
