@@ -103,5 +103,91 @@ None,
 (None,),
 None,
 None,
-[]
-)
+[
+#info_nick
+("Nick",
+"Este comando permite cambiar el apodo de uno o más usuarios. Puede usarse para cambiar el propio.\n\
+Requiere, en el primer caso, permiso de *administrar apodos* en el servidor y; en el segundo, premiso de *cambiar apodo*.",
+("nicks", "setnick", "apodo", "apodos"),
+("Usuario cuyo apodo quiere cambiarse. **Nota**: Ha de ser una mención.", "Apodo que se desea darle.",
+"Usuario cuyo apodo quiere cambiarse. **Nota**: Ha de ser una mención. **Opcional**: Puede cambiarse el apodo de \
+múltiples usuarios a la vez si se especifica. Si sólo desea cambiársele a uno, este parámetro **no** debe incluirse.",
+"Apodo que se desea darle al segundo usuario. **Nota**: Si sólo desea cambiársele a uno, este parámetro **no** debe incluirse",
+"**IMPORTANTE**: Si no quieres usar el cambio múltiple, pon solo los dos primeros parámetros."),
+"{}nick <usuario> (mención) <apodo>",
+"{}nick <@452961583316992000> Ghost",
+[]),
+#info_roles
+("Roles",
+"Comandos que permiten dar o quitar roles a los usuarios. No pueden otorgarse roles que estén por encima del máximo poseído por el moderador.\n\
+Requiere permiso de *administrar roles* en el servidor.",
+("rol", "role"),
+("Acción que se desea realizar. **Opcional**: Si no se especifica, se asumirá *toggle*.", "Usuario a quien desea dársele o quitársele \
+un rol. **Nota**: Ha de ser una mención.", "Rol que desea dársele o quitársele. **Nota**: Debe ser el nombre (al menos su primera parte) \
+o bien una mención.", "Usuario a quien desea dársele o quitársele un rol. **Nota**: Ha de ser una mención. **Opcional**: Puede modificarse \
+los roles a varios usuarios a la vez si se especifica. Si sólo se desea hacerlo para uno, este parámetro **no** debe incluirse.",
+"Rol que desea dársele o quitársele. **Nota**: Debe ser el nombre (al menos su primera parte) o bien una mención. **Opcional**: Puede \
+modificarse los roles a varios usuarios a la vez si se especifica. Si sólo se desea hacerlo para uno, este parámetro **no** debe incluirse.",
+"**IMPORTANTE** Si no quieres usar la edición múltiple de roles, usa solo los tres primeros parámetros."),
+"{}roles <accion> (opcional) <usuario> (mencion) <rol> (comienzo del nombre o mención)",
+"{}roles <@452961583316992000> Developer",
+[
+#info_roles.dar
+("Dar",
+"Este comando otorga un rol a un usuario. Si el usuario ya tiene ese rol, no hace nada.\n\
+Requiere permiso de *administrar roles* en el servidor.",
+("da","dale", "give", "add"),
+("Usuario a quien desea dársele un rol. **Nota**: Ha de ser una mención.", "Rol que desea dársele. **Nota**: Debe ser \
+el nombre (al menos su primera parte o bien una mención.", "Usuario a quien desea dársele un rol. **Nota**: Ha de ser \
+una mención. **Opcional**: Puede dársele roles a varios usuarios a la vez si se especifica. Si sólo se desea hacerlo para \
+uno, este parámetro **no** debe incluirse.", "Rol que desea dársele. **Nota**: Debe ser el nombre (al menos su primera \
+parte) o bien una mención. **Opcional**: Puede dársele roles a varios usuarios a la vez si se especifica. Si sólo se desea \
+hacerlo para uno, este parámetro **no** debe incluirse.", "**IMPORTANTE** Si no quieres usar la edición múltiple de roles, usa solo \
+los dos primeros parámetros."),
+"{}roles dar <usuario> (mención) <rol> (comienzo del nombre o mención)",
+"{}roles dar <@452961583316992000> Developer Profesional",
+[]),
+("Quitar",
+"Este comando remueve un rol a un usuario. Si el usuario ya tiene ese rol, no hace nada.\n\
+Requiere permiso de *administrar roles* en el servidor.",
+("quita", "quitale","take", "remove"),
+("Usuario a quien desea quitársele un rol. **Nota**: Ha de ser una mención.", "Rol que desea quitársele. **Nota**: Debe ser \
+el nombre (al menos su primera parte o bien una mención.", "Usuario a quien desea quitársele un rol. **Nota**: Ha de ser \
+una mención. **Opcional**: Puede quitársele roles a varios usuarios a la vez si se especifica. Si sólo se desea hacerlo para \
+uno, este parámetro **no** debe incluirse.", "Rol que desea quitársele. **Nota**: Debe ser el nombre (al menos su primera \
+parte) o bien una mención. **Opcional**: Puede quitársele roles a varios usuarios a la vez si se especifica. Si sólo se desea \
+hacerlo para uno, este parámetro **no** debe incluirse.", "**IMPORTANTE** Si no quieres usar la edición múltiple de roles, usa solo \
+los dos primeros parámetros."),
+"{}roles quitar <usuario> (mención) <rol> (comienzo del nombre o mención)",
+"{}roles quitar <@452961583316992000> Dev",
+[]),
+("Cambiar",
+"Este comando modifica los roles a un usuario, dejándole únicamente con el especificado.\n\
+Requiere permiso de *administrar roles* en el servidor.",
+("cambia", "cambiale", "change", "set"),
+("Usuario cuyos roles desean modificarse. **Nota**: Ha de ser una mención.", "Rol que desea dejársele. **Nota**: Debe ser \
+el nombre (al menos su primera parte o bien una mención.", "Usuario cuyos roles desean modificarse. **Nota**: Ha de ser \
+una mención. **Opcional**: Puede cambiársele roles a varios usuarios a la vez si se especifica. Si sólo se desea hacerlo para \
+uno, este parámetro **no** debe incluirse.", "Rol que desea dejársele. **Nota**: Debe ser el nombre (al menos su primera \
+parte) o bien una mención. **Opcional**: Puede cambiársele roles a varios usuarios a la vez si se especifica. Si sólo se desea \
+hacerlo para uno, este parámetro **no** debe incluirse.", "**IMPORTANTE** Si no quieres usar la edición múltiple de roles, usa solo \
+los dos primeros parámetros."),
+"{}roles cambiar <usuario> (mención) <rol> (comienzo del nombre o mención)",
+"{}roles cambiar <@452961583316992000> Developer Prof",
+[]),
+("Toggle",
+"Este comando otorga o remueve un rol a un usario. Si el usuario ya tiene el rol especificado, se lo quita y, si no lo tiene, se lo da.\n\
+Requiere permiso de *administrar roles* en el servidor.",
+(None,),
+("Usuario a quien desea dársele o quitársele un rol. **Nota**: Ha de ser una mención.", "Rol que desea dársele o quitársele. **Nota**: \
+Debe ser el nombre (al menos su primera parte) o bien una mención.", "Usuario a quien desea dársele o quitársele un rol. **Nota**: \
+Ha de ser una mención. **Opcional**: Puede modificarse los roles a varios usuarios a la vez si se especifica. Si sólo se desea hacerlo \
+para uno, este parámetro **no** debe incluirse.", "Rol que desea dársele o quitársele. **Nota**: Debe ser el nombre (al menos su primera \
+parte) o bien una mención. **Opcional**: Puede modificarse los roles a varios usuarios a la vez si se especifica. Si sólo se desea hacerlo \
+para uno, este parámetro **no** debe incluirse.", "**IMPORTANTE** Si no quieres usar la edición múltiple de roles, usa solo los dos \
+primeros parámetros."),
+"{}roles toggle <usuario> (mención) <rol> (comienzo del nombre o mención)",
+"{}roles toggle <@452961583316992000> Develop",
+[])
+])
+])
