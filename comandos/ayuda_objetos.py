@@ -9,7 +9,7 @@ class informacionComando:
 		self.subs = []
 		for i in range(len(subs)):
 			sub_ident = None
-			if len(subs[i]) >= 7:
+			if len(subs[i]) >= 8:
 				sub_ident = subs[i][7]
 			self.subs.append(informacionComando(subs[i][0], subs[i][1], subs[i][2], subs[i][3], subs[i][4], subs[i][5], subs[i][6], sub_ident))
 		if ident != None:
