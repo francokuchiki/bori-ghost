@@ -27,7 +27,6 @@ async def auto_unmute(client):
 				tiempo_unmute = usuario[1] #Le da formato de fecha
 				if datetime.now() >= tiempo_unmute: #Lo compara con la hora actual (UTC)
 					miembro = discord.utils.get(servidor.members, id = usuario[0]) #Selecciona el miembro con esa id
-					print (usuario[0], miembro)
 					razon="Ha transcurrido el tiempo de silencio especificado." #Establece la razón
 					#Define los parámetros para el tiempo del footer
 					pie_embed=pie_texto.format("desilenciado",client.user.name,client.user.name,client.user.discriminator)
