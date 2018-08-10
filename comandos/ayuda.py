@@ -3,10 +3,10 @@ import discord
 from variables import ayuda, comandos_ayuda, descripciones_ayuda
 
 async def ayuda_general(client, message, nick_autor, avatar_autor, mensaje_separado, prefijo):
-	if len(mensaje_separado) > 2:
+	if len(mensaje_separado) > 1:
 		comando_separado = mensaje_separado[1].split(".")
 		for elemento in descripciones_ayuda:
-			if comando_separado[0] == elemento.nombre:
+			if comando_separado[0].lower() == elemento.nombre.lower():
 				embed = discord.Embed(title="Ayuda: "+elemento.nombre,
 									description=elemtno.descripcion+"\n**__Alias__**\n"+str(elemento.alias),
 									colour=0xAAAAAA)
