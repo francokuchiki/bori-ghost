@@ -8,7 +8,10 @@ class informacionComando:
 		self.ejemplo = ejemplo
 		self.subs = []
 		for i in range(len(subs)):
-			self.subs.append(informacionComando(subs[i][0], subs[i][1], subs[i][2], subs[i][3], subs[i][4], subs[i][5], subs[i][6]))
+			sub_ident = None
+			if len(subs[i]) >= 7:
+				sub_ident = subs[i][7]
+			self.subs.append(informacionComando(subs[i][0], subs[i][1], subs[i][2], subs[i][3], subs[i][4], subs[i][5], subs[i][6], sub_ident))
 		if ident != None:
 			self.ident = ident
 		else:
@@ -38,7 +41,7 @@ info_utilidad = informacionComando(
 "{}informacion",
 "{}info",
 [],
-ident="informacion")],
+"informacion")],
 "informacion"),
 #info_ayuda
 ("Ayuda",
