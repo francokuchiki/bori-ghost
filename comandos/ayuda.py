@@ -20,7 +20,7 @@ async def ayuda_general(client, message, nick_autor, avatar_autor, mensaje_separ
 					descripcion += "\n**__Sintaxis__**\n"+"```{}```".format(elemento.sintaxis.format(prefijo))
 					descripcion += "\n**__Ejemplo__**\n"+"```{}```".format(elemento.ejemplo.format(prefijo))
 				embed = discord.Embed(title="Ayuda: "+elemento.nombre,
-									description=elemento.descripcion+"\n**__Alias__**\n"+str(elemento.alias),
+									description=descripcion,
 									colour=0xAAAAAA)
 				for i in range(len(elemento.subs)):
 					embed.add_field(name=str(i+1)+". "+elemento.subs[i].nombre,
@@ -29,6 +29,15 @@ async def ayuda_general(client, message, nick_autor, avatar_autor, mensaje_separ
 		embed = discord.Embed(title="BORI GHOST: Mensaje de Ayuda",
 								description=ayuda.format(client.user.mention, prefijo, prefijo, prefijo),
 								colour=0xAAAAAA)
+		mod_i = 1
+		for mod_i in range(len(descripciones_ayuda)):
+			valor = ""
+			for sub_i in range(len(descripciones_ayuda[mod_i].subs)):
+				valor += "**"+str(mod_i)+"."+str(sub_i)+". "+descripciones_ayuda[mod_i].subs[sub_i].nombre+"**\n"
+				for i in range(len(descripciones_ayuda[mod_i].subs[sub_i].subs)):
+					valor += "——"+str(mod_i)+"."+str(sub_i)+"."+str(i+1)+". "+descripciones_ayuda[mod_i].subs[sub_i].subs[i].nombre+"\n"
+			embed.add_field(name=str(mod_i)+". "+descripciones_ayuda[mod_i].nombre,
+							value=valor)
 		mod_i = 1
 		for key in comandos_ayuda:
 			valor = ""
