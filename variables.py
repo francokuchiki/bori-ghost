@@ -133,4 +133,4 @@ comandos_ayuda = {
 					"Avatar": ("Avatar",)}
 }
 
-descripciones_ayuda = (info_utilidad)
+descripciones_ayuda = (info_utilidad,)
