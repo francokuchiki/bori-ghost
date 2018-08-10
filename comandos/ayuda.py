@@ -9,14 +9,15 @@ async def ayuda_manejador(client, message, nick_autor, avatar_autor, mensaje_sep
 		comando_separado = mensaje_separado[1].split(".")
 		es_elemento = False
 		for elemento in descripciones_ayuda:
-			if comando_separado[0].lower() == elemento.ident.lower():
-				i = 1
-				while len(comando_separado) > i:
-					for sub_elemento in elemento.subs:
-						if comando_separado[i].lower() == sub_elemento.ident.lower():
-							elemento = sub_elemento
-					i += 1
-				es_elemento=True
+			if not es_elemento:
+				if comando_separado[0].lower() == elemento.ident.lower():
+					i = 1
+					while len(comando_separado) > i:
+						for sub_elemento in elemento.subs:
+							if comando_separado[i].lower() == sub_elemento.ident.lower():
+								elemento = sub_elemento
+						i += 1
+					es_elemento=True
 		if es_elemento:
 			await ayuda_especifica(client, message, elemento, nick_autor, avatar_autor, prefijo)
 		else:
