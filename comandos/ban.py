@@ -31,7 +31,8 @@ async def ban(client, message, nick_autor, avatar_autor, mensaje_separado, prefi
 				razon = borrar_repetidos(razon, " ")
 				if razon == "":
 					razon = "No se ha especificado ninguna razón."
-				if message.content.startswith("ban",len(prefijo),len(prefijo)+4):
+				if message.content.startswith("ban",len(prefijo),len(prefijo)+4) or message.content.startswith("banear",
+					len(prefijo),len(prefijo)+7):
 					ban_kick="baneado"
 					emoji=u"\U0000274E"
 					puede = message.author.server_permissions.ban_members

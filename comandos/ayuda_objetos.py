@@ -223,7 +223,7 @@ silenciarse a múltiples usuarios a la vez. Si sólo se desea hacerlo con uno, e
 "**IMPORTANTE**: Si no se desea usar el silencio múltiple, sólo deben incluirse los parámetros 1, 2 y 3.",
 "**NOTA**: El orden de los parámetros 2 y 3 es indistinto."),
 "{}silenciar <usuario> (mención) <tiempo> (opcional) <razón> (opcional)\
-<usuario> (opcional) (mención) <razón> (opcional) <tiempo> (opcional)",
+<usuario> (mención) (opcional) <razón> (opcional) <tiempo> (opcional)",
 "{}silenciar @BORI GHOST#1213 2a Prueba de silenciado.",
 []),
 #info_silencio.desilenciar
@@ -236,8 +236,67 @@ Envía un mensaje al servidor por cada usuario desilenciado y uno al propio usua
 sólo se desea hacerlo con uno, este parámetro **no** debe incluirse.", "Razón por la que se le desea silenciar. **Opcional**: Puede \
 silenciarse a múltiples usuarios a la vez. Si sólo se desea hacerlo con uno, este parámetro **no** debe incluirse.",
 "**IMPORTANTE**: Si no se desea usar el desilenciado múltiple, sólo deben incluirse los parámetros 1 y 2."),
-"{}desilenciar <usuario> (mención) <razón> <usuario> (opcional) (mención) <razón> (opcional)",
+"{}desilenciar <usuario> (mención) <razón> <usuario> (mención) (opcional) <razón> (opcional)",
 "{}desilenciar @BORI GHOST#1213 Prueba de desilenciado.",
+[])
+]),
+#info_exclusion
+("Exclusión",
+"Módulo con comandos que permiten expulsar, banear y desbanear usuarios del servidor.\n\
+Requiere permiso de *expulsar miembros*, en el primer caso, y de *banear miembros* en los otros dos.",
+None,
+(None,)
+None,
+None,
+[
+#info_exclusion.excluir
+("Excluir",
+"Expulsa a uno o más usuarios especificando una razón (individual para cada uno).\n\
+Envía un mensaje al servidor por cada usuario excluido y, también, uno a cada usuario avisándole e incluyendo \
+el motivo (si fue especificado).\n\
+Requiere permiso de *excluir miembros* en el servidor.",
+("kick",),
+("Usuario al que se desea excluir. **Nota**: Debe ser una mención.", "Razón por la que se le desea excluir. **Opcional**",
+"Usuario al que se desea excluir. **Nota**: Debe ser una mención. **Opcional**: Pueden excluirse múltiples usuarios a la vez. Si \
+sólo se desea hacerlo con uno, este parámetro **no** debe incluirse.", "Razón por la que se le desea excluir. **Opcional**: \
+Pueden excluirse múltiples usuarios a la vez. Si sólo se desea hacerlo con uno, este parámetro **no** debe incluirse.",
+"**IMPORTANTE**: Si no se desea usar la exclusión múltiple, sólo deben incluirse los parámetros 1 y 2."),
+"{}excluir <usuario> (mención) <razón> (opcional) <usuario> (mención) (opcional) <razón> (opcional)",
+"{}excluir @BORI GHOST#1213 Prueba de exclusión.",
+[]),
+#info_exclusión.banear
+("Banear",
+"Banea a uno o más usuarios especificando una razón (individual para cada uno).\n\
+Envía un mensaje al servidor por cada usuario baneado y, también, uno a cada usuario avisándole e incluyendo \
+el motivo (si fue especificado).\n\
+Requiere permiso de *banear miembros* en el servidor.",
+("ban",),
+("Usuario al que se desea banear. **Nota**: Debe ser una mención.", "Razón por la que se le desea banear. **Opcional**",
+"Usuario al que se desea banear. **Nota**: Debe ser una mención. **Opcional**: Pueden banearse múltiples usuarios a la vez. Si \
+sólo se desea hacerlo con uno, este parámetro **no** debe incluirse.", "Razón por la que se le desea banear. **Opcional**: \
+Pueden banearse múltiples usuarios a la vez. Si sólo se desea hacerlo con uno, este parámetro **no** debe incluirse.",
+"**IMPORTANTE**: Si no se desea usar el baneo múltiple, sólo deben incluirse los parámetros 1 y 2."),
+"{}banear <usuario> (mención) <razón> (opcional> <usuario> (mención) (opcional) <razón> (opcional)",
+"{}banear @BORI GHOST#1213 Prueba de ban.",
+[]),
+#info_exclusión.desbanear
+("Desbanear",
+"Desbanea a un usuario del servidor pudiendo especificar una razón para ello.\n\
+Envía un mensaje en el servidor y puede, opcionalmente, enviar uno al usuario donde figura quién lo desbaneó y la razón \
+(si fue especificada).\n\
+Requiere permiso de *banear miembros* en el servidor.",
+("unban",),
+("Usuario al que se desea desbanear. **Nota**: Debe ser una mención.", "Razón por la que se le desea desbanear. **Opcional**",
+"Si se le desea enviar un mensaje al usuario o no. **Opcional**. **Nota**: Puede escribirse lo que sea mientras no esté en blanco.",
+"Usuario al que se desea desbanear. **Nota**: Debe ser una mención. **Opcional**: Pueden desbanearse múltiples usuarios a la vez. Si \
+sólo se desea hacerlo con uno, este parámetro **no** debe incluirse.", "Razón por la que se le desea desbanear. **Opcional**: \
+Pueden desbanearse múltiples usuarios a la vez. Si sólo se desea hacerlo con uno, este parámetro **no** debe incluirse.",
+"Si se le desea enviar un mensaje al usuario o no. **Opcional**: Pueden desbanearse múltiples usuarios a la vez. Si sólo se \
+desea hacerlo con uno, este parámetro **no** debe incluirse.",
+"**IMPORTANTE**: Si no se desea usar el desbaneo múltiple, sólo deben incluirse los parámetros 1 y 2.",
+"**NOTA**: Entre cada parámetro debe haber un \";\" o un \"|\"."),
+"{}desbanear <usuario>; <razón> (opcional); <aviso> (opcional)",
+"{}desbanear @BORI GHOST#1213; Prueba de desbaneo; a",
 [])
 ])
 ],

@@ -14,6 +14,7 @@ coms = {
 	"desilencia": silencio.unmute,
 	#expulsión
 	"ban": ban.ban,
+	"excluir": ban.ban,
 	"kick": ban.ban,
 	"unban": ban.unban,
 	#Mix
