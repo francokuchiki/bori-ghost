@@ -7,7 +7,12 @@ async def ayuda_general(client, message, nick_autor, avatar_autor, mensaje_separ
 		comando_separado = mensaje_separado[1].split(".")
 		for elemento in descripciones_ayuda:
 			if comando_separado[0].lower() == elemento.nombre.lower():
-
+				i = 1
+				while len(comando_separado) > i:
+					for sub_elemento in elemento.subs:
+						if comando_separado[1].lower() == sub_elemento.lower():
+							elemento = sub_elemento
+					i += 1
 				descripcion = elemento.descripcion
 				if elemento.sintaxis[0] != None:
 					if elemento.alias != None:
