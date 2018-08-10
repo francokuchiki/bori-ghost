@@ -13,6 +13,7 @@ class informacionComando:
 		return nombre+": "+descripcion
 
 info_informacion = informacionComando(
+"Información",
 "Comando que brinda información sobre este bot.",
 ("information", "info"),
 (None,),
@@ -22,6 +23,7 @@ info_informacion = informacionComando(
 )
 
 info_ayuda = informacionComando(
+"Ayuda",
 "Muestra la lista de comandos o el modo de uso y la información sobre cada uno, \
 según accedas a la ayuda general o específica.",
 ("help", "comandos", "commands"),
@@ -32,6 +34,7 @@ según accedas a la ayuda general o específica.",
 )
 
 info_prefijos = informacionComando(
+"Prefijos",
 "Comandos que permiten ver o configurar los prefijos disponibles",
 ("prefijos", "prefix", "prefixes"),
 ("Acción que se desea realizar. Si no se especifica, se asume que quiere verse la lista.*","Si se quiere añadir, quitar o \
