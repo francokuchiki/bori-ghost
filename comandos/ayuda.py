@@ -17,14 +17,14 @@ async def ayuda_manejador(client, message, nick_autor, avatar_autor, mensaje_sep
 							elemento = sub_elemento
 					i += 1
 		if elemento != None:
-			await ayuda_especifica(client, message, elemento, prefijo)
+			await ayuda_especifica(client, message, elemento, nick_autor, avatar_autor, prefijo)
 		else:
 			await client.send_typing(message.channel)
 			await client.send_message(message.channel, "ERROR: No has especificado un módulo válido.")
 	else:
-		await ayuda_general(client, message, prefijo)
+		await ayuda_general(client, message, nick_autor, avatar_autor, prefijo)
 
-async def ayuda_especifica(client, message, elemento, prefijo):
+async def ayuda_especifica(client, message, elemento, nick_autor, avatar_autor, prefijo):
 	descripcion = elemento.descripcion
 	if elemento.sintaxis[0] != None:
 		if elemento.alias != None:
@@ -62,7 +62,7 @@ async def ayuda_especifica(client, message, elemento, prefijo):
 	await client.send_typing(message.channel)
 	await client.send_message(message.channel, embed=embed)
 
-async def ayuda_general(client, message, prefijo):
+async def ayuda_general(client, message, nick_autor, avatar_autor, prefijo):
 	embed = discord.Embed(title="BORI GHOST: Mensaje de Ayuda",
 							description=ayuda.format(client.user.mention, prefijo, prefijo, prefijo),
 							colour=0x2464CC)
