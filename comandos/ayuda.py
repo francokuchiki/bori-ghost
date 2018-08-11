@@ -73,8 +73,9 @@ async def ayuda_especifica(client, message, elemento, nick_autor, avatar_autor, 
 	embed.set_footer(icon_url=avatar_autor,
 					text="Este mensaje ha sido solicitado por {} ({}#{})".format(nick_autor,
 							message.author.name, message.author.discriminator))
-	await client.send_typing(message.channel)
-	await client.send_message(message.channel, embed=embed)
+	try:
+		await client.send_typing(message.author)
+		await client.send_message(message.author, embed=embed)
 
 async def ayuda_general(client, message, nick_autor, avatar_autor, prefijo):
 	embed = discord.Embed(title="BORI GHOST: Mensaje de Ayuda",
