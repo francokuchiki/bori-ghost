@@ -27,7 +27,7 @@ async def ayuda_manejador(client, message, nick_autor, avatar_autor, mensaje_sep
 					pass
 			if len(numeros) >= 1:
 				elem = descripciones_ayuda[numeros[0]]
-			for i in range(len(numeros)):
+			for i in range(1,len(numeros)):
 				elem = elem.subs[i]
 		if elem != None:
 			await ayuda_especifica(client, message, elem, nick_autor, avatar_autor, prefijo)
