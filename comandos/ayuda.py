@@ -25,10 +25,11 @@ async def ayuda_manejador(client, message, nick_autor, avatar_autor, mensaje_sep
 					numeros.append(int(parte))
 				except ValueError:
 					pass
-			if len(numeros) >= 1:
+			if len(numeros) >= 1 and numeros[0]-1 in range(len(descripciones_ayuda)):
 				elem = descripciones_ayuda[numeros[0]-1]
 			for i in range(1,len(numeros)):
-				elem = elem.subs[numeros[i]-1]
+				if numeros[i]-1 in range(len(elem.subs)):
+					elem = elem.subs[numeros[i]-1]
 		if elem != None:
 			await ayuda_especifica(client, message, elem, nick_autor, avatar_autor, prefijo)
 		else:
