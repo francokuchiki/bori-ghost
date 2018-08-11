@@ -59,7 +59,7 @@ async def ayuda_especifica(client, message, elemento, nick_autor, avatar_autor, 
 		descripcion += "\n**__Sintaxis__**\n"+"```{}```".format(elemento.sintaxis.format(prefijo))
 		descripcion += "\n Los símbolos < y > y todo lo que esté entre paréntesis **no** debe escribirse."
 		descripcion += "\n**__Ejemplo__**\n"+"```{}```".format(elemento.ejemplo.format(prefijo))
-	embed = discord.Embed(title=u"\U0001F3A9"+" Ayuda: "+elemento.nombre,
+	embed = discord.Embed(title=u"\U0001F527"+" Ayuda: "+elemento.nombre,
 						description=descripcion,
 						colour=0x2464CC)
 	for i in range(len(elemento.subs)):
@@ -77,7 +77,8 @@ async def ayuda_especifica(client, message, elemento, nick_autor, avatar_autor, 
 		await client.send_typing(message.author)
 		await client.send_message(message.author, embed=embed)
 		await client.send_typing(message.channel)
-		await client.send_message(message.channel, u"\U0001F4E8"+" Revisa tu MAC, súbdito. Te he enviado un mensaje privado.")
+		await client.send_message(message.channel, u"\U0001F5A5"+" Revisa tu MAC, súbdito.\n"+
+									u"\U0001F4E8"+"Te he enviado un mensaje privado.")
 	except discord.errors.Forbidden:
 		await client.send_typing(message.channel)
 		await client.send_message(message.channel, embed=embed)
@@ -93,7 +94,7 @@ async def ayuda_general(client, message, nick_autor, avatar_autor, prefijo):
 			valor += "**"+str(mod_i+1)+"."+str(sub_i+1)+". "+descripciones_ayuda[mod_i].subs[sub_i].nombre+"**\n"
 			for i in range(len(descripciones_ayuda[mod_i].subs[sub_i].subs)):
 				valor += "——"+str(mod_i+1)+"."+str(sub_i+1)+"."+str(i+1)+". "+descripciones_ayuda[mod_i].subs[sub_i].subs[i].nombre+"\n"
-		embed.add_field(name=str(mod_i+1)+". "+descripciones_ayuda[mod_i].nombre,
+		embed.add_field(name=u"\U0001F47B"+" "+str(mod_i+1)+". "+descripciones_ayuda[mod_i].nombre,
 						value=valor)
 	embed.set_thumbnail(url=client.user.avatar_url)
 	embed.set_footer(icon_url=avatar_autor,
