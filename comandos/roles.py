@@ -43,6 +43,7 @@ async def toggle_roles(client, message, nick_autor, avatar_autor, mensaje_separa
 						await client.send_typing(message.channel)
 						await client.send_message(message.channel, "{} es ahora el único rol de {}".format(Rol,
 																	miembro.display_name))
+						return
 					mensaje = "**{}** *{}* tiene ese rol. Hacerme perder el tiempo no es profesional"
 					if Rol in miembro.roles:
 						if mensaje_separado[1] not in {"dar", "da", "dale", "give", "add"}:
