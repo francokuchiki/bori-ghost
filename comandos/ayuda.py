@@ -77,8 +77,8 @@ async def ayuda_especifica(client, message, elemento, nick_autor, avatar_autor, 
 		await client.send_typing(message.author)
 		await client.send_message(message.author, embed=embed)
 		await client.send_typing(message.channel)
-		await client.send_message(message.channel, u"\U0001F5A5"+" Revisa tu MAC, súbdito.\n"+
-									u"\U0001F4E8"+"Te he enviado un mensaje privado.")
+		await client.send_message(message.channel, u"\U0001F5A5"+" Revisa tu MAC, súbdito. "+u"\U0001F4BB"+"\n"+
+									u"\U0001F4E9"+" Te he enviado un mensaje privado. "+u"\U0001F4E8")
 	except discord.errors.Forbidden:
 		await client.send_typing(message.channel)
 		await client.send_message(message.channel, embed=embed)
@@ -91,7 +91,7 @@ async def ayuda_general(client, message, nick_autor, avatar_autor, prefijo):
 	for mod_i in range(len(descripciones_ayuda)):
 		valor = ""
 		for sub_i in range(len(descripciones_ayuda[mod_i].subs)):
-			valor += "**"+str(mod_i+1)+"."+str(sub_i+1)+". "+descripciones_ayuda[mod_i].subs[sub_i].nombre+"**\n"
+			valor += "**—"+str(mod_i+1)+"."+str(sub_i+1)+". "+descripciones_ayuda[mod_i].subs[sub_i].nombre+"**\n"
 			for i in range(len(descripciones_ayuda[mod_i].subs[sub_i].subs)):
 				valor += "——"+str(mod_i+1)+"."+str(sub_i+1)+"."+str(i+1)+". "+descripciones_ayuda[mod_i].subs[sub_i].subs[i].nombre+"\n"
 		embed.add_field(name=u"\U0001F47B"+" "+str(mod_i+1)+". "+descripciones_ayuda[mod_i].nombre,
