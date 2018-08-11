@@ -10,9 +10,10 @@ async def toggle_roles(client, message, nick_autor, avatar_autor, mensaje_separa
 			rol = ""
 			Rol = None
 			while i < len(mensaje_separado):
-				if mensaje_separado[i] in message.role_mentions[0].mention:
-					Rol = discord.utils.get(message.server.roles, mention = mensaje_separado[i])
-					i = len(mensaje_separado)
+				if len(message.role_mentions) == 1:
+					if mensaje_separado[i] in message.role_mentions[0].mention:
+						Rol = discord.utils.get(message.server.roles, mention = mensaje_separado[i])
+						i = len(mensaje_separado)
 				else:
 					if not re.search("<@!?[0-9]+>", mensaje_separado[i]):
 						if mensaje_separado[i] != "\n":
