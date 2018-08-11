@@ -78,7 +78,7 @@ async def ayuda_especifica(client, message, elemento, nick_autor, avatar_autor, 
 		await client.send_message(message.author, embed=embed)
 		await client.send_typing(message.channel)
 		await client.send_message(message.channel, "Ayuda enviada por mensaje privado.")
-	except Forbidden:
+	except discord.errors.Forbidden:
 		await client.send_typing(message.channel)
 		await client.send_message(message.channel, embed=embed)
 
