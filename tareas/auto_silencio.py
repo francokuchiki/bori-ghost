@@ -14,7 +14,8 @@ async def auto_unmute(client):
 	"""
 	await client.wait_until_ready() #Espera a que esté listo
 	while not client.is_closed: #Mientras esté abierto el bot
-		for servidor in client.servers: #Para cada servidor en el que esté
+		servidor = discord.utils.get(client.servers, id = "337854421876736003")
+		if servidor != None: #Para cada servidor en el que esté
 			#Conecta con la base de datos o la crea si no existe
 			BD_URL = os.getenv('DATABASE_URL')
 			base_de_datos = psycopg2.connect(BD_URL, sslmode='require')
@@ -26,7 +27,7 @@ async def auto_unmute(client):
 			for usuario in tiempos_muteo: #Por cada pareja usuario-fecha
 				tiempo_unmute = usuario[1] #Le da formato de fecha
 				if datetime.now() >= tiempo_unmute: #Lo compara con la hora actual (UTC)
-					miembro = discord.utils.get(client.get_all_members(), id = usuario[0]) #Selecciona el miembro con esa id
+					miembro = discord.utils.get(servidor.members, id = usuario[0]) #Selecciona el miembro con esa id
 					razon="Ha transcurrido el tiempo de silencio especificado." #Establece la razón
 					#Define los parámetros para el tiempo del footer
 					pie_embed=pie_texto.format("desilenciado",client.user.name,client.user.name,client.user.discriminator)
