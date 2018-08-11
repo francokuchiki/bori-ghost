@@ -108,9 +108,9 @@ Al consultar la ayuda general, recibirán este mensaje. Para obtener más inform
 puedes llamar a este mismo comando pero especificando como primer parámetro el nombre particular. Ídem con los \
 módulos.
 Por ejemplo, para obtener ayuda respecto al módulo `Prefijos`, puedes hacer:
-```{}ayuda prefijos```
+```{}ayuda utilidad.prefijos```
 Y para obtener información sobre el comando `Añadir` del módulo nombrado, usa:
-```{}ayuda prefijos.añadir```
+```{}ayuda utilidad.prefijos.añadir```
 También puedes usar el orden numérico. Considerando el mismo ejemplo quedaría:
 ```{}ayuda 1.3.2```
 """
@@ -133,4 +133,4 @@ comandos_ayuda = {
 					"Avatar": ("Avatar",)}
 }
 
-descripciones_ayuda = (info_utilidad, info_moderacion, info_usuarios)
+descripciones_ayuda = (info_utilidad, info_moderacion, info_usuarios, info_entretenimiento)
