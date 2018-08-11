@@ -35,16 +35,32 @@ async def toggle_roles(client, message, nick_autor, avatar_autor, mensaje_separa
 					if rol_autor.position > Rol.position:
 						puede = True
 				if puede or message.author == message.server.owner:
-					if Rol in miembro.roles:
-						quita_mensaje = "A *{}* se le ha quitado el rol '**{}**'."
-						await client.remove_roles(miembro, Rol)
-						await client.send_typing(message.channel)
-						await client.send_message(message.channel, quita_mensaje.format(miembro.display_name,Rol.name))
-					else:
-						da_mensaje = "A *{}* se le ha concedido el rol '**{}**'."
+					if mensaje_separado[1] in {"cambiar", "cambia", "cambiale", "change", "set"}:
+						for Rol_miembro in miembro.roles:
+							await client.remove_roles(miembro, Rol_miembro)
 						await client.add_roles(miembro, Rol)
 						await client.send_typing(message.channel)
-						await client.send_message(message.channel, da_mensaje.format(miembro.display_name,Rol.name))
+						await client.send_message(message.channel, "{} es ahora el único rol de {}".format(Rol,
+																	miembro.display_name))
+					mensaje = "{} {} tiene ese rol. Hacerme perder el tiempo no es profesional"
+					if Rol in miembro.roles:
+						if mensaje_separado[1] not in {"dar", "da", "dale", "give", "add"}:
+							quita_mensaje = "A *{}* se le ha quitado el rol '**{}**'."
+							await client.remove_roles(miembro, Rol)
+							await client.send_typing(message.channel)
+							await client.send_message(message.channel, quita_mensaje.format(miembro.display_name,Rol.name))
+						else:
+							await client.send_typing(message.channel)
+							await client.send_message(message.channel, mensaje.format(miembro.display_name, "ya"))
+					else:
+						if mensaje_separado[1] not in {"quitar", "quita", "quitale", "take", "remove"}:
+							da_mensaje = "A *{}* se le ha concedido el rol '**{}**'."
+							await client.add_roles(miembro, Rol)
+							await client.send_typing(message.channel)
+							await client.send_message(message.channel, da_mensaje.format(miembro.display_name,Rol.name))
+						else:
+							await client.send_typing(message.channel)
+							await client.send_message(message.channel, mensaje.format(miembro.display_name, "no"))
 				else:
 					error_permisos = "No tienes los permisos suficientes para eso. Tal vez no eres tan profesional como creí..."
 					await client.send_typing(message.channel)
