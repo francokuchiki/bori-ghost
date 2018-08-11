@@ -37,9 +37,7 @@ async def toggle_roles(client, message, nick_autor, avatar_autor, mensaje_separa
 						puede = True
 				if puede or message.author == message.server.owner:
 					if mensaje_separado[1] in {"cambiar", "cambia", "cambiale", "change", "set"}:
-						for Roles in miembro.roles:
-							await client.remove_roles(miembro, Roles)
-						await client.add_roles(miembro, Rol)
+						await client.replace_roles(miembro, Rol)
 						await client.send_typing(message.channel)
 						await client.send_message(message.channel, "{} es ahora el único rol de {}".format(Rol,
 																	miembro.display_name))
