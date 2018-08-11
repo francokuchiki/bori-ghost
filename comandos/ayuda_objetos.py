@@ -346,7 +346,7 @@ hacerlo con uno, **no** incluyas este parámetro.",
 "Este comando agrega o elimina usuarios de la lista de confiables y les otorga o les quita el rol. Si el usuario está \
 en la lista, lo quita; y si no está, lo añade.\n\
 Requiere permiso de *administrar roles* en el servidor.",
-None,,
+None,
 ("Usuario a quien se desea añadir o quitar de la lista. **Nota: Debe ser una mención.", "Usuario a quien se desea \
 añadir o quitar de la lista. **Nota: Debe ser una mención. **Opcional**: Puedes añadir o  quitar múltiples usuarios\
 a la vez. Si sólo quieres hacerlo con uno, **no** incluyas este parámetro.",
