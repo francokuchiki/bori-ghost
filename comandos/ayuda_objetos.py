@@ -357,3 +357,104 @@ a la vez. Si sólo quieres hacerlo con uno, **no** incluyas este parámetro.",
 ])
 ],
 "moderacion")
+
+info_usuarios = informacionComando(
+"Usuarios",
+"Módulo de uso para todos los miembros del servidor. Contiene comandos útiles y entretenidos.",
+None,
+(None,),
+None,
+None,
+[
+#info_democracia
+("Democracia",
+"Comandos que permiten a los miembros ejercer sus derechos cívicos llevando a cabo votaciones.\n\
+Sólo se permite una votación activa por canal.",
+("votar", "vota", "votacion", "encuesta", "vote", "poll"),
+("Acción que se desea realizar. **Nota**: No especificarla indica que se quiere votar en una encuesta.",
+"Opción que deseas votar. Ya sea escribiendo exactamente su contenido textual o su número de orden. **Nota**: Sólo para votar.",
+"Parámetros variables según la acción. Consultar ayudas específicas de cada una."),
+"{}democracia <acción> / <opción>",
+"{}democracia 1",
+[
+#info_democracia.crear
+("Crear",
+"Crea una encuesta. Sólo puede haber una activa en cada canal, para comenzar una nueva, debes cerrar la anterior.",
+("empezar", "nueva", "create", "start", "new"),
+("Título de la encuesta: Temática o pregunta a la que se desea contestar. **Opcional**", "Opción A", "Opción B",
+"Otras opciones (opcional)",
+"**IMPORTANTE**: Puedes incluir más de dos opciones pero no menos. El orden de los primeros tres parámetros es indistinto.",
+"**Nota**: Los parámetros deben estar separados por \";\" o \"|\"."),
+"{}democracia crear <titulo> (opcional); <opcion A> (opcional); <opcion B> (opcional)",
+"{}democracia crear t:¿T'agrada?; M'agrada; M'encanta; No m'agrada",
+[]),
+#info_democracia.revisar
+("Revisar",
+"Consulta los resultados parciales de la encuesta en curso. El mensaje se elimina tras diez segundos.",
+("ver", "consultar", "checkear", "view", "check"),
+(None,),
+"{}democracia revisar",
+"{}democracia revisar",
+[]),
+#info_democracia.votar
+("Votar",
+"Para votar en una encuesta, sólo usa el comando de democracia sin ningún parámetro de acción, seguido por la \
+opción que desees, o copiada textualmente o por su número de orden.",
+None,
+(None,),
+"{}democracia <opción>",
+"{}democracia 5",
+[]),
+#info_democracia.cerrar
+("Cerrar",
+"Cierra la encuesta en curso. Es necesario si quieres abrir otra.",
+("terminar", "finalizar", "fin", "close", "end"),
+(None,),
+"{}democracia cerrar",
+"{}democracia cerrar",
+[]),
+]),
+#info_destacados
+("Destacados",
+"Sistema que permite destacar mensajes a través de reacciones. Coloca un embed con su contenido en el canal designado.",
+None,
+(None,),
+None,
+None,
+[
+#info_destacados.canal
+("Canal",
+"Comando que permite consultar el canal desginado para los mensajes destacados o cambiarlos.\n\
+Requiere permiso de *administrar canales* en el servidor.\n\
+**__Comando__**: dcanal",
+("dchannel",),
+("Canal donde se desea que salgan los mensajes destacados. **Nota**: Debe ser una mención. **Opcional**: De \
+no especificarse, el bot responderá mencionando el canal designado actualmente.",),
+"{}dcanal <canal>",
+"{}dcanal #parábolas",
+[]),
+#info_destacados.emoji
+("Emoji",
+"Comando que permite consultar el emoji designado para destacar mensajes al reaccionar con él o cambiarlo.\n\
+Requiere permiso de *administrar canales* o *administrar mensajes* en el servidor.\n\
+**__Comando__**: demoji",
+("dreaccion", "dreaction"),
+("Emoji con el cual se desea destacar mensajes. **Nota**: Puede ser un emoji personalizado del servidor.\
+**Opcional**: De no especificarse, el bot responderá con el emoji designado actualmente.",),
+"{}demoji <emoji>",
+"{}demoji :star:",
+[]),
+#info_destacados.minimo
+("Mínimo",
+"Comando que permite consultar el mínimo de reacciones requeridas para destacar mensajes o modificarlo.\n\
+Requiere permiso de *administrar canales* o *administrar mensajes* en el servidor.\n\
+**__Comando__**: dminimo",
+("dminimum", "dmin"),
+("Cantidad de reacciones que se desea sean necesarias para destacar un mensaje. **Nota**: Debe ser un número\
+entero. **Opcional**: De no especificarse, el bot responderá con el mínimo actual.",),
+"{}dminimo <minimo> (entero)",
+"{}dminimo 5",
+[],
+"minimo")
+])
+])

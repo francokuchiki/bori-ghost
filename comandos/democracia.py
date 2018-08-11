@@ -1,6 +1,7 @@
 import re
 import psycopg2
 import os
+import asyncio
 from variables import tabla_encuestas, nueva_encuesta
 from funciones import borrar_repetidos, lista_a_cadena
 from discord import Embed
@@ -82,7 +83,7 @@ async def revisa_encuesta(client, message, nick_autor, avatar_autor):
 		texto_pie = "Consultados por {} ({}#{})"
 		resultados = ""
 		for i in range(0, len(opciones)-1):
-			resultados += opciones[i]+": "+votos[i]+" votos"+"\n"
+			resultados += str(i+1) + opciones[i]+": "+votos[i]+" votos"+"\n"
 		votacion_embed = Embed(title=u"\U0001F5F3"+" Votación",
 								description=encuesta[0][0],
 								colour=0xCCD6DD)
@@ -93,10 +94,12 @@ async def revisa_encuesta(client, message, nick_autor, avatar_autor):
 									icon_url=avatar_autor)
 		votacion_embed.set_thumbnail(url="https://i.imgur.com/5LEqNv7.png")
 		await client.send_typing(message.channel)
-		await client.send_message(message.channel, embed=votacion_embed)
+		mensaje = await client.send_message(message.channel, embed=votacion_embed)
 	else:
 		await client.send_typing(message.channel)
-		await client.send_message(message.channel, "No hay ninguna votación en transcurso en este canal, "+message.author.mention)
+		mensaje = await client.send_message(message.channel, "No hay ninguna votación en transcurso en este canal, "+message.author.mention)
+	await asyncio.sleep(10)
+	await client.delete_message(mensaje)
 	bd.close()
 	base_de_datos.close()
 

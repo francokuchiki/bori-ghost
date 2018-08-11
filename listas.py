@@ -32,6 +32,7 @@ coms = {
 	#AVATAR
 	"avatar": mix.obtener_avatar,
 	#Democracia
+	"democracia": democracia.maneja_encuestas,
 	"vota": democracia.maneja_encuestas,
 	"vote": democracia.maneja_encuestas,
 	"encuesta": democracia.maneja_encuestas,
@@ -57,6 +58,8 @@ coms = {
 	"dcanal": destacados.canal_destacado,
 	"dchannel": destacados.canal_destacado,
 	"demoji": destacados.emoji_destacado,
+	"dreaccion": destacados.emoji_destacado,
+	"dreaction": destacados.emoji_destacado,
 	"dminimo": destacados.minimo_destacado,
 	"dminimum": destacados.minimo_destacado,
 	"dmin": destacados.minimo_destacado,
