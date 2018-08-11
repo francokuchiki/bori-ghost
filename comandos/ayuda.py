@@ -18,6 +18,17 @@ async def ayuda_manejador(client, message, nick_autor, avatar_autor, mensaje_sep
 					i += 1
 				if elem == None:
 					elem = elemento
+		if elem == None:
+			numeros = []
+			for parte in comando_separado:
+				try:
+					numeros.append(int(parte))
+				except ValueError:
+					pass
+			if len(numeros) >= 1:
+				elem = descripciones_ayuda[numeros[0]]
+			for i in range(len(numeros)):
+				elem = elem.subs[i]
 		if elem != None:
 			await ayuda_especifica(client, message, elem, nick_autor, avatar_autor, prefijo)
 		else:
