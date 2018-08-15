@@ -9,7 +9,7 @@ async def da_carta(client, message, nick_autor, avatar_autor, mensaje_separado, 
 	else:
 		jugadores = (message.mentions[0], message.author)
 	manos = [[],[]]
-	while len(manos[1]) < 3:
+	while len(manos[0]) < 3 or len(manos[1]) < 3:
 		i = random.randint(0,39)
 		i2 = random.randint(0,39)
 		while i2 == i:
@@ -27,5 +27,14 @@ async def da_carta(client, message, nick_autor, avatar_autor, mensaje_separado, 
 			mensajes[i] += str(emoji)
 		if jugadores[i] != client.user:
 			await client.send_message(jugadores[i], mensajes[i])
-		await client.send_message(message.channel, mensajes[i])
 		i += 1
+	reverso_emoji = discord.utils.get(servidor.emojis, name="reversonaipe")
+	embed = discord.Embed(title="Truco",
+							description="Partido entre {} y {}.".format(jugadores[0].display_name, jugadores[1].display_name),
+							colour = 0x00AAAA)
+	embed.add_field(name="Mano de {}".format(jugadores[0].display_name),
+					value=reverso_emoji*3)
+	embed.add_field(name="Mesa",value="")
+	embed.add_field(name="Mano de {}".format(jugadores[1].display_name),
+					value=reverso_emoji*3)
+	await client.send_message(message.channel, embed=embed)
