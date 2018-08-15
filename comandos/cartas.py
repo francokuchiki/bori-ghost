@@ -1,5 +1,5 @@
 import discord
-from cartas_objetos import *
+from comandos.cartas_objetos import *
 
 async def da_carta(client, message, nick_autor, avatar_autor, mensaje_separado, prefijo):
 	await client.send_message(message.channel, espada_1.emoji)

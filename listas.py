@@ -77,6 +77,8 @@ coms = {
 	"help": ayuda.ayuda_manejador,
 	"comandos": ayuda.ayuda_manejador,
 	"commands": ayuda.ayuda_manejador,
+	#Juegos
+	"truco": cartas.dar_carta,
 	#Cerrar
 	"ciérrate sésamo": cerrar.cerrar,
 	"close": cerrar.cerrar,
