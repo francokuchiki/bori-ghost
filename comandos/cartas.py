@@ -4,7 +4,7 @@ from comandos.cartas_objetos import *
 
 async def da_carta(client, message, nick_autor, avatar_autor, mensaje_separado, prefijo):
 	servidor = discord.utils.get(client.servers, id = "310951366736609281")
-	if message.mentions == 0:
+	if len(message.mentions) == 0:
 		jugadores = (client.user, message.author)
 	else:
 		jugadores = (message.mentions[0], message.author)
@@ -26,5 +26,5 @@ async def da_carta(client, message, nick_autor, avatar_autor, mensaje_separado, 
 			emoji = discord.utils.get(servidor.emojis, name=carta.emoji)
 			mensajes[i] += str(emoji)
 		await client.send_message(jugadores[i], mensajes[i])
-		await client.send_message(message.author, mensajes[i])
+		await client.send_message(message.channel, mensajes[i])
 		i += 1
