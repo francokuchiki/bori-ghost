@@ -28,6 +28,9 @@ async def da_carta(client, message, nick_autor, avatar_autor, mensaje_separado, 
 			await client.send_message(jugadores[i], mensajes[i])
 		i += 1
 	reverso_emoji = discord.utils.get(servidor.emojis, name="reversonaipe")
-	a = str(reverso_emoji)*3
-	embed = discord.Embed(title="Truco")
+	embed = discord.Embed(title="Truco",
+							description="Partido entre {} y {}.".format(jugadores[0].display_name, jugadores[1].display_name),
+							colour = 0x00AAAA)
+	embed.add_field(name="Mano de {}".format(jugadores[0].display_name),
+					value=str(reverso_emoji)*3)
 	await client.send_message(message.channel, embed=embed)
