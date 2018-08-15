@@ -25,6 +25,7 @@ async def da_carta(client, message, nick_autor, avatar_autor, mensaje_separado, 
 		for carta in manos[i]:
 			emoji = discord.utils.get(servidor.emojis, name=carta.emoji)
 			mensajes[i] += str(emoji)
-		await client.send_message(jugadores[i], mensajes[i])
+		if jugadores[i] != client.user:
+			await client.send_message(jugadores[i], mensajes[i])
 		await client.send_message(message.channel, mensajes[i])
 		i += 1
