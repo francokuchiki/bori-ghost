@@ -32,9 +32,7 @@ async def da_carta(client, message, nick_autor, avatar_autor, mensaje_separado, 
 	embed = discord.Embed(title="Truco",
 							description="Partido entre {} y {}.".format(jugadores[0].display_name, jugadores[1].display_name),
 							colour = 0x00AAAA)
-	embed.add_field(name="Mano de {}".format(jugadores[0].display_name),
-					value=a)
-	embed.add_field(name="Mesa",value="")
-	embed.add_field(name="Mano de {}".format(jugadores[1].display_name),
-					value=a)
+	embed.add_field(name="Mano de A", value=a)
+	embed.add_field(name="Mesa", value="")
+	embed.add_field(name="Mano de B", value=a)
 	await client.send_message(message.channel, embed=embed)
