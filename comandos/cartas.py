@@ -30,7 +30,4 @@ async def da_carta(client, message, nick_autor, avatar_autor, mensaje_separado, 
 	reverso_emoji = discord.utils.get(servidor.emojis, name="reversonaipe")
 	a = str(reverso_emoji)*3
 	embed = discord.Embed(title="Truco")
-	embed.add_field(name="Mano de A", value=a)
-	embed.add_field(name="Mesa", value="")
-	embed.add_field(name="Mano de B", value=a)
 	await client.send_message(message.channel, embed=embed)
