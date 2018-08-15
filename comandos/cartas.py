@@ -32,8 +32,8 @@ async def da_carta(client, message, nick_autor, avatar_autor, mensaje_separado, 
 							description="Partido entre {} y {}.".format(jugadores[0].display_name, jugadores[1].display_name),
 							colour = 0x00AAAA)
 	embed.add_field(name="Mano de {}".format(jugadores[0].display_name),
-					value=reverso_emoji*3)
+					value=str(reverso_emoji)*3)
 	embed.add_field(name="Mesa",value="")
 	embed.add_field(name="Mano de {}".format(jugadores[1].display_name),
-					value=reverso_emoji*3)
+					value=str(reverso_emoji)*3)
 	await client.send_message(message.channel, embed=embed)
