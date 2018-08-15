@@ -20,7 +20,7 @@ async def da_carta(client, message, nick_autor, avatar_autor, mensaje_separado, 
 			manos[1].append(baraja[i2])
 	i = 0
 	mensajes = [[],[]]
-	while i < 1:
+	while i <= 1:
 		mensajes[i] = ""
 		for carta in manos[i]:
 			emoji = discord.utils.get(servidor.emojis, name=carta.emoji)
