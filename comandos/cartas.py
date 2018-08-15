@@ -14,9 +14,8 @@ async def da_carta(client, message, nick_autor, avatar_autor, mensaje_separado, 
 		i2 = random.randint(0,39)
 		while i2 == i:
 			i2 = random.randint(0,39)
-		if baraja[i] not in manos[0]:
+		if baraja[i] not in manos[0] and baraja[i2] not in manos[1]:
 			manos[0].append(baraja[i])
-		if baraja[i2] not in manos[1]:
 			manos[1].append(baraja[i2])
 	i = 0
 	mensajes = [[],[]]
