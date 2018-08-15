@@ -10,10 +10,11 @@ async def da_carta(client, message, nick_autor, avatar_autor, mensaje_separado, 
 			i = random.randint(0,39)
 			if baraja[i] not in manos[0] and baraja[i] not in manos[1]:
 				mano.append(baraja[i])
-	mensaje = ""
-	for carta in mano_1:
-		emoji = discord.utils.get(servidor.emojis, name=carta.emoji)
-		mensaje += str(emoji)
-		print(mensaje)
-	await client.send_message(message.channel, mensaje)
-	await client.send_message(message.author, mensaje)
+		mensaje = ""
+
+		for carta in mano:
+			emoji = discord.utils.get(servidor.emojis, name=carta.emoji)
+			mensaje += str(emoji)
+			print(mensaje)
+		await client.send_message(message.channel, mensaje)
+		await client.send_message(message.author, mensaje)
