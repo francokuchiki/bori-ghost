@@ -50,3 +50,4 @@ async def da_carta(client, message, nick_autor, avatar_autor, mensaje_separado, 
 		emoji_jugada = manos[0][int(respuesta.content)-1].emoji
 		emoji_jugada = discord.utils.get(servidor.emojis, name=emoji_jugada)
 		await client.send_message(message.channel, str(emoji_jugada))
+		turnos += 1
