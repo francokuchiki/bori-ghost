@@ -36,4 +36,6 @@ async def da_carta(client, message, nick_autor, avatar_autor, mensaje_separado, 
 	embed.add_field(name="Mesa",value="---")
 	embed.add_field(name="Mano de {}".format(jugadores[1].display_name),
 					value=str(reverso_emoji)*3)
+	embed.set_footer(icon_url="https://cdn.icon-icons.com/icons2/1310/PNG/512/hourglass_86336.png",
+						text="Es el turno de {}".format(jugadores[0].display_name))
 	await client.send_message(message.channel, embed=embed)
