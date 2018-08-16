@@ -38,4 +38,13 @@ async def da_carta(client, message, nick_autor, avatar_autor, mensaje_separado, 
 					value=str(reverso_emoji)*3)
 	embed.set_footer(icon_url="https://cdn.icon-icons.com/icons2/1310/PNG/512/hourglass_86336.png",
 						text="Es el turno de {}".format(jugadores[0].display_name))
-	await client.send_message(message.channel, embed=embed)
+	mensaje_juego = await client.send_message(message.channel, embed=embed)
+	respuesta = None
+	while respuesta == None:
+		respuesta = await client.wait_for_message(author=jugadores[0])
+		if hasattr(respuesta.server, "id"):
+			if respuesta.server.id != message.server.id:
+				respuesta = None
+	emoji_jugada = manos[0][int(respuesta)].emoji
+	emoji_jugada = discord.utils.get(servidor.emojis, name=emoji_jugada)
+	await client.send_message(message.channel, str(emoji_jugada))
