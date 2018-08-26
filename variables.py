@@ -4,7 +4,7 @@ whitelist = {
 	"295748486253510658": "franco",
 	"287554491916746752": "katie",
 	"244535132097216512": "yoru",
-	"239709477392089109": "zero",
+	#"239709477392089109": "zero",
 	"451551868070526977": "prueba"
 }
 
@@ -38,23 +38,27 @@ unban_titulo = (u"\U00002705", "desbaneado")
 unban_color = 0x00AA00
 
 
+#--------- SQL Statements para la tabla de mutes ---------#
+#Crea la tabla de mutes si no existe
 tabla_mute="""
 CREATE TABLE IF NOT EXISTS silenciados(
 key SERIAL NOT NULL PRIMARY KEY,
 discord_id VARCHAR(30) NOT NULL,
 termina TIMESTAMP WITHOUT TIME ZONE NOT NULL);
 """
-
+#Introduce un nuevo miembro silenciado
 nuevo_mute="""
 INSERT INTO silenciados (discord_id,termina)
 VALUES (%s,%s);
 """
-
+#Quita a un miembro de la tabla de silenciados
 quita_mute="""
 DELETE FROM silenciados
 WHERE discord_id=%s;
 """
 
+#--------- SQL Statements para la tabla de encuestas ---------#
+#Crea la tabla de encuestas si no existe
 tabla_encuestas="""
 CREATE TABLE IF NOT EXISTS encuestas(
 key SERIAL NOT NULL PRIMARY KEY,
@@ -66,19 +70,25 @@ terminada INTEGER NOT NULL,
 votantes VARCHAR);
 """
 
+#Crea una nueva encuesta
 nueva_encuesta="""
 INSERT INTO encuestas (channel_id,titulo,opciones,votos,terminada, votantes)
 VALUES (%s,%s,%s,%s,%s, %s);
 """
 
+#--------- SQL Statements para la tabla de prefijos ---------#
+#Crea la tabla de prefijos si no existe
 tabla_prefijos = """
 CREATE TABLE IF NOT EXISTS prefijos(
 key SERIAL NOT NULL PRIMARY KEY,
 prefijo VARCHAR(20) NOT NULL);
 """
 
+#Prefijo del bot por defecto
 default_prefix = "g$"
 
+#--------- SQL Statements para la tabla de destacados ---------#
+#Crea la tabla de destacados si no existe
 tabla_destacados = """
 CREATE TABLE IF NOT EXISTS destacados(
 id_canal VARCHAR(30) NOT NULL PRIMARY KEY,
@@ -88,20 +98,26 @@ ids_destacados VARCHAR NOT NULL DEFAULT '',
 ids_destaque VARCHAR NOT NULL DEFAULT '');
 """
 
+#--------- SQL Statements para la tabla de confiables ---------#
+#Crea la tabla de mutes si no existe
 tabla_confiables = """
 CREATE TABLE IF NOT EXISTS confiables(
 user_id VARCHAR(30) NOT NULL);
 """
 
+#Introduce un nuevo miembro confiable
 nuevo_confiable = """
 INSERT INTO confiables(user_id) VALUES (%s);
 """
 
+#Quita a un miembro de la tabla de confiables
 quita_confiable = """
 DELETE FROM confiables
 WHERE user_id = %s;
 """
 
+#--------- Variables para el sistema de ayuda ---------#
+#Mensaje de ayuda general que explica el sistema
 ayuda = """
 Esta es la lista de comandos del bot {}. Debajo encontrarán los módulos y, dentro de ellos, cada uno de los comandos.
 Al consultar la ayuda general, recibirán este mensaje. Para obtener más información sobre cada una de las funciones \
@@ -115,6 +131,7 @@ También puedes usar el orden numérico. Considerando el mismo ejemplo quedaría
 ```{}ayuda 1.3.2```
 """
 
+"""
 comandos_ayuda = {
 "Utilidad": {"Información": ("Información",),
 			"Ayuda": ("Ayuda",),
@@ -132,5 +149,7 @@ comandos_ayuda = {
 					"Elegir": ("Elegir",),
 					"Avatar": ("Avatar",)}
 }
+"""
 
+#Lista que contiene los objetos de información que saldrán en la ayuda
 descripciones_ayuda = (info_utilidad, info_moderacion, info_usuarios, info_entretenimiento)

@@ -9,7 +9,6 @@ async def confiable_entrar(client, miembro):
 		confiable_rol = get_confiable_role(miembro.server.roles)
 		await client.add_roles(miembro, confiable_rol)
 
-
 async def silencio_entrar(client, miembro):
 	BD_URL = os.getenv('DATABASE_URL')
 	silenciado = get_mute_role(miembro.server.roles) #Establece el rol de silenciados para el servidor

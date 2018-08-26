@@ -2,6 +2,11 @@ from comandos import *
 from eventos import *
 from tareas import *
 
+"""
+Lista que contiene todos los comandos. Como key del diccionario está
+la expresión usada para llamar al comando y sus alias.
+Como valor, la función que debe ejecutar (debe ser una corutina).
+"""
 coms = {
 	"ping": ping.ping,
 	#Moderación
@@ -85,15 +90,32 @@ coms = {
 	"cerrar": cerrar.cerrar
 }
 
+"""
+Lista de eventos. La llave del dicionario indica en qué momento deben ejecutarse las
+corutinas que se especifican (en una lista) como valor.
+"""
 evs = {
+	#Cuando un miembro entra al servidor
 	"entra_miembro": [entra_miembro.silencio_entrar, 
-					entra_miembro.roles_superduperserver],
+					entra_miembro.roles_superduperserver,
+					entra_miembro.confiable_entrar],
+	#Cuando el bot entra a un servidor
 	"entra_servidor": [entra_servidor.servidor_entro],
+	#Cuando el bot recibe un mensaje
 	"por_mensaje": [por_mensaje.procesar_comandos],
+	#Cuando alguien reacciona a un mensaje
 	"pone_reaccion": [en_reacciones.pone_destacados],
+	#Cuando alguien quita una reacción
 	"quita_reaccion": [en_reacciones.quita_destacados],
+	#Cuando alguien edita un mensaje
 	"en_edicion": [en_ediciones.editar_destacados],
+	#Cuando ocurre un error
 	"en_error": [en_error.maneja_errores]
 }
 
+"""
+Lista de tareas que deben ejecutarse una y otra vez en bucle desde
+que el bot se inicia hasta que se cierra.
+Es una lista de corutinas.
+"""
 tasks = [auto_silencio.auto_unmute]

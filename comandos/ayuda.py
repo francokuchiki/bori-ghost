@@ -1,7 +1,7 @@
 import os
 import discord
 import re
-from variables import ayuda, comandos_ayuda, descripciones_ayuda
+from variables import ayuda, descripciones_ayuda
 from unicodedata import normalize
 
 async def ayuda_manejador(client, message, nick_autor, avatar_autor, mensaje_separado, prefijo):

@@ -6,44 +6,71 @@ from variables import (embed_titulo, embed_descripcion, usuario_texto, razon_tit
 						tabla_prefijos, tabla_confiables)
 
 def get_prefijos(message):
+	"""
+	Función que me permite seleccionar la lista de prefijos disponibles en el servidor.
+	Parámetros: 1
+		-message: Mensaje que esté en el server para el cual quiere obtenerse los prefijos.
+	"""
+	#Carga la url de la base de datos desde las variables de ambiente
 	BD_URL = os.getenv("DATABASE_URL")
-	base_de_datos = psycopg2.connect(BD_URL, sslmode='require')
-	bd = base_de_datos.cursor()
-	bd.execute(tabla_prefijos)
+	base_de_datos = psycopg2.connect(BD_URL, sslmode='require') #Conecta a la base de datos
+	bd = base_de_datos.cursor() #Crea un cursor para ejecutar queries en la base de datos
+	bd.execute(tabla_prefijos) #Crea la tabla de prefijos si no existe
+	base_de_datos.commit()
+	#Selecciona todos los prefijos
 	bd.execute("SELECT prefijo FROM prefijos;")
 	prefijos = bd.fetchall()
-	base_de_datos.close()
-	lista_prefijos = [prefijo[0] for prefijo in prefijos]
-	return lista_prefijos
-
-def get_confiables():
-	BD_URL = os.getenv("DATABASE_URL")
-	base_de_datos = psycopg2.connect(BD_URL, sslmode='require')
-	bd = base_de_datos.cursor()
-	bd.execute(tabla_confiables)
-	base_de_datos.commit()
-	bd.execute("SELECT user_id FROM confiables;")
-	confiables = bd.fetchall()
-	confiables_whitelist = {confiable[0] for confiable in confiables}
+	#Cierra el cursor y la conexión con la base de datos
 	bd.close()
 	base_de_datos.close()
-	return confiables_whitelist
+	#Convierte los datos obtenidos en una lista de prefijos
+	lista_prefijos = [prefijo[0] for prefijo in prefijos]
+	return lista_prefijos #Devuelve la lista de prefijos
+
+def get_confiables():
+	"""
+	Función que devuelve la lista de usuarios que son considerados confiables en el servidor.
+	"""
+	#Carga la url de la base de datos desde las variables de ambiente
+	BD_URL = os.getenv("DATABASE_URL")
+	base_de_datos = psycopg2.connect(BD_URL, sslmode='require') #Conecta a la base de datos
+	bd = base_de_datos.cursor() #Crea un cursor para ejecutar queries en la base de datos
+	bd.execute(tabla_confiables) #Crea la tabla de confiables si no existe
+	base_de_datos.commit() #Guarda los cambios en la base de datos
+	#Selecciona los usuarios de la lista de confiables
+	bd.execute("SELECT user_id FROM confiables;")
+	confiables = bd.fetchall()
+	#Convierte los datos obtenidos en un conjunto con los ids de los usuarios confiables
+	confiables_whitelist = {confiable[0] for confiable in confiables}
+	#Cierra el cursor y la conexión con la base de datos
+	bd.close()
+	base_de_datos.close()
+	return confiables_whitelist #Devuelve el conjunto de usuarios confiables
 
 def lista_a_cadena(lista, inicio: int=None, final: int=None, caracter=" "):
-	if inicio == None:
-		inicio = 0
-	if final == None:
-		final = len(lista)
-	mensaje_sin_comando = ""
+	"""
+	Función que une los elementos de una lista, convirtiéndola en cadena.
+	Parámetros: 4
+		-lista: Lista que se desea convertir en cadena.
+		-inicio: Offset de la lista que se desea sea el primer elemento. (opcional)
+		-final: Offset de la lista que se desea sea el último elemento. (opcional)
+		-caracter: Caracter de separación entre elementos (opcional) (por defecto whitespace)
+	"""
+	if inicio == None: #Si no se ha especificado inicio
+		inicio = 0 #Empieza en el primer elemento
+	if final == None: #Si no se ha especificado final
+		final = len(lista) #Termina en el último elemento
+	mensaje_sin_comando = "" #Declara la variable donde guardaré el mensaje
 	for i in range(inicio,final):
-		if lista[i] != "\n":
-			mensaje_sin_comando += lista[i]+caracter
-		else:
-			mensaje_sin_comando += lista[i]
-	return mensaje_sin_comando
+		if lista[i] != "\n": #Si no es un salto de línea
+			mensaje_sin_comando += lista[i]+caracter #Agrega el elemento y un caracter de separación
+		else: #Si es un salto de línea
+			mensaje_sin_comando += lista[i] #Agrega el elemento sin la separación
+	return mensaje_sin_comando #Devuelve el mensaje
 
 def get_mute_role(lista):
-	"""Selecciona el rol para los usuarios silenciados en una lista de roles.
+	"""
+	Selecciona el rol para los usuarios silenciados en una lista de roles.
 		Parámetros:
 			-Lista: Una lista que contiene objetos discord.Role en la que se 
 			selecciona el rol de silencio.
@@ -58,17 +85,27 @@ def get_mute_role(lista):
 	return silenciado #Devuelve el rol
 
 def get_confiable_role(lista):
-	confiable = discord.utils.get(lista, id="")
-	if confiable == None:
+	"""
+	Función que permite obtener el rol para usuarios confiables en el servidor.
+	Parámetros:
+		-lista: Lista de roles desde donde debe seleccionarse.
+	"""
+	#Selecciona el rol por id
+	confiable = discord.utils.get(lista, id="482391907289268244")
+	if confiable == None: #Si no se ha encontrado
+		#Selecciona el rol por nombre en minúsculas
 		confiable = discord.utils.get(lista, name="confiable")
-	if confiable == None:
+	if confiable == None: #Si no se ha encontrado
+		#Selecciona el rol por nombre con primera letra mayúscula
 		confiable = discord.utils.get(lista, name="Confiable")
-	if confiable == None:
+	if confiable == None: #Si no se ha encontrado
+		#Selecciona el rol por nombre en mayúsculas
 		confiable = discord.utils.get(lista, name="CONFIABLE")
-	return confiable
+	return confiable #Devuelve el rol
 
 def borrar_repetidos(mensaje, caracter):
-	"""Borra los caracteres repetidos al principio y al final de un mensaje.
+	"""
+	Borra los caracteres repetidos al principio y al final de un mensaje.
 		Lo uso principalmente para borrar espacios extras.
 		Parámetros:
 			-Mensaje (string): Cadena de texto que quiero modificar.
@@ -81,7 +118,8 @@ def borrar_repetidos(mensaje, caracter):
 	return mensaje
 
 def get_nick_avatar(miembro):
-	"""Devuelve el nick y el avatar de un miembro dado.
+	"""
+	Devuelve el nick y el avatar de un miembro dado.
 		Parámetros:
 			-Miembro: Usuario cuyos nick y avatar se quieren obtener.
 	"""
@@ -98,7 +136,8 @@ def get_nick_avatar(miembro):
 
 def crear_embed(client,titulo:tuple,descripcion,color,miembro,autor,servidor,razon,
 				usuario=None,tiempo=None,miniatura=None,pie:str=None,ed:tuple=None):
-	"""Función que me permite crear embeds con un sólo código para no andar repitiendo
+	"""
+	Función que me permite crear embeds con un sólo código para no andar repitiendo
 		lo mismo una y otra vez.
 		La llamo para los mensajes que se envían luego de cada comando.
 		Parámetros:
