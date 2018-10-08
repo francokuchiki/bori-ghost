@@ -4,7 +4,7 @@ import os
 from funciones import get_mute_role, get_confiables, get_confiable_role
 
 async def confiable_entrar(client, miembro):
-	confiables = get_confiables()
+	confiables = get_confiables(miembro.server)
 	if miembro.id in confiables:
 		confiable_rol = get_confiable_role(miembro.server.roles)
 		await client.add_roles(miembro, confiable_rol)
@@ -14,7 +14,7 @@ async def silencio_entrar(client, miembro):
 	silenciado = get_mute_role(miembro.server.roles) #Establece el rol de silenciados para el servidor
 	base_de_datos = psycopg2.connect(BD_URL, sslmode='require')
 	bd = base_de_datos.cursor()
-	bd.execute("SELECT discord_id FROM silenciados")
+	bd.execute(f'SELECT discord_id FROM "{miembro.server.id}_silenciados"')
 	muteados = bd.fetchall()
 	muteados = [dato[0] for dato in muteados] #Lista de ids de los muteados en el server
 	if miembro.id in muteados: #Para cada miembro en la lista de silenciados

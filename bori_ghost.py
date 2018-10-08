@@ -98,5 +98,4 @@ if __name__ == "__main__": #Si estoy ejecutándolo desde este mismo archivo
 	for tarea in listas.tasks:
 		#La agrega al grupo de tareas a ejecutar en bucle
 		client.loop.create_task(tarea(client))
-	print(TOKEN)
 	client.run(TOKEN) #Ejecuta el bot (lo enciende)

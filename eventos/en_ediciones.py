@@ -7,8 +7,10 @@ async def editar_destacados(client, antes, despues):
 	BD_URL = os.getenv("DATABASE_URL")
 	base_de_datos = psycopg2.connect(BD_URL, sslmode='require')
 	bd = base_de_datos.cursor()
-	bd.execute("SELECT id_canal, ids_destacados, ids_destaque FROM destacados")
-	id_canal, ids_destacados, ids_destaque = bd.fetchone()
+	bd.execute(f'SELECT id_canal, ids_destacados, ids_destaque FROM "{antes.server.id}_destacados"'),
+	try:
+		id_canal, ids_destacados, ids_destaque = bd.fetchone()
+	except TypeError: return
 	ids_destacados = ids_destacados.split(",")
 	ids_destaque = ids_destaque.split(",")
 	if antes.id in ids_destacados:

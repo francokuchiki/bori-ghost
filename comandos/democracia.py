@@ -35,9 +35,9 @@ async def crear_encuesta(client, message, prefijo):
 	BD_URL = os.getenv('DATABASE_URL')
 	base_de_datos = psycopg2.connect(BD_URL, sslmode='require')
 	bd = base_de_datos.cursor()
-	bd.execute(tabla_encuestas)
-	select = "SELECT terminada FROM encuestas WHERE channel_id = %s and terminada = %s"
-	bd.execute(select, (message.channel.id, 0))
+	bd.execute(tabla_encuestas.format('"'+message.server.id+'_encuestas"'))
+	select = "SELECT terminada FROM {} WHERE channel_id = %s and terminada = %s"
+	bd.execute(select.format('"'+message.server.id+'_encuestas"'), (message.channel.id, 0))
 	estado = bd.fetchall()
 	if len(estado) != 0:
 		await client.send_typing(message.channel)
@@ -63,7 +63,7 @@ async def crear_encuesta(client, message, prefijo):
 			votos += "0,"
 	if titulo == None:
 		titulo = "No se ha especificado un título o tema para esta votación."
-	bd.execute(nueva_encuesta, (message.channel.id,titulo,opciones,votos,0,""))
+	bd.execute(nueva_encuesta.format('"'+message.server.id+'_encuestas"'), (message.channel.id,titulo,opciones,votos,0,""))
 	base_de_datos.commit()
 	bd.close()
 	base_de_datos.close()
@@ -75,7 +75,8 @@ async def revisa_encuesta(client, message, nick_autor, avatar_autor):
 	BD_URL = os.getenv('DATABASE_URL')
 	base_de_datos = psycopg2.connect(BD_URL, sslmode='require')
 	bd = base_de_datos.cursor()
-	bd.execute("SELECT titulo,opciones,votos FROM encuestas WHERE channel_id = %s AND terminada = %s", (message.channel.id, 0))
+	bd.execute(f'SELECT titulo,opciones,votos FROM "{message.server.id}_encuestas" WHERE channel_id = %s AND terminada = %s',
+		(message.channel.id, 0))
 	encuesta = bd.fetchall()
 	if len(encuesta) > 0:
 		opciones = encuesta[0][1].split(",")
@@ -107,8 +108,8 @@ async def vota_encuesta(client, message, nick_autor, mensaje_separado):
 	BD_URL = os.getenv('DATABASE_URL')
 	base_de_datos = psycopg2.connect(BD_URL, sslmode='require')
 	bd = base_de_datos.cursor()
-	select = "SELECT titulo,opciones,votos,votantes FROM encuestas WHERE channel_id = %s AND terminada = 0"
-	bd.execute(select, (message.channel.id,))
+	select = "SELECT titulo,opciones,votos,votantes FROM {} WHERE channel_id = %s AND terminada = 0"
+	bd.execute(select.format('"'+message.server.id+'_encuestas"'), (message.channel.id,))
 	encuesta = bd.fetchall()
 	if len(encuesta) > 0:
 		opciones = encuesta[0][1].split(",")
@@ -135,8 +136,8 @@ async def vota_encuesta(client, message, nick_autor, mensaje_separado):
 			votos = lista_a_cadena(votos[0:len(votos)-1:],caracter=",")
 			votantes.append(message.author.id)
 			votantes = ",".join(votantes)
-			nuevo_voto = "UPDATE encuestas SET votos = %s, votantes = %s WHERE channel_id = %s;"
-			bd.execute(nuevo_voto, (votos,votantes, message.channel.id))
+			nuevo_voto = "UPDATE {} SET votos = %s, votantes = %s WHERE channel_id = %s;"
+			bd.execute(nuevo_voto.format('"'+message.server.id+'_encuestas"'), (votos,votantes, message.channel.id))
 			base_de_datos.commit()
 			await client.delete_message(message)
 			await client.send_typing(message.channel)
@@ -151,11 +152,11 @@ async def cierra_encuesta(client, message, nick_autor, avatar_autor):
 	BD_URL = os.getenv('DATABASE_URL')
 	base_de_datos = psycopg2.connect(BD_URL, sslmode='require')
 	bd = base_de_datos.cursor()
-	select = "SELECT key,titulo,opciones,votos FROM encuestas WHERE channel_id = %s AND terminada = 0"
-	bd.execute(select, (message.channel.id,))
+	select = "SELECT key,titulo,opciones,votos FROM {} WHERE channel_id = %s AND terminada = 0"
+	bd.execute(select.format('"'+message.server.id+'_encuestas"'), (message.channel.id,))
 	encuesta = bd.fetchall()
 	if len(encuesta) > 0:
-		bd.execute("UPDATE encuestas SET terminada = 1 WHERE key = %s", (encuesta[0][0],))
+		bd.execute(f'UPDATE "{message.server.id}_encuestas" SET terminada = 1 WHERE key = %s', (encuesta[0][0],))
 		base_de_datos.commit()
 		opciones = encuesta[0][2].split(",")
 		votos = encuesta[0][3].split(",")
@@ -186,7 +187,7 @@ async def borra_tabla(client, message):
 	BD_URL= os.getenv("DATABASE_URL")
 	base_de_datos = psycopg2.connect(BD_URL, sslmode='require')
 	bd = base_de_datos.cursor()
-	bd.execute("DROP TABLE IF EXISTS encuestas")
+	bd.execute(f'DROP TABLE IF EXISTS "{message.server.id}_encuestas"')
 	base_de_datos.commit()
 	bd.close()
 	base_de_datos.close()

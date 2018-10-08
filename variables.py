@@ -41,26 +41,26 @@ unban_color = 0x00AA00
 #--------- SQL Statements para la tabla de mutes ---------#
 #Crea la tabla de mutes si no existe
 tabla_mute="""
-CREATE TABLE IF NOT EXISTS silenciados(
+CREATE TABLE IF NOT EXISTS {}(
 key SERIAL NOT NULL PRIMARY KEY,
 discord_id VARCHAR(30) NOT NULL,
 termina TIMESTAMP WITHOUT TIME ZONE NOT NULL);
 """
 #Introduce un nuevo miembro silenciado
 nuevo_mute="""
-INSERT INTO silenciados (discord_id,termina)
+INSERT INTO {} (discord_id,termina)
 VALUES (%s,%s);
 """
 #Quita a un miembro de la tabla de silenciados
 quita_mute="""
-DELETE FROM silenciados
+DELETE FROM {}
 WHERE discord_id=%s;
 """
 
 #--------- SQL Statements para la tabla de encuestas ---------#
 #Crea la tabla de encuestas si no existe
 tabla_encuestas="""
-CREATE TABLE IF NOT EXISTS encuestas(
+CREATE TABLE IF NOT EXISTS {}(
 key SERIAL NOT NULL PRIMARY KEY,
 channel_id VARCHAR(30) NOT NULL,
 titulo VARCHAR NOT NULL,
@@ -72,14 +72,14 @@ votantes VARCHAR);
 
 #Crea una nueva encuesta
 nueva_encuesta="""
-INSERT INTO encuestas (channel_id,titulo,opciones,votos,terminada, votantes)
+INSERT INTO {}(channel_id,titulo,opciones,votos,terminada, votantes)
 VALUES (%s,%s,%s,%s,%s, %s);
 """
 
 #--------- SQL Statements para la tabla de prefijos ---------#
 #Crea la tabla de prefijos si no existe
 tabla_prefijos = """
-CREATE TABLE IF NOT EXISTS prefijos(
+CREATE TABLE IF NOT EXISTS {}(
 key SERIAL NOT NULL PRIMARY KEY,
 prefijo VARCHAR(20) NOT NULL);
 """
@@ -90,7 +90,7 @@ default_prefix = "g$"
 #--------- SQL Statements para la tabla de destacados ---------#
 #Crea la tabla de destacados si no existe
 tabla_destacados = """
-CREATE TABLE IF NOT EXISTS destacados(
+CREATE TABLE IF NOT EXISTS {}(
 id_canal VARCHAR(30) NOT NULL PRIMARY KEY,
 emoji VARCHAR NOT NULL DEFAULT '⭐',
 minimo INT NOT NULL DEFAULT 1,
@@ -101,18 +101,18 @@ ids_destaque VARCHAR NOT NULL DEFAULT '');
 #--------- SQL Statements para la tabla de confiables ---------#
 #Crea la tabla de mutes si no existe
 tabla_confiables = """
-CREATE TABLE IF NOT EXISTS confiables(
+CREATE TABLE IF NOT EXISTS {}(
 user_id VARCHAR(30) NOT NULL);
 """
 
 #Introduce un nuevo miembro confiable
 nuevo_confiable = """
-INSERT INTO confiables(user_id) VALUES (%s);
+INSERT INTO {}(user_id) VALUES (%s);
 """
 
 #Quita a un miembro de la tabla de confiables
 quita_confiable = """
-DELETE FROM confiables
+DELETE FROM {}
 WHERE user_id = %s;
 """
 

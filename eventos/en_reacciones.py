@@ -10,8 +10,8 @@ async def pone_destacados(client, reaction, user):
 	BD_URL = os.getenv("DATABASE_URL")
 	base_de_datos = psycopg2.connect(BD_URL, sslmode='require')
 	bd = base_de_datos.cursor()
-	bd.execute(tabla_destacados)
-	bd.execute("SELECT id_canal, emoji, minimo, ids_destacados, ids_destaque FROM destacados")
+	bd.execute(tabla_destacados.format('"'+reaction.message.server.id+'_destacados"',))
+	bd.execute(f'SELECT id_canal, emoji, minimo, ids_destacados, ids_destaque FROM "{reaction.message.server.id}_destacados"')
 	id_canal, emoji, minimo, ids_destacados, ids_destaque = bd.fetchone()
 	if reaction.emoji == emoji or str(reaction.emoji) == emoji:
 		if user == reaction.message.author or user.bot:
@@ -78,8 +78,8 @@ async def pone_destacados(client, reaction, user):
 					mensaje = await client.send_message(canal, embed=embed)
 					ids_destacados += reaction.message.id+","
 					ids_destaque += mensaje.id+","
-					bd.execute("UPDATE destacados SET ids_destacados = %s, ids_destaque = %s"+
-								"WHERE minimo = %s", (ids_destacados, ids_destaque, minimo))
+					bd.execute(f'UPDATE "{reaction.message.server.id}_destacados" SET ids_destacados = %s, ids_destaque = %s'+
+								'WHERE minimo = %s', (ids_destacados, ids_destaque, minimo))
 					base_de_datos.commit()
 	bd.close()
 	base_de_datos.close()
@@ -88,8 +88,8 @@ async def quita_destacados(client, reaction, user):
 	BD_URL = os.getenv("DATABASE_URL")
 	base_de_datos = psycopg2.connect(BD_URL, sslmode='require')
 	bd = base_de_datos.cursor()
-	bd.execute(tabla_destacados)
-	bd.execute("SELECT id_canal, emoji, minimo, ids_destacados, ids_destaque FROM destacados")
+	bd.execute(tabla_destacados.format('"'+reaction.message.server.id+'_destacados"',))
+	bd.execute(f'SELECT id_canal, emoji, minimo, ids_destacados, ids_destaque FROM "{reaction.message.server.id}_destacados"')
 	canal, emoji, minimo, ids_destacados, ids_destaque = bd.fetchone()
 	ids_destacados = ids_destacados.split(",")
 	ids_destaque = ids_destaque.split(",")
@@ -101,8 +101,8 @@ async def quita_destacados(client, reaction, user):
 			ids_destacados.remove(reaction.message.id)
 			del ids_destaque[i]
 			await client.delete_message(mensaje)
-			bd.execute("UPDATE destacados SET ids_destacados = %s, ids_destaque = %s WHERE id_canal=%s", (",".join(ids_destacados),
-						",".join(ids_destaque), canal))
+			bd.execute(f'UPDATE "{reaction.message.server.id}_destacados" SET ids_destacados = %s, ids_destaque = %s WHERE id_canal=%s',
+				(",".join(ids_destacados), ",".join(ids_destaque), canal))
 			base_de_datos.commit()
 	bd.close()
 	base_de_datos.close()

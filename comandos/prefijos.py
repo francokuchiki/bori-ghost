@@ -29,7 +29,7 @@ async def agregar_prefijo(client, message, mensaje_separado):
 		BD_URL = os.getenv("DATABASE_URL")
 		base_de_datos = psycopg2.connect(BD_URL, sslmode='require')
 		bd = base_de_datos.cursor()
-		bd.execute("INSERT INTO prefijos(prefijo) VALUES(%s)", (mensaje_separado[2],))
+		bd.execute(f'INSERT INTO "{message.server.id}_prefijos"(prefijo) VALUES(%s)', (mensaje_separado[2],))
 		base_de_datos.commit()
 		await client.send_typing(message.channel)
 		await client.send_message(message.channel, "El prefijo '*{}*' ha sido añadido con éxito.".format(mensaje_separado[2]))
@@ -45,7 +45,7 @@ async def quitar_prefijo(client, message, mensaje_separado):
 		BD_URL = os.getenv("DATABASE_URL")
 		base_de_datos = psycopg2.connect(BD_URL, sslmode='require')
 		bd = base_de_datos.cursor()
-		bd.execute("SELECT prefijo FROM prefijos;")
+		bd.execute(f'SELECT prefijo FROM "{message.server.id}_prefijos";')
 		prefijos = bd.fetchall()
 		prefijos = [prefijo[0] for prefijo in prefijos]
 		if mensaje_separado[2] not in prefijos:
@@ -59,7 +59,7 @@ async def quitar_prefijo(client, message, mensaje_separado):
 			await client.send_message(message.channel, msg_solouno.format(message.author.mention))
 			return
 		else:
-			bd.execute("DELETE FROM prefijos WHERE prefijo = %s;", (mensaje_separado[2],))
+			bd.execute(f'DELETE FROM "{message.server.id}_prefijos" WHERE prefijo = %s;', (mensaje_separado[2],))
 			base_de_datos.commit()
 			await client.send_typing(message.channel)
 			await client.send_message(message.channel, "El prefijo '*{}*' ha sido eliminado exitosamente.".format(mensaje_separado[2]))
@@ -79,8 +79,8 @@ async def cambiar_prefijo(client, message, mensaje_separado):
 		BD_URL = os.getenv("DATABASE_URL")
 		base_de_datos = psycopg2.connect(BD_URL, sslmode='require')
 		bd = base_de_datos.cursor()
-		bd.execute("DELETE FROM prefijos")
-		bd.execute("INSERT INTO prefijos(prefijo) VALUES (%s)", (mensaje_separado[2],))
+		bd.execute(f'DELETE FROM "{message.server.id}_prefijos"')
+		bd.execute(f'INSERT INTO "{message.server.id}_prefijos"(prefijo) VALUES (%s)', (mensaje_separado[2],))
 		base_de_datos.commit()
 		await client.send_typing(message.channel)
 		await client.send_message(message.channel, "El prefijo '*{}*'' es ahora el único prefijo válido.".format(mensaje_separado[2]))
@@ -95,7 +95,7 @@ async def ver_prefijos(client, message, nick_autor, avatar_autor):
 	BD_URL = os.getenv("DATABASE_URL")
 	base_de_datos = psycopg2.connect(BD_URL, sslmode='require')
 	bd = base_de_datos.cursor()
-	bd.execute("SELECT prefijo FROM prefijos;")
+	bd.execute(f'SELECT prefijo FROM "{message.server.id}_prefijos";')
 	prefijos = bd.fetchall()
 	bd.close()
 	base_de_datos.close()

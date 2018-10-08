@@ -15,10 +15,10 @@ def get_prefijos(message):
 	BD_URL = os.getenv("DATABASE_URL")
 	base_de_datos = psycopg2.connect(BD_URL, sslmode='require') #Conecta a la base de datos
 	bd = base_de_datos.cursor() #Crea un cursor para ejecutar queries en la base de datos
-	bd.execute(tabla_prefijos) #Crea la tabla de prefijos si no existe
+	bd.execute(tabla_prefijos.format('"'+message.server.id+'_prefijos"')) #Crea la tabla de prefijos si no existe
 	base_de_datos.commit()
 	#Selecciona todos los prefijos
-	bd.execute("SELECT prefijo FROM prefijos;")
+	bd.execute(f'SELECT prefijo FROM "{message.server.id}_prefijos";')
 	prefijos = bd.fetchall()
 	#Cierra el cursor y la conexión con la base de datos
 	bd.close()
@@ -27,7 +27,7 @@ def get_prefijos(message):
 	lista_prefijos = [prefijo[0] for prefijo in prefijos]
 	return lista_prefijos #Devuelve la lista de prefijos
 
-def get_confiables():
+def get_confiables(server):
 	"""
 	Función que devuelve la lista de usuarios que son considerados confiables en el servidor.
 	"""
@@ -35,10 +35,10 @@ def get_confiables():
 	BD_URL = os.getenv("DATABASE_URL")
 	base_de_datos = psycopg2.connect(BD_URL, sslmode='require') #Conecta a la base de datos
 	bd = base_de_datos.cursor() #Crea un cursor para ejecutar queries en la base de datos
-	bd.execute(tabla_confiables) #Crea la tabla de confiables si no existe
+	bd.execute(tabla_confiables.format('"'+server.id+'_confiables"',)) #Crea la tabla de confiables si no existe
 	base_de_datos.commit() #Guarda los cambios en la base de datos
 	#Selecciona los usuarios de la lista de confiables
-	bd.execute("SELECT user_id FROM confiables;")
+	bd.execute(f'SELECT user_id FROM "{server.id}_confiables";')
 	confiables = bd.fetchall()
 	#Convierte los datos obtenidos en un conjunto con los ids de los usuarios confiables
 	confiables_whitelist = {confiable[0] for confiable in confiables}
