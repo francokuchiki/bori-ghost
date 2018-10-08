@@ -24,12 +24,13 @@ async def pone_destacados(client, reaction, user):
 		elif minimo == None:
 			await client.send_message(channel, "No se ha establecido la cantidad necesaria de reacciones "+
 												"para destacar mensajes.")
-		elif reaction.count == minimo:
+		elif reaction.count >= minimo:
 			canal = discord.utils.get(channel.server.channels, id=id_canal)
 			if canal == None:
 				await client.send_message(channel, "El canal elegido no es válido. Por favor cámbialo con "+
 													"el comando *dcanal*.")
 			elif canal != channel:
+				if message.id not in ids_destacados:
 					embed = discord.Embed(title=u"\U0001F4CC"+reaction.message.author.display_name+" en #"+channel.name,
 											description=reaction.message.content,
 											colour=0xFFFF00)
