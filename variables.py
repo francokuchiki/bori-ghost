@@ -67,13 +67,14 @@ titulo VARCHAR NOT NULL,
 opciones VARCHAR NOT NULL,
 votos VARCHAR NOT NULL,
 terminada INTEGER NOT NULL,
-votantes VARCHAR);
+votantes VARCHAR,
+votocada VARCHAR);
 """
 
 #Crea una nueva encuesta
 nueva_encuesta="""
-INSERT INTO {}(channel_id,titulo,opciones,votos,terminada, votantes)
-VALUES (%s,%s,%s,%s,%s, %s);
+INSERT INTO {}(channel_id,titulo,opciones,votos,terminada, votantes, votocada)
+VALUES (%s,%s,%s,%s,%s, %s, %s);
 """
 
 #--------- SQL Statements para la tabla de prefijos ---------#

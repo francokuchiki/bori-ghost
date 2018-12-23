@@ -63,7 +63,7 @@ async def crear_encuesta(client, message, prefijo):
 			votos += "0,"
 	if titulo == None:
 		titulo = "No se ha especificado un título o tema para esta votación."
-	bd.execute(nueva_encuesta.format('"'+message.server.id+'_encuestas"'), (message.channel.id,titulo,opciones,votos,0,""))
+	bd.execute(nueva_encuesta.format('"'+message.server.id+'_encuestas"'), (message.channel.id,titulo,opciones,votos,0,"", ""))
 	base_de_datos.commit()
 	bd.close()
 	base_de_datos.close()
@@ -84,7 +84,7 @@ async def revisa_encuesta(client, message, nick_autor, avatar_autor):
 		texto_pie = "Consultados por {} ({}#{})"
 		resultados = ""
 		for i in range(0, len(opciones)-1):
-			resultados += str(i+1) + opciones[i]+": "+votos[i]+" votos"+"\n"
+			resultados += f"{str(i+1)}. {opciones[i]}: {votos[i]} votos\n"
 		votacion_embed = Embed(title=u"\U0001F5F3"+" Votación",
 								description=encuesta[0][0],
 								colour=0xCCD6DD)
@@ -108,17 +108,15 @@ async def vota_encuesta(client, message, nick_autor, mensaje_separado):
 	BD_URL = os.getenv('DATABASE_URL')
 	base_de_datos = psycopg2.connect(BD_URL, sslmode='require')
 	bd = base_de_datos.cursor()
-	select = "SELECT titulo,opciones,votos,votantes FROM {} WHERE channel_id = %s AND terminada = 0"
+	select = "SELECT titulo,opciones,votos,votantes,votocada FROM {} WHERE channel_id = %s AND terminada = 0"
 	bd.execute(select.format('"'+message.server.id+'_encuestas"'), (message.channel.id,))
 	encuesta = bd.fetchall()
 	if len(encuesta) > 0:
+		print(encuesta)
 		opciones = encuesta[0][1].split(",")
 		votos = encuesta[0][2].split(",")
 		votantes = encuesta[0][3].split(",")
-		if message.author.id in votantes:
-			await client.send_typing(message.channel)
-			await client.send_message(message.channel, "Ya has participado en esta votación.")
-			return
+		voto_cada = encuesta[0][4].split(",")
 		voto = False
 		for i in range(1,len(mensaje_separado)):
 			if not voto:
@@ -132,12 +130,21 @@ async def vota_encuesta(client, message, nick_autor, mensaje_separado):
 						opcion = opciones.index(mensaje_separado[i])
 						voto = True
 		if voto:
-			votos[opcion] = str(int(votos[opcion])+1)
-			votos = lista_a_cadena(votos[0:len(votos)-1:],caracter=",")
-			votantes.append(message.author.id)
+			if message.author.id not in votantes:
+				votos[opcion] = str(int(votos[opcion])+1)
+				votantes.append(message.author.id)
+				voto_cada.append(str(opcion))
+			else:
+				i = votantes.index(message.author.id)
+				index = int(voto_cada[i])
+				votos[index] = str(int(votos[index])-1)
+				voto_cada[i] = str(opcion)
+				votos[opcion] = str(int(votos[opcion])+1)
 			votantes = ",".join(votantes)
-			nuevo_voto = "UPDATE {} SET votos = %s, votantes = %s WHERE channel_id = %s;"
-			bd.execute(nuevo_voto.format('"'+message.server.id+'_encuestas"'), (votos,votantes, message.channel.id))
+			voto_cada = ",".join(voto_cada)
+			votos = lista_a_cadena(votos[0:len(votos)-1:],caracter=",")
+			nuevo_voto = "UPDATE {} SET votos = %s, votantes = %s, votocada = %s WHERE channel_id = %s;"
+			bd.execute(nuevo_voto.format('"'+message.server.id+'_encuestas"'), (votos,votantes, voto_cada, message.channel.id))
 			base_de_datos.commit()
 			await client.delete_message(message)
 			await client.send_typing(message.channel)

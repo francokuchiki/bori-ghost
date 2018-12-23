@@ -100,7 +100,10 @@ async def unban(client, message, nick_autor, avatar_autor, mensaje_separado, pre
 		razon = mensaje_separado[1]
 	else:
 		razon = "No se ha especificado ninguna razón"
-	miembro = discord.utils.get(lista, name = mensaje_separado[0][empieza::])
+	miembro = None
+	for user in lista:
+		if user.name.lower().startswith(mensaje_separado[0][empieza::]):
+			miembro = user
 	if miembro != None:
 		pie_embed = pie_texto.format("desbaneado",nick_autor,message.author.name,message.author.discriminator)
 		unban_embed = crear_embed(client,unban_titulo, del_descripcion, unban_color, miembro, message.author,
